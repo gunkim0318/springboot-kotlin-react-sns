@@ -11,8 +11,6 @@ import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router } from "react-router-dom";
 import { history } from "./configureStore";
 import { Todo } from "./model/model";
-import HomePage from "./pages/HomePage";
-import TodoPage from "./pages/TodoPage";
 import { RootState } from "./reducers/index";
 import withRoot from "./withRoot";
 
@@ -21,9 +19,9 @@ function Routes() {
 
 	return (
 		<div className={classes.content}>
-			<Route exact={true} path="/" component={HomePage} />
+			{/* <Route exact={true} path="/" component={HomePage} />
 			<Route exact={true} path="/home" component={HomePage} />
-			<Route exact={true} path="/todo" component={TodoPage} />
+			<Route exact={true} path="/todo" component={TodoPage} /> */}
 		</div>
 	);
 }
