@@ -1,20 +1,19 @@
 import { makeStyles } from "@material-ui/core";
 
+//img
+import background from '../static/img/background.jpg';
+
 const useStyle = makeStyles(theme => ({
-    root: {
-        display: 'grid',
+    subRoot: {
         width: '100%',
+        backgroundImage: `url(${background})`
     },
 
     content: {
         width: '100%',
+        height: '100%',
     },
-    card: {
-        width: '60%',
-        [theme.breakpoints.down('sm')] : {
-            width: '360px'
-        }
-    }
+    
 }))
 
 export default useStyle;

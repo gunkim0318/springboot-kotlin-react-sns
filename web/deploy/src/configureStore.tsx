@@ -5,7 +5,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 import { PersistConfig, persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers";
 
 const persistConfig: PersistConfig<any> = {
 	key: "root",
@@ -25,10 +24,34 @@ if (dev) {
 	middleware = composeWithDevTools(middleware);
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer(history));
+//Action
+const INCREMENT = "INCREMENT";
+
+function increase(diff: any) {
+    return {
+        type: INCREMENT,
+        addBy: diff
+    };
+}
+
+//reducer
+const initialState = {
+    value: 0
+};
+
+const counterReducer = (state = initialState, action: any) => {
+    switch(action.type) {
+        case INCREMENT:
+            return Object.assign({}, state, {
+                value: state.value + action.addBy
+            });
+        default:
+            return state;
+    }
+}
 
 export default () => {
-	const store = createStore(persistedReducer, {}, middleware);
+	const store = createStore(counterReducer);
 	const persistor = persistStore(store);
 	return { store, persistor };
 };
