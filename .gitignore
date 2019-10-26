@@ -34,7 +34,7 @@ target/
 ### react ###
 .DS_*
 logs
-deploy/node_modules
+web/deploy/node_modules
 **/*.backup.*
 **/*.back.*
 
