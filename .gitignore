@@ -111,4 +111,9 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/intellij
 
+# 제외 파일
 .idea
+settings.gradle
+react_dev.bat
+gradlew.bat
+gradlew
