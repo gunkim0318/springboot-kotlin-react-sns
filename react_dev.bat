@@ -1,0 +1,2 @@
+cd deploy
+yarn start
