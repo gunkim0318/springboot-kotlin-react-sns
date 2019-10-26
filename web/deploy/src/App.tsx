@@ -17,7 +17,7 @@ interface Props extends RouteComponentProps<void>, WithWidth {}
 const App = (props?: Props) => {
 
 	return (
-		<Router history={history}>
+		<Router history={history} >
 			<Switch>
 				<Route path='/sub' component={Sub} />
 				<Route path='/sub/' component={Sub} />
