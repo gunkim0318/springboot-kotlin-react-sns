@@ -1,12 +1,6 @@
-
-# Created by https://www.gitignore.io/api/java,react,gradle,java-web
-# Edit at https://www.gitignore.io/?templates=java,react,gradle,java-web
-
-### Java ###
-# Compiled class file
+# 컴파일된 class
 *.class
-
-# Log file
+# 로그 파일
 *.log
 
 # BlueJ files
