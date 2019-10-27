@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public void index() {
-    }
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public @ResponseBody  String hello(){
         logger.info("============");
