@@ -26,6 +26,9 @@ dependencies {
     testImplementation 'junit:junit'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.5.3'
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.3'
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.1'
 }
 
 test {
