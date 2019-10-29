@@ -1,8 +1,7 @@
 import React from 'react';
+
+//Material ui
 import { Card, CardHeader, Divider, makeStyles, Grid } from '@material-ui/core';
-
-
-
 
 interface Props {
     children: any,

@@ -13,15 +13,15 @@ const useStyle = makeStyles(theme => ({
         padding: 0,
     },
     card: {
-        width:'100%',
         [theme.breakpoints.down('sm')] : {
-            width: '360px',
-            marginLeft: '40px',
-            marginRight: '40px',
+            width: '100%',
+            minWidth: '270px',
+            marginLeft: '10px',
+            marginRight: '10px',
             
         },
         [theme.breakpoints.up('sm')] : {
-            width: '500px',
+            width: '600px',
         },
     },
     cardContent: {

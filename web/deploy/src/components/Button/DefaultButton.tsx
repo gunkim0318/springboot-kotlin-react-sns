@@ -1,7 +1,8 @@
 import React from 'react';
+
+//Material ui
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { fontWeight } from '@material-ui/system';
 
 interface Props {
     children?: any,
@@ -62,10 +63,13 @@ const useStyle = makeStyles(theme => ({
         backgroundColor: props.color,
         border: 0,
         outline: 0,
+        paddingRight: 0,
+        paddingLeft: 0,
     }),
     btnFontStyle: {
         fontWeight: 'bold',  
-        color: 'white'      
+        color: 'white',    
+        fontSize: 12,  
     }
 }))
 
