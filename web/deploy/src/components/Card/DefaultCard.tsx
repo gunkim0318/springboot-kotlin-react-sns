@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, Divider, makeStyles } from '@material-ui/core';
+import { Card, CardHeader, Divider, makeStyles, Grid } from '@material-ui/core';
 
 
 
@@ -43,9 +43,9 @@ const DefaultCard = (props: Props) => {
             title={props.title}
             />
             <Divider />
-            <CardContent className={classes.content}>
-                {props.children}
-            </CardContent>
+            <Grid item container>
+                    {props.children}
+            </Grid>
         </Card>
     );
 }
@@ -57,16 +57,12 @@ const useStyle = makeStyles(theme => ({
         '& div': {
             '& span': {
                 fontSize: 25,
-                fontWeight: 'bold'
+                fontWeight: 'bold',
             }
             
         }
     }),
-    content: {
-        padding: '0px',
-        paddingBottom: '0px',
-        width: '100%',
-    }
+    
 }))
 
 export default DefaultCard;
