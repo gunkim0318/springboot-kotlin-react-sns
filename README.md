@@ -8,7 +8,8 @@
     Language : Java 1.8, JavaScript
     FrameWork : MyBatis, Spring Boot, React.js
     Build Tool : WebPack, Gradle
-    Client Tool : DBeaver, IntelliJ
+    Client Tool : DBeaver
+    IDE Tool : IntelliJ, Visual Studio Code
     Configuration : git
 
 
