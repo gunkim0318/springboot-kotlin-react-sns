@@ -16,7 +16,7 @@ const DefaultButton = (props: Props) => {
     let btnColor;
     switch(props.color) {
         case 'default' :
-            btnColor = '#8F7CEE';
+            btnColor = '#B7A4EE';
             break;
         case 'success' :
             btnColor = '#5CE75C';

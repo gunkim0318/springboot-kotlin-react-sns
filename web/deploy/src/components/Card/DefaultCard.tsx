@@ -15,7 +15,7 @@ const DefaultCard = (props: Props) => {
     let headerColor;
     switch(props.headerColor) {
         case 'default' :
-            headerColor = '#8F7CEE';
+            headerColor = '#B7A4EE';
             break;
         case 'success' :
             headerColor = '#8EFB8E';
