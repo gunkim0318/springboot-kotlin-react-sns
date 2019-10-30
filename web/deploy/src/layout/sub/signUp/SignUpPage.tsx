@@ -10,6 +10,9 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubStyles from '../SubStyles';
 import DefaultInput from '../../../components/Input/DefaultInput';
 import DefaultButton from '../../../components/Button/DefaultButton';
+import PasswordInput from '../../../components/Input/PasswordInput';
+import DefaultRadio from '../../../components/Radio/DefaultRadio';
+import DefaultRadioGroup from '../../../components/Radio/DefaultRadioGroup';
 
 
 interface Props extends RouteComponentProps<void> {
@@ -19,10 +22,17 @@ interface Props extends RouteComponentProps<void> {
 const SignUpPage = (props: Props) => {
     const classes = SubStyles();
 
+    //useState
+    const [ selectedRadio, setSelectedRadio ] = React.useState('man');
+
+    const handleSelectRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedRadio(e.target.value);
+    }
+
     const handleCancel = () => {
         props.history.goBack();
     }
-    
+
     const handleSignUp = () => {
 
     }
@@ -31,24 +41,35 @@ const SignUpPage = (props: Props) => {
         <Grid container className={classes.root} justify='center' alignItems='center' >
             <Grid item container xs={12} sm={12} md={12} lg={12} justify='center' >
                 <DefaultCard className={classes.card} title='회원가입' headerColor='default' icon={<AccountBoxIcon fontSize='large' />}>
-                    <Grid item container spacing={2} justify='center' className={classes.cardContent} >
+                    <Grid item container spacing={2} className={classes.cardContent} >
                         <Grid item xs={12}>
-                            <DefaultInput label='1' />
+                            <DefaultInput label='이메일 *' />
                         </Grid>
                         <Grid item xs={12}>
-                            <DefaultInput label='1' />
+                            <PasswordInput >
+                                비밀번호 *
+                            </PasswordInput>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <DefaultRadioGroup label='성별 *'>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <DefaultRadio selectedRadio={selectedRadio} value='man' label='남자' onChange={handleSelectRadio} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <DefaultRadio selectedRadio={selectedRadio} value='woman' label='여자' onChange={handleSelectRadio} />
+                                    </Grid>
+                                </Grid>
+                            </DefaultRadioGroup>
+                        </Grid>
+                        {/* <Grid item xs={3}>
+                            <DefaultRadio selectedRadio={selectedRadio} value='woman' label='여자' onChange={handleSelectRadio} />
+                        </Grid> */}
+                        <Grid item xs={12}>
+                            <DefaultInput label='성명 *' />
                         </Grid>
                         <Grid item xs={12}>
-                            <DefaultInput label='1' />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <DefaultInput label='1' />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <DefaultInput label='1' />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <DefaultInput label='1' />
+                            <DefaultInput label='전화번호 *' />
                         </Grid>
                         <Grid item xs={6}>
                             <DefaultButton size='large' onClick={handleCancel} color='rose' >
