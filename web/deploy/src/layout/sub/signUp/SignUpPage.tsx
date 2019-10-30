@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 //Material ui & Components
 import { Grid } from '@material-ui/core';
 import DefaultCard from '../../../components/Card/DefaultCard';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 //CSS
 import SubStyles from '../SubStyles';
@@ -40,7 +40,7 @@ const SignUpPage = (props: Props) => {
     return (
         <Grid container className={classes.root} justify='center' alignItems='center' >
             <Grid item container xs={12} sm={12} md={12} lg={12} justify='center' >
-                <DefaultCard className={classes.card} title='회원가입' headerColor='default' icon={<AccountBoxIcon fontSize='large' />}>
+                <DefaultCard className={classes.card} title='회원가입' headerColor='default' icon={<PersonAddIcon fontSize='large' />}>
                     <Grid item container spacing={2} className={classes.cardContent} >
                         <Grid item xs={12}>
                             <DefaultInput label='이메일 *' />

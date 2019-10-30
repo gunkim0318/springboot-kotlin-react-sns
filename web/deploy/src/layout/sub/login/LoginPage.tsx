@@ -23,6 +23,11 @@ const LoginPage = (props: Props) => {
     const [idInput, setIdInput] = React.useState('');
     const [passwordInput, setPasswordInput] = React.useState('');
 
+
+    const handleFindPasswordClick = () => {
+        props.history.push('FindPassword');
+    }
+
     const handleSignUpClick = () => {
         props.history.push('SignUp');
     }
@@ -75,7 +80,7 @@ const LoginPage = (props: Props) => {
                         </Grid>
                         <Grid item xs={6}>
                             <DefaultButton
-                                onClick={handleClick}
+                                onClick={handleFindPasswordClick}
                                 size='large'
                                 color='sky'
                             >
