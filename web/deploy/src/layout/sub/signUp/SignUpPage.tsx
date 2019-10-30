@@ -13,6 +13,7 @@ import DefaultButton from '../../../components/Button/DefaultButton';
 import PasswordInput from '../../../components/Input/PasswordInput';
 import DefaultRadio from '../../../components/Radio/DefaultRadio';
 import DefaultRadioGroup from '../../../components/Radio/DefaultRadioGroup';
+import CancelButton from '../../../components/Button/CancelButton';
 
 
 interface Props extends RouteComponentProps<void> {
@@ -29,10 +30,6 @@ const SignUpPage = (props: Props) => {
         setSelectedRadio(e.target.value);
     }
 
-    const handleCancel = () => {
-        props.history.goBack();
-    }
-
     const handleSignUp = () => {
 
     }
@@ -43,7 +40,9 @@ const SignUpPage = (props: Props) => {
                 <DefaultCard className={classes.card} title='회원가입' headerColor='default' icon={<PersonAddIcon fontSize='large' />}>
                     <Grid item container spacing={2} className={classes.cardContent} >
                         <Grid item xs={12}>
-                            <DefaultInput label='이메일 *' />
+                            <DefaultInput 
+                            label='이메일 *' 
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <PasswordInput >
@@ -54,10 +53,20 @@ const SignUpPage = (props: Props) => {
                             <DefaultRadioGroup label='성별 *'>
                                 <Grid container>
                                     <Grid item xs={6}>
-                                        <DefaultRadio selectedRadio={selectedRadio} value='man' label='남자' onChange={handleSelectRadio} />
+                                        <DefaultRadio 
+                                        selectedRadio={selectedRadio} 
+                                        value='man' 
+                                        label='남자' 
+                                        onChange={handleSelectRadio} 
+                                        />
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <DefaultRadio selectedRadio={selectedRadio} value='woman' label='여자' onChange={handleSelectRadio} />
+                                        <DefaultRadio 
+                                        selectedRadio={selectedRadio} 
+                                        value='woman' 
+                                        label='여자' 
+                                        onChange={handleSelectRadio} 
+                                        />
                                     </Grid>
                                 </Grid>
                             </DefaultRadioGroup>
@@ -66,18 +75,31 @@ const SignUpPage = (props: Props) => {
                             <DefaultRadio selectedRadio={selectedRadio} value='woman' label='여자' onChange={handleSelectRadio} />
                         </Grid> */}
                         <Grid item xs={12}>
-                            <DefaultInput label='성명 *' />
+                            <DefaultInput 
+                            label='성명 *' 
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <DefaultInput label='전화번호 *' />
+                            <DefaultInput 
+                            label='전화번호 *' 
+                            />
                         </Grid>
                         <Grid item xs={6}>
-                            <DefaultButton size='large' onClick={handleCancel} color='rose' >
+                            <CancelButton 
+                            parentsProps={props} 
+                            fontSize='medium' 
+                            fontColor='white'
+                            >
                                 취소
-                            </DefaultButton>
+                            </CancelButton>
                         </Grid>
                         <Grid item xs={6}>
-                            <DefaultButton size='large' onClick={handleSignUp} color='success' >
+                            <DefaultButton 
+                            size='large'
+                            onClick={handleSignUp} 
+                            color='success'
+                            fontColor='white' 
+                            >
                                 가입
                             </DefaultButton>
                         </Grid>

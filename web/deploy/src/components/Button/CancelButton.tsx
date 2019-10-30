@@ -1,32 +1,53 @@
 import React from 'react';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, Theme } from '@material-ui/core';
 
 interface Props {
     children: any,
     parentsProps: any,
     fontSize?: string,
+    fontColor?: string,
+}
+
+interface StyleProps {
+    fontSize: number,
+    fontWeight: string,
+    fontColor: string,
+    backgroundColor: string,
 }
 
 const CancelButton = (props: Props) => {
     let fontSize;
+    let fontColor;
 
-    switch(props.fontSize) {
-        case 'small' :
+    switch (props.fontSize) {
+        case 'small':
             fontSize = 10;
             break;
-        case 'medium' :
+        case 'medium':
             fontSize = 14;
             break;
-        case 'large' :
+        case 'large':
             fontSize = 18;
             break;
-        default :
+        default:
             fontSize = 14;
     }
 
-    const styleProps = {
+    switch (props.fontColor) {
+        case 'white':
+            fontColor = '#ffffff';
+            break;
+        case 'black':
+            fontColor = '#000000';
+            break;
+        default:
+            fontColor = '#000000';
+    }
+
+    let styleProps = {
         fontSize: fontSize,
         fontWeight: 'bold',
+        fontColor: fontColor,
         backgroundColor: '#FF5675',
     };
 
@@ -43,11 +64,12 @@ const CancelButton = (props: Props) => {
     );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     btnStyle: (props: any) => ({
         backgroundColor: props.backgroundColor,
         fontWeight: props.fontWeight,
         fontSize: props.fontSize,
+        color: props.fontColor,
     }),
 }))
 

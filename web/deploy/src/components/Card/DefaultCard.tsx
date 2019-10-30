@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Material ui
-import { Card, CardHeader, Divider, makeStyles, Grid } from '@material-ui/core';
+import { Card, CardHeader, Divider, makeStyles, Grid, Theme } from '@material-ui/core';
 
 interface Props {
     children: any,
@@ -9,6 +9,10 @@ interface Props {
     icon?: any,
     headerColor?: string,
     title: string,
+}
+
+interface StyleProps {
+    headerColor: string,
 }
 
 const DefaultCard = (props: Props) => {
@@ -24,7 +28,7 @@ const DefaultCard = (props: Props) => {
             headerColor = '#FFA0A0';
             break;
         default :
-            headerColor = '#FFFFFF';
+            headerColor = '#B7A4EE';
     }
 
     const styleProps = {
@@ -49,7 +53,7 @@ const DefaultCard = (props: Props) => {
     );
 }
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     header: (props: any) => ({
         height: '70px',
         backgroundColor: props.headerColor,

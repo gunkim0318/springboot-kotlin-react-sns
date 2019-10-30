@@ -4,11 +4,13 @@ import { makeStyles } from '@material-ui/styles';
 
 
 interface Props {
-    height: number, 
+    height: number,
     children?: any,
     icon?: any,
     color?: string,
     fontSize?: string,
+    onClick(): void,
+    fontColor?: string,
 }
 
 interface StyleProps {
@@ -18,65 +20,79 @@ interface StyleProps {
     fontSize: number,
     smFontSize: number,
     fontWeight: string,
+    fontColor: string,
 }
 
 const CustomButton = (props: Props) => {
 
     let btnColor;
     let fontSize;
+    let fontColor;
 
-    switch(props.color) {
-        case 'default' :
+    switch (props.color) {
+        case 'default':
             btnColor = '#B7A4EE';
             break;
-        case 'success' :
+        case 'success':
             btnColor = '#5CE75C';
             break;
-        case 'error' :
+        case 'error':
             btnColor = '#FF3232';
             break;
-        case 'warning' :
+        case 'warning':
             btnColor = '#FFF064';
             break;
-        case 'rose' :
+        case 'rose':
             btnColor = '#FFA0A0';
             break;
-        case 'sky' :
+        case 'sky':
             btnColor = '#52E4DC';
             break;
-        case 'sea' :
+        case 'sea':
             btnColor = '#91D8FA';
             break;
-        default :
+        default:
             btnColor = '#FFFFFF';
     }
 
-    switch(props.fontSize) {
-        case 'small' :
+    switch (props.fontSize) {
+        case 'small':
             fontSize = 10;
             break;
-        case 'medium' :
+        case 'medium':
             fontSize = 14;
             break;
-        case 'large' :
+        case 'large':
             fontSize = 18;
             break;
-        default :
+        default:
             fontSize = 14;
+    }
+
+    switch (props.fontColor) {
+        case 'white':
+            fontColor = '#ffffff';
+            break;
+        case 'black':
+            fontColor = '#000000';
+            break;
+        default:
+            fontColor = '#000000';
     }
 
     let styleProps = {
         height: props.height,
-        smHeight: props.height/2,
+        smHeight: props.height / 2,
         color: btnColor,
         fontSize: fontSize,
-        smFontSize: fontSize-4,
+        smFontSize: fontSize - 4,
         fontWeight: 'bold',
+        fontColor: fontColor,
     }
     const classes = useStyles(styleProps);
 
     return (
-        <Button className={classes.root} fullWidth={true}>
+        <Button className={classes.root} fullWidth={true} onClick={() => props.onClick()}>
             <Grid container>
                 <Grid item xs={12}>
                     {props.icon}
@@ -84,25 +100,26 @@ const CustomButton = (props: Props) => {
                 <Grid item xs={12}>
                     {props.children}
                 </Grid>
-            </Grid> 
+            </Grid>
         </Button>
     );
 }
 
-const useStyles = makeStyles<Theme,StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     root: (props: any) => ({
         backgroundColor: props.color,
         fontWeight: props.fontWeight,
-        [theme.breakpoints.down('sm')] :{
+        color: props.fontColor,
+        [theme.breakpoints.down('sm')]: {
             height: props.smHeight,
             fontSize: props.smFontSize,
         },
-        [theme.breakpoints.up('sm')] :{
+        [theme.breakpoints.up('sm')]: {
             height: props.height,
             fontSize: props.fontSize,
-        }
+        },
     }),
-    
+
 }))
 
 export default CustomButton;

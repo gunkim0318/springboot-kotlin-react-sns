@@ -74,6 +74,7 @@ const LoginPage = (props: Props) => {
                                 onClick={handleClick}
                                 size='large'
                                 color='rose'
+                                fontColor='white'
                             >
                                 로그인
                             </DefaultButton>
@@ -83,6 +84,7 @@ const LoginPage = (props: Props) => {
                                 onClick={handleFindPasswordClick}
                                 size='large'
                                 color='sky'
+                                fontColor='white'
                             >
                                 비밀번호 찾기
                             </DefaultButton>
@@ -92,6 +94,7 @@ const LoginPage = (props: Props) => {
                                 onClick={handleSignUpClick}
                                 size='large'
                                 color='success'
+                                fontColor='white'
                             >
                                 회원가입
                             </DefaultButton>
