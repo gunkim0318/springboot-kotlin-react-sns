@@ -1,8 +1,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.study.HomeMapper">
-    <select id="testSelect">
+<mapper namespace="com.study.mapper.HomeMapper">
+    <select id="testSelect" resultType="string">
         Select now() from dual
     </select>
 </mapper>
