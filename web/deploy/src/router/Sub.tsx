@@ -1,5 +1,5 @@
 // prettier-ignore
-import { withWidth } from "@material-ui/core";
+import { withWidth, Grid } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import { WithWidth } from "@material-ui/core/withWidth";
 
@@ -51,9 +51,9 @@ const Sub = (props?: Props) => {
 	return (
 		<Router history={history} >
 			<div className={classes.subRoot}>
-				<div className={classes.content}>
+				<Grid container justify='center'  className={classes.content}>
 					<MyRoutes />
-				</div>
+				</Grid>
 			</div>
 		</Router>
 	);
