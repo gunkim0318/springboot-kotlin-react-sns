@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Grid, Theme } from '@material-ui/core';
 
 //Material ui
-import EmailIcon from '@material-ui/icons/Email';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 
 //Components
 import DefaultCard from '../../../components/Card/DefaultCard';
@@ -20,12 +20,12 @@ interface Props extends RouteComponentProps<void> {
 
 }
 
-const EmailPwFind = (props: Props) => {
+const PhonePwFind = (props: Props) => {
     const classes = SubStyles();
     const subClasses = useStyles();
 
     //useState
-    const [emailValue, setEmailValue] = React.useState('');
+    const [phoneValue, setPhoneValue] = React.useState('');
     const [otpValue, setOtpValue] = React.useState('');
     const [otpCert, setOtpCert] = React.useState(true);
     const [timer] = React.useState(180);
@@ -52,8 +52,8 @@ const EmailPwFind = (props: Props) => {
     }
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if ('email' === e.target.name) {
-            setEmailValue(e.target.value);
+        if ('phone' === e.target.name) {
+            setPhoneValue(e.target.value);
         } else if ('otp' === e.target.name) {
             setOtpValue(e.target.value);
         }
@@ -64,7 +64,7 @@ const EmailPwFind = (props: Props) => {
     }
 
     const minusTime = (i: number) => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve) => {
             setTimeout(() => {
                 let viewTime = i - 1;
                 let viewMinute = Math.floor(viewTime / 60);
@@ -93,14 +93,14 @@ const EmailPwFind = (props: Props) => {
     return (
         <Grid container className={classes.root} justify='center' alignItems='center'>
             <Grid item container xs={12} className={classes.cardGrid} justify='center'>
-                <DefaultCard className={classes.card} title='이메일로 찾기' headerColor='default' icon={<EmailIcon fontSize='large' />}>
+                <DefaultCard className={classes.card} title='전화번호로 찾기' headerColor='default' icon={<PhoneAndroidIcon fontSize='large' />}>
                     <Grid container spacing={2} className={classes.cardContent}>
                         <Grid item xs={12} sm={9}>
                             <DefaultInput
-                                label='이메일'
+                                label='전화번호'
                                 onChange={handleOnChange}
-                                value={emailValue}
-                                name='email'
+                                value={phoneValue}
+                                name='phone'
                             />
                         </Grid>
                         <Grid item xs={12} sm={3}>
@@ -165,4 +165,4 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     }
 }))
 
-export default EmailPwFind;
+export default PhonePwFind;

@@ -27,7 +27,7 @@ const FindPassword = (props: Props) => {
     }
 
     const handlePhonePwFind = () => {
-        props.history.push('EmailPwFind');
+        props.history.push('PhonePwFind');
     }
 
     return (

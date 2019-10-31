@@ -3,6 +3,7 @@ import LoginPage from './layout/sub/login/LoginPage';
 import SignUpPage from './layout/sub/signUp/SignUpPage';
 import FindPassword from './layout/sub/findPassword/FindPassword';
 import EmailPwFind from './layout/sub/findPassword/EmailPwFind';
+import PhonePwFind from './layout/sub/findPassword/PhonePwFind';
 
 //로그인 후
 
@@ -32,6 +33,11 @@ const router = [
         component: EmailPwFind,
     },
     //전화번호로 비밀번호 찾기 페이지
+    {
+        path: '/PhonePwFind',
+        route: 'Sub',
+        component: PhonePwFind,
+    }
 ]
 
 export default router;
