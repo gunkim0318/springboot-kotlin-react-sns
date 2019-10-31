@@ -15,7 +15,6 @@ import DefaultRadio from '../../../components/Radio/DefaultRadio';
 import DefaultRadioGroup from '../../../components/Radio/DefaultRadioGroup';
 import CancelButton from '../../../components/Button/CancelButton';
 
-
 interface Props extends RouteComponentProps<void> {
 
 }
@@ -49,7 +48,7 @@ const SignUpPage = (props: Props) => {
                                 비밀번호 *
                             </PasswordInput>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <DefaultRadioGroup label='성별 *'>
                                 <Grid container>
                                     <Grid item xs={6}>
