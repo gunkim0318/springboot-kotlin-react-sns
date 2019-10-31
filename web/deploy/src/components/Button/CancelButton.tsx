@@ -6,6 +6,7 @@ interface Props {
     parentsProps: any,
     fontSize?: string,
     fontColor?: string,
+    disabled?: boolean,
 }
 
 interface StyleProps {
@@ -13,6 +14,7 @@ interface StyleProps {
     fontWeight: string,
     fontColor: string,
     backgroundColor: string,
+    disBackgroundColor: string,
 }
 
 const CancelButton = (props: Props) => {
@@ -49,6 +51,7 @@ const CancelButton = (props: Props) => {
         fontWeight: 'bold',
         fontColor: fontColor,
         backgroundColor: '#FF5675',
+        disBackgroundColor: '#FF7E9D',
     };
 
     const classes = useStyles(styleProps);
@@ -58,7 +61,12 @@ const CancelButton = (props: Props) => {
     }
 
     return (
-        <Button className={classes.btnStyle} onClick={handleCancel} fullWidth={true}>
+        <Button
+            className={classes.btnStyle}
+            onClick={handleCancel}
+            fullWidth={true}
+            disabled={props.disabled? true : false}
+        >
             {props.children}
         </Button>
     );
@@ -70,6 +78,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         fontWeight: props.fontWeight,
         fontSize: props.fontSize,
         color: props.fontColor,
+        '&:disabled': {
+            backgroundColor: props.disBackgroundColor,
+        }
     }),
 }))
 

@@ -4,21 +4,22 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 interface Props {
-    children? :any
+    children?: any
     onChange?: any,
     value?: string,
+    disabled?: boolean,
 }
 
 const PasswordInput = (props: Props) => {
     //useState
     const [showPassword, setShowPassword] = React.useState(false);
-    
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
     }
 
     return (
-        <FormControl variant="outlined" fullWidth={true}>
+        <FormControl variant="outlined" fullWidth={true} disabled={props.disabled ? true : false}>
             <InputLabel htmlFor="outlined-adornment-password">{props.children}</InputLabel>
             <OutlinedInput
                 id='outlined-adornment-password'
@@ -35,7 +36,7 @@ const PasswordInput = (props: Props) => {
                         </IconButton>
                     </InputAdornment>
                 }
-                labelWidth={props.children? 80 : 0}
+                labelWidth={props.children ? 80 : 0}
             >
 
             </OutlinedInput>

@@ -11,7 +11,7 @@ interface Props {
     color?: string,
     fontColor?: string,
     fontSize?: string,
-    fullHeight?: boolean,
+    disabled?: boolean,
 }
 
 interface styleProps {
@@ -20,11 +20,13 @@ interface styleProps {
     fontWeight: string,
     fontSize: number,
     height: string,
+    disBackgroundColor: string,
     // fullHeight: boolean,
 }
 
 const DefaultButton = (props: Props) => {
     let btnColor;
+    let disBtnColor;
     let fontSize;
     let fontColor;
 
@@ -42,30 +44,38 @@ const DefaultButton = (props: Props) => {
             fontSize = 14;
     }
 
-    switch(props.color) {
-        case 'default' :
+    switch (props.color) {
+        case 'default':
             btnColor = '#B7A4EE';
+            disBtnColor = '#CBB8EE';
             break;
-        case 'success' :
+        case 'success':
             btnColor = '#5CE75C';
+            disBtnColor = '#CBB8EE';
             break;
-        case 'error' :
+        case 'error':
             btnColor = '#FF3232';
+            disBtnColor = '#CBB8EE';
             break;
-        case 'warning' :
+        case 'warning':
             btnColor = '#FFF064';
+            disBtnColor = '#CBB8EE';
             break;
-        case 'rose' :
+        case 'rose':
             btnColor = '#FFA0A0';
+            disBtnColor = '#CBB8EE';
             break;
-        case 'sky' :
+        case 'sky':
             btnColor = '#52E4DC';
+            disBtnColor = '#CBB8EE';
             break;
         case 'sea':
             btnColor = '#91D8FA';
+            disBtnColor = '#CBB8EE';
             break;
-        default :
+        default:
             btnColor = '#FFFFFF';
+            disBtnColor = '#CBB8EE';
     }
 
     switch (props.fontColor) {
@@ -79,12 +89,16 @@ const DefaultButton = (props: Props) => {
             fontColor = '#000000';
     }
 
+    //useMemo
+    
+
     const styleProps = {
         backgroundColor: btnColor,
         fontColor: fontColor,
         fontWeight: 'bold',
         fontSize: fontSize,
         height: '100%',
+        disBackgroundColor: disBtnColor,
         // {props.fullHeight?}        
     }
 
@@ -97,13 +111,14 @@ const DefaultButton = (props: Props) => {
             fullWidth={true}
             size={props.size}
             className={classes.btnStyle}
+            disabled={props.disabled ? true : false}
         >
             {props.children}
         </Button>
     );
 }
 
-const useStyle = makeStyles<Theme ,styleProps>((theme: Theme) => ({
+const useStyle = makeStyles<Theme, styleProps>((theme: Theme) => ({
     btnStyle: (props: any) => ({
         backgroundColor: props.backgroundColor,
         border: 0,
@@ -114,6 +129,11 @@ const useStyle = makeStyles<Theme ,styleProps>((theme: Theme) => ({
         fontWeight: props.fontWeight,
         fontSize: props.fontSize,
         height: props.height,
+        '&:disabled': {
+            backgroundColor: props.disBackgroundColor,
+            border: 0,
+            outline: 0,
+        }
     }),
 }))
 

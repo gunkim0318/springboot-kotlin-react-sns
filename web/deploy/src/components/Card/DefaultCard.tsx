@@ -17,17 +17,17 @@ interface StyleProps {
 
 const DefaultCard = (props: Props) => {
     let headerColor;
-    switch(props.headerColor) {
-        case 'default' :
+    switch (props.headerColor) {
+        case 'default':
             headerColor = '#B7A4EE';
             break;
-        case 'success' :
+        case 'success':
             headerColor = '#8EFB8E';
             break;
-        case 'error' :
+        case 'error':
             headerColor = '#FFA0A0';
             break;
-        default :
+        default:
             headerColor = '#B7A4EE';
     }
 
@@ -35,19 +35,19 @@ const DefaultCard = (props: Props) => {
         headerColor: headerColor,
     }
     const classes = useStyle(styleProps);
-    
+
     return (
-        <Card className={props.className}> 
-            <CardHeader 
-            avatar={
-                props.icon
-            }
-            className={classes.header} 
-            title={props.title}
+        <Card className={props.className}>
+            <CardHeader
+                avatar={
+                    props.icon
+                }
+                className={classes.header}
+                title={props.title}
             />
             <Divider />
             <Grid item container>
-                    {props.children}
+                {props.children}
             </Grid>
         </Card>
     );
@@ -62,10 +62,10 @@ const useStyle = makeStyles<Theme, StyleProps>((theme: Theme) => ({
                 fontSize: 25,
                 fontWeight: 'bold',
             }
-            
+
         }
     }),
-    
+
 }))
 
 export default DefaultCard;
