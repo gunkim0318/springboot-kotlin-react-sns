@@ -46,7 +46,6 @@ const PasswordInput = (props: Props) => {
                                 {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                             </IconButton>
                         </InputAdornment>
-
                 }
             }
             disabled={props.disabled ? true : false}
