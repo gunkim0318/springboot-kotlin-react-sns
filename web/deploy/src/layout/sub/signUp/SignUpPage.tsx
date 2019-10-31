@@ -31,6 +31,8 @@ const SignUpPage = (props: Props) => {
 
     const handleSignUp = () => {
 
+        
+
     }
 
     return (
