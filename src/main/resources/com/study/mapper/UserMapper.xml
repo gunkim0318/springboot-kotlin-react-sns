@@ -1,7 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.study.mapper.HomeMapper">
+<mapper namespace="com.study.mapper.UserMapper">
     <select id="testSelect" resultType="string">
         Select now() from dual
     </select>
