@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.mapper.UserMapper">
     <!-- 로그인 -->
-    <select id="login" parameterType="com.study.vo.UserVO">
+    <select id="login" parameterType="com.study.vo.UserVO" resultType="com.study.vo.UserVO">
         SELECT USER_ID, USER_PW
         FROM T_USER_M
         WHERE USER_ID = #{user_id}

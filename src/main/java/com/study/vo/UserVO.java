@@ -2,6 +2,7 @@ package com.study.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +12,7 @@ import java.sql.Date;
 @Data
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 /**
  * 유저 테이블과 매칭되는 VO
  * @author gunkim
