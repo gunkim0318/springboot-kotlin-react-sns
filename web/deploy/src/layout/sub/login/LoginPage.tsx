@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom'
+import * as axiosWrapper from '../../../wrapper/axiosWrapper';
 
 //Material ui
 import { Grid } from '@material-ui/core';
@@ -34,6 +35,24 @@ const LoginPage = (props: Props) => {
 
     const handleClick = () => {
         console.log('Button Click!!!');
+
+        let headerObj = {
+            page:'loginPage',
+            net_kind: 'login',
+        };
+
+        let dataObj = {
+            user_id: idInput,
+            user_pw: passwordInput,
+        };
+
+        axiosWrapper.get('/login', headerObj, dataObj, props)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
