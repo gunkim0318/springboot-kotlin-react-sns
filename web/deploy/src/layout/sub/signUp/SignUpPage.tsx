@@ -65,7 +65,7 @@ const SignUpPage = (props: Props) => {
             user_gender: selectedRadio,
         }
 
-        axiosWrapper.post('http://192.168.0.6:9090/hello', headerObj, dataObj, props)
+        axiosWrapper.post('/user/signUp', headerObj, dataObj, props)
         .then(result => {
             console.log(result);
         })
