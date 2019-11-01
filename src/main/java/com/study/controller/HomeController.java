@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping(value = "/")
 @Slf4j
@@ -19,7 +24,15 @@ public class HomeController {
     private HomeMapper mapper;
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public @ResponseBody String hello(){
-        return mapper.testSelect().toString();
+    public @ResponseBody List<Map<String, String>> hello(){
+        log.info("Hello ! JavaScript");
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        Map<String, String> map =new HashMap<String, String>();
+        map.put("header", "data");
+        map.put("body", "data");
+
+        list.add(map);
+
+        return list;
     }
 }
