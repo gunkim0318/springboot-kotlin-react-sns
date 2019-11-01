@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.UserMapper">
+    <!-- 로그인 -->
+    <select id="login" parameterType="com.study.vo.UserVO">
+        SELECT USER_ID, USER_PW
+        FROM T_USER_M
+        WHERE USER_ID = #{user_id}
+    </select>
+    <!-- 회원가입 -->
+    <insert id="signUp" parameterType="com.study.vo.UserVO">
+        INSERT
+            INTO
+                study.T_USER_M
+                (
+                    USER_ID,
+                    USER_PW,
+                    USER_NAME,
+                    USER_GENDER,
+                    USER_TEL,
+                    USER_STATUS_CD,
+                    USER_PW_FAIL_CNT,
+                    USER_REG_ID,
+                    USER_REG_DATE
+                )
+            VALUES
+            (
+                #{user_id},
+                #{user_pw},
+                #{user_name},
+                #{user_gender},
+                #{user_tel},
+                #{user_status_cd},
+                #{user_pw_fail_cnt},
+                #{user_reg_id},
+                #{user_reg_date}
+            )
+    </insert>
+</mapper>

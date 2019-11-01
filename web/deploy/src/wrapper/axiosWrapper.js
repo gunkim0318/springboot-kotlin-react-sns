@@ -81,6 +81,7 @@ export const del = (url, headerObj, dataObj, props) => {
 
 //통신을 통해 얻은 데이타 처리
 const axiosResult = (result) => {
+    
     return result.body;
 }
 
