@@ -46,7 +46,7 @@ const LoginPage = (props: Props) => {
             user_pw: passwordInput,
         };
 
-        axiosWrapper.get('/login', headerObj, dataObj, props)
+        axiosWrapper.get('/user/login', headerObj, dataObj, props)
             .then(result => {
                 console.log(result);
             })
