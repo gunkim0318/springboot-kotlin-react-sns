@@ -18,7 +18,7 @@ import CancelButton from '../../../components/Button/CancelButton';
 import SubStyles from '../SubStyles';
 
 //Axios 통신모듈
-import * as axios from '../../../wrapper/axiosWrapper';
+import * as axiosWrapper from '../../../wrapper/axiosWrapper';
 
 
 interface Props extends RouteComponentProps<void> {
@@ -30,6 +30,10 @@ const SignUpPage = (props: Props) => {
 
     //useState
     const [selectedRadio, setSelectedRadio] = React.useState('man');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [phone, setPhone] = React.useState('');
 
     const handleSelectRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedRadio(e.target.value);
@@ -37,24 +41,37 @@ const SignUpPage = (props: Props) => {
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if ('email' === e.target.name) {
-
+            setEmail(e.target.value);
         } else if ('password' === e.target.name) {
-
-        } else if ('gender' === e.target.name) {
-            
+            setPassword(e.target.value);
+        } else if ('name' === e.target.name) {
+            setName(e.target.value);
+        } else if ('phone' === e.target.name) {
+            setPhone(e.target.value);
         }
     }
 
     const handleSignUp = () => {
+        console.log('signUp Click')
         let headerObj = {
             page: 'SignUpPage',
             net_kind: 'signUp',
         }
 
         let dataObj = {
-
+            user_id: email,
+            user_pw: password,
+            user_name: name,
+            user_gender: selectedRadio,
         }
-        axios.post('/signUp')
+
+        axiosWrapper.post('http://192.168.0.6:9090/hello', headerObj, dataObj, props)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+        })
 
     }
 
@@ -66,11 +83,17 @@ const SignUpPage = (props: Props) => {
                         <Grid item xs={12}>
                             <DefaultInput
                                 label='이메일 *'
-
+                                value={email}
+                                name='email'
+                                onChange={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <PasswordInput >
+                            <PasswordInput 
+                            value={password}
+                            onChange={handleInput}
+                            name='password'
+                            >
                                 비밀번호 *
                             </PasswordInput>
                         </Grid>
@@ -102,11 +125,17 @@ const SignUpPage = (props: Props) => {
                         <Grid item xs={12}>
                             <DefaultInput
                                 label='성명 *'
+                                value={name}
+                                onChange={handleInput}
+                                name='name'
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <DefaultInput
                                 label='전화번호 *'
+                                value={phone}
+                                onChange={handleInput}
+                                name='phone'
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -131,7 +160,6 @@ const SignUpPage = (props: Props) => {
                     </Grid>
                 </DefaultCard>
             </Grid>
-
         </Grid>
     );
 }

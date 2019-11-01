@@ -34,6 +34,10 @@ export const post = (url, headerObj, dataObj, props) => {
         .then(result => {
             resolve(axiosResult(result));
         })
+        .catch(err => {
+            console.log(err + 'axiosWrapper.js');
+            reject(err);
+        })
     })
 }
 

@@ -7,6 +7,7 @@ interface Props {
     children?: any
     onChange?: any,
     value?: string,
+    name?: string,
     disabled?: boolean,
 }
 
@@ -31,6 +32,7 @@ const PasswordInput = (props: Props) => {
             label={props.children}
             fullWidth={true}
             variant='outlined'
+            name={props.name}
             InputProps={
                 {
                     classes: {
