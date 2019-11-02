@@ -21,7 +21,7 @@ export const get = (url, headerObj, dataObj, props) => {
 
 //삽입
 export const post = (url, headerObj, dataObj, props) => {
-    return new Promise((resovle, reject) => {
+    return new Promise((resolve, reject) => {
         let reqData = {
             header: headerObj,
             body: dataObj
@@ -32,7 +32,8 @@ export const post = (url, headerObj, dataObj, props) => {
             }
         })
         .then(result => {
-            resolve(axiosResult(result));
+            console.log(result.data);
+            resolve(axiosResult(result.data));
         })
         .catch(err => {
             console.log(err + 'axiosWrapper.js');
@@ -77,6 +78,22 @@ export const del = (url, headerObj, dataObj, props) => {
         })
     })
     
+}
+
+//handshake 통신
+const handshake = () => {
+    let reqData = {
+        header: {
+            net_kind: 'handshake'
+        },
+        body: {
+
+        }
+    }
+
+    axios.post('/handshake', {
+
+    })
 }
 
 //통신을 통해 얻은 데이타 처리
