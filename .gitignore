@@ -110,3 +110,8 @@ fabric.properties
 settings.gradle
 gradlew.bat
 gradlew
+.settings
+.vscode
+bin
+.classpath
+.project
