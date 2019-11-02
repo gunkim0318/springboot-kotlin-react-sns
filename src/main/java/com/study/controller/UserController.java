@@ -5,7 +5,10 @@ import com.study.service.UserService;
 import com.study.util.ParsingUtil;
 import com.study.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,13 +34,10 @@ public class UserController {
         jwtKeyMap.put(key, jwt);
 
         ParsingUtil util = new ParsingUtil();
+        util.headPut("resCode", 200);
         util.bodyPut("mapKey", key);
         util.bodyPut("jwtKey", jwt);
 
         return util.jsonResult();
-    }
-    @GetMapping("/handGet")
-    public String get(){
-        return jwtKeyMap.get("A112");
     }
 }
