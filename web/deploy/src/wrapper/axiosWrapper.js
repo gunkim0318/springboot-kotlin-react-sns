@@ -13,9 +13,9 @@ export const get = (url, headerObj, dataObj, props) => {
                 reqData: reqData
             }
         })
-        .then(result => {
-            resolve(axiosResult(result));
-        })
+            .then(result => {
+                resolve(axiosResult(result));
+            })
     })
 }
 
@@ -31,14 +31,14 @@ export const post = (url, headerObj, dataObj, props) => {
                 reqData: reqData
             }
         })
-        .then(result => {
-            console.log(result.data);
-            resolve(axiosResult(result.data));
-        })
-        .catch(err => {
-            console.log(err + 'axiosWrapper.js');
-            reject(err);
-        })
+            .then(result => {
+                console.log(result.data);
+                resolve(axiosResult(result.data));
+            })
+            .catch(err => {
+                console.log(err + 'axiosWrapper.js');
+                reject(err);
+            })
     })
 }
 
@@ -54,11 +54,11 @@ export const put = (url, headerObj, dataObj, props) => {
                 reqData: reqData
             }
         })
-        .then(result => {
-            resolve(axiosResult(result));
-        })
+            .then(result => {
+                resolve(axiosResult(result));
+            })
     })
-    
+
 }
 
 //삭제
@@ -73,32 +73,38 @@ export const del = (url, headerObj, dataObj, props) => {
                 reqData: reqData
             }
         })
-        .then(result => {
-            resolve(axiosResult(result));
-        })
+            .then(result => {
+                resolve(axiosResult(result));
+            })
     })
-    
+
 }
 
 //handshake 통신
-const handshake = () => {
+export const handshake = () => {
     let reqData = {
         header: {
             net_kind: 'handshake'
         },
         body: {
-
+            // secert_cli: 'qkrgusrl',
         }
     }
 
-    axios.post('/handshake', {
-
+    axios.post('/user/handshake', {
+        data: reqData,
     })
+        .then(result => {
+            if (200 === result.data.header.code) {
+                sessionStorage.setItem('mapKey', result.data.body.mapKey);
+                sessionStorage.setItem('jwtKey', result.data.body.jwtKey);
+            }
+        })
 }
 
 //통신을 통해 얻은 데이타 처리
 const axiosResult = (result) => {
-    
+
     return result.body;
 }
 

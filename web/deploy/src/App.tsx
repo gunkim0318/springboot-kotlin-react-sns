@@ -6,6 +6,8 @@ import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
 import { history } from "./configureStore";
 import withRoot from "./withRoot";
 
+import * as axiosWrapper from './wrapper/axiosWrapper';
+
 //Route
 import Sub from './router/Sub';
 import NotFound from './layout/error/NotFound';
@@ -15,6 +17,13 @@ import NotFound from './layout/error/NotFound';
 interface Props extends RouteComponentProps<void>, WithWidth {}
 
 const App = (props?: Props) => {
+
+	//useMemo
+	React.useMemo(() => {
+		if(!sessionStorage.getItem('mapKey')) {
+			axiosWrapper.handshake();
+		}
+	}, [])
 
 	return (
 		<Router history={history} >
