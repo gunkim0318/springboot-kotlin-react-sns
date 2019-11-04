@@ -38,6 +38,7 @@
 
 # REST API 데이터 구조
 * Response Header
+```json
 {
     header: {
         page: 요청페이지,
@@ -46,12 +47,18 @@
     }
     
 }
+```
 * Request Header
+```json
 {
     header: {
-        resCode: 0 - 성공, 100~199 - ERROR LV.1, 200~299 - ERROR LV.2, 300~399 - ERROR LV.3 ...,
+        resCode: 0 - Success,
+                 100~199 - Error LV.1, 
+                 200~299 - Error LV.2, 
+                 300~399 - Error LV.3 ...,
         page: 요청페이지,
         netKind: 통신 종류,
         mapKey: 로그인전 통신인증 키,
     }
 }
+```
