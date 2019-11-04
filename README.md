@@ -36,7 +36,7 @@
 게시물 수정, 삭제|2일
 게시물 좋아요|4일
 
-# REST API 데이터 구조
+# REST API HEADER
 ## Response Header
 ```
 {
