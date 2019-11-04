@@ -35,3 +35,23 @@
 게시물 상세 보기,등록|7일
 게시물 수정, 삭제|2일
 게시물 좋아요|4일
+
+# REST API 데이터 구조
+* Response Header
+{
+    header: {
+        page: 요청페이지,
+        netKind: 통신 종류,
+        mapKey: 로그인전 통신인증 키,
+    }
+    
+}
+* Request Header
+{
+    header: {
+        resCode: 0 - 성공, 100~199 - ERROR LV.1, 200~299 - ERROR LV.2, 300~399 - ERROR LV.3 ...,
+        page: 요청페이지,
+        netKind: 통신 종류,
+        mapKey: 로그인전 통신인증 키,
+    }
+}

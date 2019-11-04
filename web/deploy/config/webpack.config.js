@@ -518,7 +518,7 @@ module.exports = function(webpackEnv) {
       ],
     },
     devServer: {
-      port: 9090,
+      port: 8080,
       open: true,
       proxy: {
         "/": "http://localhost"

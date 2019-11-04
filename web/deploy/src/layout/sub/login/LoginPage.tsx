@@ -39,6 +39,7 @@ const LoginPage = (props: Props) => {
         let headerObj = {
             page:'loginPage',
             net_kind: 'login',
+            mapKey: sessionStorage.getItem('mapKey'),
         };
 
         let dataObj = {

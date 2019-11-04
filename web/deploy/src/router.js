@@ -4,6 +4,7 @@ import SignUpPage from './layout/sub/signUp/SignUpPage';
 import FindPassword from './layout/sub/findPassword/FindPassword';
 import EmailPwFind from './layout/sub/findPassword/EmailPwFind';
 import PhonePwFind from './layout/sub/findPassword/PhonePwFind';
+import HomePage from './layout/main/home/HomePage';
 
 //로그인 후
 
@@ -37,7 +38,13 @@ const router = [
         path: '/PhonePwFind',
         route: 'Sub',
         component: PhonePwFind,
-    }
+    },
+    //메인화면
+    {
+        path: '/Home',
+        route: 'Main',
+        component: HomePage,
+    },
 ]
 
 export default router;

@@ -17,6 +17,10 @@ const useStyle = makeStyles(theme => ({
         // -o-background-size: 'cover',
         // background-size: 'cover',
     },
+    mainRoot: {
+        width: '100%',
+        padding: 15,
+    },
 
     content: {
         width: '100%',
