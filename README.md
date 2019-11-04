@@ -38,7 +38,7 @@
 
 # REST API 데이터 구조
 ## Response Header
-```json
+```
 {
     header: {
         page: 요청페이지,
@@ -49,7 +49,7 @@
 }
 ```
 ## Request Header
-```json
+```
 {
     header: {
         resCode: 0 - Success,
