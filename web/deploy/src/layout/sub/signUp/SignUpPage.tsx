@@ -55,8 +55,7 @@ const SignUpPage = (props: Props) => {
         console.log('signUp Click')
         let headerObj = {
             page: 'SignUpPage',
-            net_kind: 'signUp',
-            mapKey: sessionStorage.getItem('mapKey'),
+            netKind: 'signUp',
         }
 
         let dataObj = {
