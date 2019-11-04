@@ -37,7 +37,7 @@
 게시물 좋아요|4일
 
 # REST API HEADER
-## Response Header
+## Request Header
 ```
 {
     header: {
@@ -48,14 +48,15 @@
     
 }
 ```
-## Request Header
+## Response Header
 ```
 {
     header: {
         resCode: 0 - Success,
                  100~199 - Error LV.1, 
                  200~299 - Error LV.2, 
-                 300~399 - Error LV.3 ...,
+                 300~399 - Error LV.3,
+                 ...,
         page: 요청페이지,
         netKind: 통신 종류,
         mapKey: 로그인전 통신인증 키,

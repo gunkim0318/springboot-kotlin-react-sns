@@ -37,9 +37,8 @@ const LoginPage = (props: Props) => {
         console.log('Button Click!!!');
 
         let headerObj = {
-            page:'loginPage',
+            page: 'loginPage',
             net_kind: 'login',
-            mapKey: sessionStorage.getItem('mapKey'),
         };
 
         let dataObj = {
@@ -49,7 +48,11 @@ const LoginPage = (props: Props) => {
 
         axiosWrapper.get('/user/login', headerObj, dataObj, props)
             .then(result => {
-                console.log(result);
+                if (0 === result.header.resCode) {
+                    props.history.push('/main/Home');
+                } else {
+
+                }
             })
             .catch(err => {
                 console.log(err);
