@@ -20,6 +20,9 @@ import SubStyles from '../SubStyles';
 //Axios 통신모듈
 import * as axiosWrapper from '../../../wrapper/axiosWrapper';
 
+//validator
+import validator from 'validator';
+
 
 interface Props extends RouteComponentProps<void> {
 
@@ -52,6 +55,17 @@ const SignUpPage = (props: Props) => {
     }
 
     const handleSignUp = () => {
+        
+        if (validator.isEmail(email)) {
+
+        } else if (validator.isMobilePhone(phone)) {
+            
+        } else if (validator.isMobilePhone(phone)) {
+            
+        } else if (validator.isMobilePhone(phone)) {
+            
+        }
+
         console.log('signUp Click')
         let headerObj = {
             page: 'SignUpPage',
@@ -66,12 +80,12 @@ const SignUpPage = (props: Props) => {
         }
 
         axiosWrapper.post('/user/signUp', headerObj, dataObj, props)
-        .then(result => {
-            console.log(result);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
     }
 
@@ -89,10 +103,10 @@ const SignUpPage = (props: Props) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <PasswordInput 
-                            value={password}
-                            onChange={handleInput}
-                            name='password'
+                            <PasswordInput
+                                value={password}
+                                onChange={handleInput}
+                                name='password'
                             >
                                 비밀번호 *
                             </PasswordInput>

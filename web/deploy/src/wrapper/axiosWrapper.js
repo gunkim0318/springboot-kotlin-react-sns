@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { decode } from 'punycode';
 
 //GET 조회
 export const get = (url, headerObj, dataObj, props) => {
@@ -143,7 +142,7 @@ const axiosResult = (result) => {
     const jwtKey = sessionStorage.getItem('jwtKey');
 
     if (0 === code) {
-        //통신성공
+        //통신성공 encoded
         let decoded = jwt.verify(result.body.data, jwtKey);
 
         const resData = {
