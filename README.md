@@ -59,7 +59,19 @@
                  ...,
         page: 요청페이지,
         netKind: 통신 종류,
-        mapKey: 로그인전 통신인증 키,
+        mapKey: 로그인 전 통신인증 키,
+    }
+}
+```
+## Handshake Header
+```
+{
+    header: {
+        resCode: 200 - Success
+                 100 - Error,
+        netKind: handshake,
+        mapKey: 로그인 전 통신인증 키,
+        jwtKey: 토큰 encoded 키
     }
 }
 ```
