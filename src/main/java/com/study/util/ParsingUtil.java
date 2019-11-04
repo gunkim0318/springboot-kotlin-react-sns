@@ -41,8 +41,4 @@ public class ParsingUtil {
 
         return resultMap;
     }
-    @Override
-    public String toString(){
-        return "{'header':"+headerList.toString()+", 'body':"+bodyList.toString()+"}";
-    }
 }

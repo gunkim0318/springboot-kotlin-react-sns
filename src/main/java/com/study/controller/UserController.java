@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@Slf4j
 @RequestMapping(value = "/user")
+@Slf4j
 public class UserController {
     private static Map<String, String> jwtKeyMap = new HashMap<String, String>();
 
@@ -27,25 +27,30 @@ public class UserController {
     private JwtService jwtService;
 
     @RequestMapping(value = "/signUp", method = {RequestMethod.GET})
-    public void signUp(UserVO vo){
-        log.info(vo.toString());
-        userService.signUp(vo);
+    public Map<String, Map<String, Object>> signUp(String mapKey, UserVO vo){
+        ParsingUtil util = new ParsingUtil();
+        if(userService.signUp(vo) == 1){
+            util.headPut("resCode", 0);
+        }else{
+            util.headPut("resCode", 100);
+        }
+        util.headPut("page", "/signUp");
+        util.headPut("netKind", "get");
+
+        return util.jsonResult();
     }
     @PostMapping("/handshake")
-    public String handshake(){
+    public Map<String, Map<String, Object>> handshake() {
         String jwt = jwtService.jwtCreate();
-        String key = "A112";
+        String key = UUID.randomUUID().toString();
         jwtKeyMap.put(key, jwt);
 
-        UUID uuid = UUID.randomUUID();
-
         ParsingUtil util = new ParsingUtil();
-        util.headPut("resCode", 200);
-        util.bodyPut("mapKey", uuid.toString());
-        util.bodyPut("jwtKey", jwt);
+        util.headPut("resCode", 0);
+        util.headPut("page", "/user/handshake");
+        util.headPut("page", "handshake");
+        util.headPut("mapKey", key);
 
-        log.info(util.toString());
-
-        return util.toString();
+        return util.jsonResult();
     }
 }
