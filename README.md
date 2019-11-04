@@ -37,7 +37,7 @@
 게시물 좋아요|4일
 
 # REST API 데이터 구조
-* Response Header
+## Response Header
 ```json
 {
     header: {
@@ -48,7 +48,7 @@
     
 }
 ```
-* Request Header
+## Request Header
 ```json
 {
     header: {
