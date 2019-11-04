@@ -38,6 +38,14 @@ const SignUpPage = (props: Props) => {
     const [name, setName] = React.useState('');
     const [phone, setPhone] = React.useState('');
 
+    const [emailError, setEmailError] = React.useState(true);
+    const [passwordError, setPasswordError] = React.useState(true);
+    const [nameError, setNameError] = React.useState(true);
+
+    const [emailHelper, setEmailHelper] = React.useState('');
+    const [passwordHelper, setPasswordHelper] = React.useState('');
+    const [nameHelper, setNameHelper] = React.useState('');
+
     const handleSelectRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedRadio(e.target.value);
     }
@@ -46,7 +54,15 @@ const SignUpPage = (props: Props) => {
         if ('email' === e.target.name) {
             setEmail(e.target.value);
         } else if ('password' === e.target.name) {
-            setPassword(e.target.value);
+            if (/^.*(?=^.{10,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^()]).*$/.test(e.target.value) && !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g.test(e.target.value)) {
+                setPasswordError(false);
+                setPasswordHelper('');
+                setPassword(e.target.value);
+            } else {
+                setPasswordError(true);
+                setPasswordHelper('(영문 대소문자, 숫자, 특수문자 1자이상 한글 사용불가 10자~20자)');
+                setPassword(e.target.value);
+            }
         } else if ('name' === e.target.name) {
             setName(e.target.value);
         } else if ('phone' === e.target.name) {
@@ -55,15 +71,15 @@ const SignUpPage = (props: Props) => {
     }
 
     const handleSignUp = () => {
-        
-        if (validator.isEmail(email)) {
+
+        if (!validator.isEmail(email)) {
+
+        } else if (/^.*(?=^.{10,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^()]).*$/.test(password) && !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g.test(password)) {
+
+        } else if (/[a-z0-9]|[ []{}()<>?|`~!@#$%^&*-_+=,.;:"']{2,5}/g.test(name)) {
 
         } else if (validator.isMobilePhone(phone)) {
-            
-        } else if (validator.isMobilePhone(phone)) {
-            
-        } else if (validator.isMobilePhone(phone)) {
-            
+
         }
 
         console.log('signUp Click')
