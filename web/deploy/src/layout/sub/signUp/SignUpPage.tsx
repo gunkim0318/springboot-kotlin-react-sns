@@ -48,20 +48,20 @@ const SignUpPage = (props: Props) => {
     const [nameHelper, setNameHelper] = React.useState('이름을 입력해주세요');
     const [phoneHelper, setPhoneHelper] = React.useState('"-" 제외하고 입력해주세요');
 
-    const [disSignUpBt, setDisSignUpBt] = React.useState(true);
 
     const handleSelectRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedRadio(e.target.value);
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // console.log(e.target.value);
         if ('email' === e.target.name) {
             if ('' === e.target.value) {
                 console.log('1');
                 setEmailHelper('이메일을 입력해주세요.');
                 setEmailError(true);
                 setEmail(e.target.value);
-            } else if (validator.isEmail(email)) {
+            } else if (validator.isEmail(e.target.value)) {
                 console.log('2');
                 setEmailHelper('');
                 setEmailError(false);
@@ -101,7 +101,7 @@ const SignUpPage = (props: Props) => {
                 setPhoneHelper('"-" 를 제외하고 전화번호를 입력해주세요.');
                 setPhoneError(true);
                 setPhone(e.target.value);
-            } else if (validator.isMobilePhone(phone)) {
+            } else if (validator.isMobilePhone(e.target.value)) {
                 setPhoneHelper('');
                 setPhoneError(false);
                 setPhone(e.target.value);
@@ -112,11 +112,6 @@ const SignUpPage = (props: Props) => {
             }
         }
 
-        if (!emailError && !passwordError && !nameError && !phoneError) {
-            setDisSignUpBt(false);
-        } else {
-            setDisSignUpBt(true);
-        }
     }
 
     const handleSignUp = () => {
@@ -232,7 +227,7 @@ const SignUpPage = (props: Props) => {
                                 onClick={handleSignUp}
                                 color='success'
                                 fontColor='white'
-                                disabled={disSignUpBt}
+                                disabled={emailError || passwordError || nameError || phoneError ? true : false}
                             >
                                 가입
                             </DefaultButton>

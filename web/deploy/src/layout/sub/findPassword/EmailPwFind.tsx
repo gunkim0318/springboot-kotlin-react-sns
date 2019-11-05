@@ -15,6 +15,12 @@ import SubStyles from '../SubStyles';
 import { makeStyles } from '@material-ui/styles';
 import CancelButton from '../../../components/Button/CancelButton';
 
+//Validator
+import validator from 'validator';
+
+//Axios
+import * as axiosWrapper from '../../../wrapper/axiosWrapper';
+
 
 interface Props extends RouteComponentProps<void> {
 
@@ -28,35 +34,60 @@ const EmailPwFind = (props: Props) => {
     const [emailValue, setEmailValue] = React.useState('');
     const [otpValue, setOtpValue] = React.useState('');
     const [otpCert, setOtpCert] = React.useState(true);
+    const [otpBtText, setOtpBtText] = React.useState('인증번호 전송')
     const [timer] = React.useState(180);
-    const [minute, setMinute] = React.useState(Math.floor(timer/60));
-    const [second, setSecond] = React.useState(timer%60);
+    const [minute, setMinute] = React.useState(Math.floor(timer / 60));
+    const [second, setSecond] = React.useState(timer % 60);
     const [timerSt, setTimerST] = React.useState(false);
 
+    const [emailHelper, setEmailHelper] = React.useState('(이메일을 입력해주세요.)');
+    const [emailError, setEmailError] = React.useState(true);
+
+
     const handleSendOtp = () => {
-        setOtpCert(!otpCert);
-        setTimerST(true);
-        
+        setOtpBtText('인증번호 재전송');
+        let headerObj = {
+            page: 'EmailPwFind',
+            netKind: 'sendOtp',
+        };
 
-        // const interval = setInterval(() => {
-        //     console.log('interval ' + timer);
-        //     let viewTime = timer - 1;
-        //     let viewMinute = Math.floor(viewTime / 60);
-        //     let viewSecond = viewTime % 60;
+        let dataObj = {
+            user_id: emailValue,
+        };
 
-        //     setTimer(viewTime);
-        //     setMinute(viewMinute);
-        //     setSecond(viewSecond);
-        // }, 1000);
-        
+        axiosWrapper.post('/user/sendOtp', headerObj, dataObj, props)
+            .then(result => {
+                if (0 === result.header.resCode) {
+                    setOtpCert(false);
+                    setTimerST(true);
+                } else {
+
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
     }
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if ('email' === e.target.name) {
             setEmailValue(e.target.value);
+            if ('' === e.target.value) {
+                setEmailHelper('(이메일을 입력해주세요.)');
+                setEmailError(true);
+            } else if (validator.isEmail(e.target.value)) {
+                setEmailHelper('');
+                setEmailError(false);
+            } else {
+                setEmailHelper('(이메일 형식이 맞지 않습니다.)');
+                setEmailError(true);
+            }
         } else if ('otp' === e.target.name) {
             setOtpValue(e.target.value);
         }
+
     }
 
     const handleCertOtp = () => {
@@ -64,12 +95,12 @@ const EmailPwFind = (props: Props) => {
     }
 
     const minusTime = (i: number) => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 let viewTime = i - 1;
                 let viewMinute = Math.floor(viewTime / 60);
                 let viewSecond = viewTime % 60;
-    
+
                 setMinute(viewMinute);
                 setSecond(viewSecond);
                 resolve();
@@ -77,15 +108,15 @@ const EmailPwFind = (props: Props) => {
         })
     }
 
-     const startClock = async () => {
-        for(let i = timer; i>0; --i) {
+    const startClock = async () => {
+        for (let i = timer; i > 0; --i) {
             await minusTime(i);
         }
     }
 
     //useMemo
     React.useEffect(() => {
-        if(timerSt) {
+        if (timerSt) {
             startClock();
         }
     }, [timerSt])
@@ -97,10 +128,12 @@ const EmailPwFind = (props: Props) => {
                     <Grid container spacing={2} className={classes.cardContent}>
                         <Grid item xs={12} sm={9}>
                             <DefaultInput
-                                label='이메일'
+                                label={'이메일 ' + emailHelper}
                                 onChange={handleOnChange}
                                 value={emailValue}
                                 name='email'
+                                //helperText={emailHelper}
+                                error={emailError}
                             />
                         </Grid>
                         <Grid item xs={12} sm={3}>
@@ -108,8 +141,9 @@ const EmailPwFind = (props: Props) => {
                                 color='sea'
                                 onClick={handleSendOtp}
                                 fontColor='white'
+                                disabled={emailError ? true : false}
                             >
-                                인증번호 전송
+                                {otpBtText}
                             </DefaultButton>
                         </Grid>
                         <Grid item xs={9}>
@@ -121,7 +155,7 @@ const EmailPwFind = (props: Props) => {
                                 disabled={otpCert}
                             />
                         </Grid>
-                        <Grid item container xs={3}  className={subClasses.timer} justify='center' alignItems='center'>
+                        <Grid item container xs={3} className={subClasses.timer} justify='center' alignItems='center'>
                             {minute}:{0 === second ? '00' : second}
                         </Grid>
                         <Grid item xs={12}>

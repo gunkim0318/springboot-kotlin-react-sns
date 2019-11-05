@@ -99,12 +99,12 @@ export const handshake = () => {
                 if (200 === result.data.header.resCode) {
                     sessionStorage.setItem('mapKey', result.data.body.mapKey);
                     sessionStorage.setItem('jwtKey', result.data.body.jwtKey);
-                    resolve()
+                    resolve();
                 }
             })
             .catch(err => {
                 console.log(err);
-                reject(err)
+                reject(err);
             })
     })
 

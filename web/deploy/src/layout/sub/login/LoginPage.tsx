@@ -13,6 +13,7 @@ import DefaultButton from '../../../components/Button/DefaultButton';
 
 //CSS
 import SubStyles from '../SubStyles';
+import PasswordInput from '../../../components/Input/PasswordInput';
 
 
 interface Props extends RouteComponentProps<void> { }
@@ -23,6 +24,12 @@ const LoginPage = (props: Props) => {
     //useState
     const [idInput, setIdInput] = React.useState('');
     const [passwordInput, setPasswordInput] = React.useState('');
+
+    const [idHelper, setIdHelper] = React.useState('이메일을 입력해주세요.');
+    const [passwordHelper, setPasswordHelper] = React.useState('비밀번호를 입력해주세요.');
+
+    const [idError, setIdError] = React.useState(true);
+    const [passwordError, setPasswordError] = React.useState(true);
 
 
     const handleFindPasswordClick = () => {
@@ -51,7 +58,7 @@ const LoginPage = (props: Props) => {
                 if (0 === result.header.resCode) {
                     props.history.push('/main/Home');
                 } else {
-
+                    console.log('code error');
                 }
             })
             .catch(err => {
@@ -62,13 +69,30 @@ const LoginPage = (props: Props) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         switch (e.target.name) {
             case 'id':
-                setIdInput(e.target.value);
+                if ('' === e.target.value) {
+                    setIdHelper('이메일을 입력해주세요.');
+                    setIdError(true);
+                    setIdInput(e.target.value);
+                } else {
+                    setIdHelper('');
+                    setIdError(false);
+                    setIdInput(e.target.value);
+                }
                 break;
             case 'password':
-                setPasswordInput(e.target.value);
+                if ('' === e.target.value) {
+                    setPasswordHelper('비밀번호를 입력해주세요.');
+                    setPasswordError(true);
+                    setPasswordInput(e.target.value);
+                } else {
+                    setPasswordHelper('');
+                    setPasswordError(false);
+                    setPasswordInput(e.target.value);
+                }
             default:
 
         }
+
     }
 
     return (
@@ -82,15 +106,20 @@ const LoginPage = (props: Props) => {
                                 label='ID'
                                 onChange={handleChange}
                                 value={idInput}
+                                helperText={idHelper}
+                                error={idError}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <DefaultInput
+                            <PasswordInput
                                 name='password'
-                                label='PASSWORD'
                                 onChange={handleChange}
                                 value={passwordInput}
-                            />
+                                helperText={passwordHelper}
+                                error={passwordError}
+                            >
+                                PASSWORD
+                            </PasswordInput>
                         </Grid>
                         <Grid item xs={12}>
                             <DefaultButton
@@ -98,6 +127,7 @@ const LoginPage = (props: Props) => {
                                 size='large'
                                 color='rose'
                                 fontColor='white'
+                                disabled={idError || passwordError ? true : false}
                             >
                                 로그인
                             </DefaultButton>

@@ -15,6 +15,12 @@ import SubStyles from '../SubStyles';
 import { makeStyles } from '@material-ui/styles';
 import CancelButton from '../../../components/Button/CancelButton';
 
+//Validator
+import validator from 'validator';
+
+//Axios
+import * as axiosWrapper from '../../../wrapper/axiosWrapper';
+
 
 interface Props extends RouteComponentProps<void> {
 
@@ -28,32 +34,54 @@ const PhonePwFind = (props: Props) => {
     const [phoneValue, setPhoneValue] = React.useState('');
     const [otpValue, setOtpValue] = React.useState('');
     const [otpCert, setOtpCert] = React.useState(true);
+    const [otpBtText, setOtpBtText] = React.useState('인증번호 전송')
     const [timer] = React.useState(180);
-    const [minute, setMinute] = React.useState(Math.floor(timer/60));
-    const [second, setSecond] = React.useState(timer%60);
+    const [minute, setMinute] = React.useState(Math.floor(timer / 60));
+    const [second, setSecond] = React.useState(timer % 60);
     const [timerSt, setTimerST] = React.useState(false);
 
+    const [phoneHelper, setPhoneHelper] = React.useState('(전화번호를 입력해주세요.)');
+    const [phoneError, setPhoneError] = React.useState(true);
+
     const handleSendOtp = () => {
-        setOtpCert(!otpCert);
-        setTimerST(true);
-        
+        setOtpBtText('인증번호 재전송');
+        let headerObj = {
+            page: 'PhonePwFind',
+            netKind: 'sendOtp',
+        };
 
-        // const interval = setInterval(() => {
-        //     console.log('interval ' + timer);
-        //     let viewTime = timer - 1;
-        //     let viewMinute = Math.floor(viewTime / 60);
-        //     let viewSecond = viewTime % 60;
+        let dataObj = {
+            user_tel: phoneValue,
+        };
 
-        //     setTimer(viewTime);
-        //     setMinute(viewMinute);
-        //     setSecond(viewSecond);
-        // }, 1000);
-        
+        axiosWrapper.post('/user/sendOtp', headerObj, dataObj, props)
+            .then(result => {
+                if (0 === result.header.resCode) {
+                    setOtpCert(false);
+                    setTimerST(true);
+                } else {
+
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
     }
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if ('phone' === e.target.name) {
             setPhoneValue(e.target.value);
+            if ('' === e.target.value) {
+                setPhoneHelper('(비밀번호를 입력해주세요.)');
+                setPhoneError(true);
+            } else if (validator.isMobilePhone(e.target.value)) {
+                setPhoneHelper('');
+                setPhoneError(false);
+            } else {
+                setPhoneHelper('(전화번호 형식이 맞지 않습니다.)');
+                setPhoneError(true);
+            }
         } else if ('otp' === e.target.name) {
             setOtpValue(e.target.value);
         }
@@ -69,7 +97,7 @@ const PhonePwFind = (props: Props) => {
                 let viewTime = i - 1;
                 let viewMinute = Math.floor(viewTime / 60);
                 let viewSecond = viewTime % 60;
-    
+
                 setMinute(viewMinute);
                 setSecond(viewSecond);
                 resolve();
@@ -77,15 +105,15 @@ const PhonePwFind = (props: Props) => {
         })
     }
 
-     const startClock = async () => {
-        for(let i = timer; i>0; --i) {
+    const startClock = async () => {
+        for (let i = timer; i > 0; --i) {
             await minusTime(i);
         }
     }
 
     //useMemo
     React.useEffect(() => {
-        if(timerSt) {
+        if (timerSt) {
             startClock();
         }
     }, [timerSt])
@@ -97,10 +125,11 @@ const PhonePwFind = (props: Props) => {
                     <Grid container spacing={2} className={classes.cardContent}>
                         <Grid item xs={12} sm={9}>
                             <DefaultInput
-                                label='전화번호'
+                                label={'전화번호 ' + phoneHelper}
                                 onChange={handleOnChange}
                                 value={phoneValue}
                                 name='phone'
+                                error={phoneError}
                             />
                         </Grid>
                         <Grid item xs={12} sm={3}>
@@ -108,8 +137,9 @@ const PhonePwFind = (props: Props) => {
                                 color='sea'
                                 onClick={handleSendOtp}
                                 fontColor='white'
+                                disabled={phoneError ? true : false}
                             >
-                                인증번호 전송
+                                {otpBtText}
                             </DefaultButton>
                         </Grid>
                         <Grid item xs={9}>
@@ -121,7 +151,7 @@ const PhonePwFind = (props: Props) => {
                                 disabled={otpCert}
                             />
                         </Grid>
-                        <Grid item container xs={3}  className={subClasses.timer} justify='center' alignItems='center'>
+                        <Grid item container xs={3} className={subClasses.timer} justify='center' alignItems='center'>
                             {minute}:{0 === second ? '00' : second}
                         </Grid>
                         <Grid item xs={12}>
