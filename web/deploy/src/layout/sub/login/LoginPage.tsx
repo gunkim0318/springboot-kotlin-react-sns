@@ -45,7 +45,8 @@ const LoginPage = (props: Props) => {
 
         let headerObj = {
             page: 'loginPage',
-            netKind: 'login',
+            netKind: 'get',
+            netDesc: 'login',
         };
 
         let dataObj = {

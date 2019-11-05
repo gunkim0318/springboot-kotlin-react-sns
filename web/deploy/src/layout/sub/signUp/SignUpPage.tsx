@@ -123,7 +123,8 @@ const SignUpPage = (props: Props) => {
 
         let headerObj = {
             page: 'SignUpPage',
-            netKind: 'signUp',
+            netKind: 'post',
+            netDesc: 'signUp',
         }
 
         let dataObj = {

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import * as res from './responseWrapper';
 
 //GET 조회
 export const get = (url, headerObj, dataObj, props) => {
     return new Promise((resolve, reject) => {
-        let promise = CreateReqData();
+        let promise = CreateReqData(headerObj, dataObj)
 
-        promise()
+        promise
             .then(reqData => {
                 return axios.get(url, {
                     params: {
@@ -24,9 +25,9 @@ export const get = (url, headerObj, dataObj, props) => {
 //POST 삽입
 export const post = (url, headerObj, dataObj, props) => {
     return new Promise((resolve, reject) => {
-        let promise = CreateReqData();
+        let promise = CreateReqData(headerObj, dataObj)
 
-        promise()
+        promise
             .then(reqData => {
                 return axios.post(url, {
                     reqData: reqData
@@ -37,7 +38,7 @@ export const post = (url, headerObj, dataObj, props) => {
                 resolve(axiosResult(result.data));
             })
             .catch(err => {
-                console.log(err + 'axiosWrapper.js');
+                console.log(err + ' axiosWrapper.js');
                 reject(err);
             })
 
@@ -47,9 +48,9 @@ export const post = (url, headerObj, dataObj, props) => {
 //PUT 수정
 export const put = (url, headerObj, dataObj, props) => {
     return new Promise((resolve, reject) => {
-        let promise = CreateReqData();
+        let promise = CreateReqData(headerObj, dataObj)
 
-        promise()
+        promise
             .then(reqData => {
                 return axios.put(url, {
                     reqData: reqData
@@ -65,9 +66,9 @@ export const put = (url, headerObj, dataObj, props) => {
 //DELETE 삭제
 export const del = (url, headerObj, dataObj, props) => {
     return new Promise((resolve, reject) => {
-        let promise = CreateReqData();
+        let promise = CreateReqData(headerObj, dataObj)
 
-        promise()
+        promise
             .then(reqData => {
                 return axios.delete(url, {
                     reqData: reqData
@@ -96,7 +97,7 @@ export const handshake = () => {
             data: reqData,
         })
             .then(result => {
-                if (200 === result.data.header.resCode) {
+                if (0 === result.data.header.resCode) {
                     sessionStorage.setItem('mapKey', result.data.body.mapKey);
                     sessionStorage.setItem('jwtKey', result.data.body.jwtKey);
                     resolve();
@@ -121,7 +122,7 @@ const CreateReqData = (headerObj, dataObj) => {
         promise = handshake();
     }
 
-    return promise()
+    return promise
         .then(() => {
             headerObj.mapKey = sessionStorage.getItem('mapKey');
 
@@ -138,138 +139,7 @@ const CreateReqData = (headerObj, dataObj) => {
 
 //통신을 통해 얻은 데이타 처리
 const axiosResult = (result) => {
-    const code = result.header.resCode;
-    const jwtKey = sessionStorage.getItem('jwtKey');
-
-    if (0 === code) {
-        //통신성공 encoded
-        let decoded = jwt.verify(result.body.data, jwtKey);
-
-        const resData = {
-            header: result.header,
-            body: decoded,
-        }
-
-        return resData;
-
-    } else if (1 === Math.floor(code / 100)) {
-        //
-        if (0 === code % 100) {
-
-        } else if (1 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-
-        } else if (2 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-
-        } else if (3 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        }
-
-    } else if (2 === Math.floor(code / 100)) {
-        //
-        if (0 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (1 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (2 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (3 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        }
-
-    } else if (3 === Math.floor(code / 100)) {
-        //
-        if (0 === code % 100) {
-
-        } else if (1 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (2 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (3 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        }
-
-    } else if (4 === Math.floor(code / 100)) {
-        //
-        if (0 === code % 100) {
-
-        } else if (1 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (2 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        } else if (3 === code % 100) {
-            let resData = {
-                header: result.header,
-                body: '',
-            }
-
-            return resData;
-        }
-
-    }
-
-    return result.body;
+    return res.responseCode(result);
 }
 
 
