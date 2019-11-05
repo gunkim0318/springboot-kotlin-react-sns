@@ -41,7 +41,7 @@ const LoginPage = (props: Props) => {
     }
 
     const handleClick = () => {
-        console.log('Button Click!!!');
+        //console.log('Button Click!!!');
 
         let headerObj = {
             page: 'loginPage',

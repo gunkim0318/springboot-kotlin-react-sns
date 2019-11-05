@@ -17,15 +17,14 @@ import HomePage from '../layout/main/home/HomePage';
 import RouterStyles from './RouterStyles';
 
 const MyRoutes = () => {
-	const [ routerArray ] = React.useState([...router]);
+	const [routerArray] = React.useState([...router]);
 
 	return (
 		<Switch>
-			{console.log(routerArray.length)}
 			{
 				routerArray.map((v, i) => {
-					if('Main' === v.route) {
-						return(
+					if ('Main' === v.route) {
+						return (
 							<Route path={v.path} key={i} component={v.component} />
 						)
 					} else {
@@ -43,13 +42,13 @@ interface Props extends RouteComponentProps<void>, WithWidth { }
 
 const Main = (props?: Props) => {
 	const classes = RouterStyles();
-	
+
 	//useState
 
 	return (
 		<Router history={history} >
 			<div className={classes.mainRoot}>
-				<Grid container justify='center'  className={classes.content}>
+				<Grid container justify='center' className={classes.content}>
 					<MyRoutes />
 				</Grid>
 			</div>

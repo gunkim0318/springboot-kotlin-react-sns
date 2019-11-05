@@ -57,12 +57,10 @@ const SignUpPage = (props: Props) => {
         // console.log(e.target.value);
         if ('email' === e.target.name) {
             if ('' === e.target.value) {
-                console.log('1');
                 setEmailHelper('이메일을 입력해주세요.');
                 setEmailError(true);
                 setEmail(e.target.value);
             } else if (validator.isEmail(e.target.value)) {
-                console.log('2');
                 setEmailHelper('');
                 setEmailError(false);
                 setEmail(e.target.value);
@@ -102,9 +100,16 @@ const SignUpPage = (props: Props) => {
                 setPhoneError(true);
                 setPhone(e.target.value);
             } else if (validator.isMobilePhone(e.target.value)) {
-                setPhoneHelper('');
-                setPhoneError(false);
-                setPhone(e.target.value);
+                if (/[-]/g.test(e.target.value)) {
+                    setPhoneHelper('');
+                    setPhoneError(false);
+                    setPhone(e.target.value);
+                } else {
+                    setPhoneHelper('"-" 를 제외하고 입력하세요.');
+                    setPhoneError(true);
+                    setPhone(e.target.value);
+                }
+
             } else {
                 setPhoneHelper('전화번호 형식이 맞지 않습니다.');
                 setPhoneError(true);

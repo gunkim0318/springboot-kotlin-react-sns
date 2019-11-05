@@ -21,11 +21,9 @@ const MyRoutes = () => {
 
 	return (
 		<Switch>
-			{console.log(routerArray.length)}
 			{
 				routerArray.map((v, i) => {
 					if ('Sub' === v.route) {
-						console.log('dddddd')
 						return (
 							<Route path={v.path} key={i} component={v.component} />
 						)
