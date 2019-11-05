@@ -69,8 +69,10 @@
 ```
 {
     header: {
-        resCode: 200 - Success
-                 100 - Error,
+        resCode: 0 - Success,
+                 100~199 - Error LV.1, 
+                 200~299 - Error LV.2, 
+                 300~399 - Error LV.3,
         netKind: handshake,
         netDesc: 통신 이름,
         mapKey: 로그인 전 통신인증 키,
