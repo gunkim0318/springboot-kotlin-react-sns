@@ -101,12 +101,12 @@ const SignUpPage = (props: Props) => {
                 setPhone(e.target.value);
             } else if (validator.isMobilePhone(e.target.value)) {
                 if (/[-]/g.test(e.target.value)) {
-                    setPhoneHelper('');
-                    setPhoneError(false);
-                    setPhone(e.target.value);
-                } else {
                     setPhoneHelper('"-" 를 제외하고 입력하세요.');
                     setPhoneError(true);
+                    setPhone(e.target.value);
+                } else {
+                    setPhoneHelper('');
+                    setPhoneError(false);
                     setPhone(e.target.value);
                 }
 
@@ -121,12 +121,10 @@ const SignUpPage = (props: Props) => {
 
     const handleSignUp = () => {
 
-
-
-        console.log('signUp Click')
         let headerObj = {
             page: 'SignUpPage',
-            netKind: 'signUp',
+            netKind: 'post',
+            netDesc: 'signUp',
         }
 
         let dataObj = {
