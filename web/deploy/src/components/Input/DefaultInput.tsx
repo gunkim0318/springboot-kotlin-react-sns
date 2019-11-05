@@ -10,6 +10,8 @@ interface Props {
     value?: string,
     name?: string,
     disabled?: boolean,
+    helperText?: string,
+    error?: boolean,
 }
 
 const DefaultInput = (props: Props) => {
@@ -25,6 +27,8 @@ const DefaultInput = (props: Props) => {
             variant="outlined"
             fullWidth={true}
             disabled={props.disabled ? true : false}
+            helperText={props.helperText}
+            error={props.error ? true : false}
             InputProps={
                 {
                     classes: {
@@ -50,19 +54,19 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
     notchedOutline: {
         borderWidth: 2,
-        borderColor: '#828282'
+        borderColor: '#c8c8c8'
     },
 }));
 
 const CustomTextField = withStyles({
     root: {
         '& input:valid + fieldset': {
-            borderColor: '#828282',
+            borderColor: '#c8c8c8',
             borderWidth: 2,
         },
         '& input:valid:focus + fieldset': {
-           borderColor: '#000000',
-           borderWidth: 2,
+            // borderColor: '#000000',
+            borderWidth: 2,
         },
     }
 })(TextField);

@@ -39,31 +39,31 @@ const CustomButton = (props: Props) => {
             break;
         case 'success':
             btnColor = '#5CE75C';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#98FB98';
             break;
         case 'error':
             btnColor = '#FF3232';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#FF8C8C';
             break;
         case 'warning':
             btnColor = '#FFF064';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#FAFAA0';
             break;
         case 'rose':
             btnColor = '#FFA0A0';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#FFDCDC';
             break;
         case 'sky':
             btnColor = '#52E4DC';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#87F5F5';
             break;
         case 'sea':
             btnColor = '#91D8FA';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#C8FFFF';
             break;
         default:
             btnColor = '#FFFFFF';
-            disBtnColor = '#CBB8EE';
+            disBtnColor = '#dcdcdc';
     }
 
     switch (props.fontSize) {

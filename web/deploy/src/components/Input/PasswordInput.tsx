@@ -9,6 +9,8 @@ interface Props {
     value?: string,
     name?: string,
     disabled?: boolean,
+    error?: boolean,
+    helperText?: string,
 }
 
 const PasswordInput = (props: Props) => {
@@ -33,6 +35,8 @@ const PasswordInput = (props: Props) => {
             fullWidth={true}
             variant='outlined'
             name={props.name}
+            helperText={props.helperText}
+            error={props.error ? true : false}
             InputProps={
                 {
                     classes: {
@@ -61,11 +65,11 @@ const PasswordInput = (props: Props) => {
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
     input: {
-        
+
     },
     cssOutlinedInput: {
         '&$cssFocused $notchedOutline': {
-            borderColor: '#000000',
+            // borderColor: '#000000',
             borderWidth: 2,
         }
     },
@@ -74,7 +78,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
     notchedOutline: {
         borderWidth: 2,
-        borderColor: '#828282'
+        borderColor: '#c8c8c8'
     },
 }));
 

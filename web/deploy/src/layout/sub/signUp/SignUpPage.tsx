@@ -41,10 +41,14 @@ const SignUpPage = (props: Props) => {
     const [emailError, setEmailError] = React.useState(true);
     const [passwordError, setPasswordError] = React.useState(true);
     const [nameError, setNameError] = React.useState(true);
+    const [phoneError, setPhoneError] = React.useState(true);
 
-    const [emailHelper, setEmailHelper] = React.useState('');
-    const [passwordHelper, setPasswordHelper] = React.useState('');
-    const [nameHelper, setNameHelper] = React.useState('');
+    const [emailHelper, setEmailHelper] = React.useState('이메일을 입력해주세요.');
+    const [passwordHelper, setPasswordHelper] = React.useState('(영문 대소문자, 숫자, 특수문자 1자이상 한글 사용불가 10자~20자)');
+    const [nameHelper, setNameHelper] = React.useState('이름을 입력해주세요');
+    const [phoneHelper, setPhoneHelper] = React.useState('"-" 제외하고 입력해주세요');
+
+    const [disSignUpBt, setDisSignUpBt] = React.useState(true);
 
     const handleSelectRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedRadio(e.target.value);
@@ -52,7 +56,21 @@ const SignUpPage = (props: Props) => {
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if ('email' === e.target.name) {
-            setEmail(e.target.value);
+            if ('' === e.target.value) {
+                console.log('1');
+                setEmailHelper('이메일을 입력해주세요.');
+                setEmailError(true);
+                setEmail(e.target.value);
+            } else if (validator.isEmail(email)) {
+                console.log('2');
+                setEmailHelper('');
+                setEmailError(false);
+                setEmail(e.target.value);
+            } else {
+                setEmailHelper('이메일 형식이 맞지 않습니다.');
+                setEmailError(true);
+                setEmail(e.target.value);
+            }
         } else if ('password' === e.target.name) {
             if (/^.*(?=^.{10,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^()]).*$/.test(e.target.value) && !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g.test(e.target.value)) {
                 setPasswordError(false);
@@ -64,23 +82,46 @@ const SignUpPage = (props: Props) => {
                 setPassword(e.target.value);
             }
         } else if ('name' === e.target.name) {
-            setName(e.target.value);
+            if ('' === e.target.value) {
+                setNameHelper('이름을 입력해주세요.');
+                setNameError(true);
+                setName(e.target.value);
+            } else if (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}/g.test(e.target.value)) {
+                ///[a-z0-9]|[ []{}()<>?|`~!@#$%^&*-_+=,.;:"']{3,15}/g
+                setNameHelper('');
+                setNameError(false);
+                setName(e.target.value);
+            } else {
+                setNameHelper('2자~5자의 한글 이름만 입력가능합니다.');
+                setNameError(true);
+                setName(e.target.value);
+            }
         } else if ('phone' === e.target.name) {
-            setPhone(e.target.value);
+            if ('' === e.target.value) {
+                setPhoneHelper('"-" 를 제외하고 전화번호를 입력해주세요.');
+                setPhoneError(true);
+                setPhone(e.target.value);
+            } else if (validator.isMobilePhone(phone)) {
+                setPhoneHelper('');
+                setPhoneError(false);
+                setPhone(e.target.value);
+            } else {
+                setPhoneHelper('전화번호 형식이 맞지 않습니다.');
+                setPhoneError(true);
+                setPhone(e.target.value);
+            }
+        }
+
+        if (!emailError && !passwordError && !nameError && !phoneError) {
+            setDisSignUpBt(false);
+        } else {
+            setDisSignUpBt(true);
         }
     }
 
     const handleSignUp = () => {
 
-        if (!validator.isEmail(email)) {
 
-        } else if (/^.*(?=^.{10,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^()]).*$/.test(password) && !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g.test(password)) {
-
-        } else if (/[a-z0-9]|[ []{}()<>?|`~!@#$%^&*-_+=,.;:"']{2,5}/g.test(name)) {
-
-        } else if (validator.isMobilePhone(phone)) {
-
-        }
 
         console.log('signUp Click')
         let headerObj = {
@@ -115,6 +156,8 @@ const SignUpPage = (props: Props) => {
                                 label='이메일 *'
                                 value={email}
                                 name='email'
+                                helperText={emailHelper}
+                                error={emailError}
                                 onChange={handleInput}
                             />
                         </Grid>
@@ -123,6 +166,8 @@ const SignUpPage = (props: Props) => {
                                 value={password}
                                 onChange={handleInput}
                                 name='password'
+                                helperText={passwordHelper}
+                                error={passwordError}
                             >
                                 비밀번호 *
                             </PasswordInput>
@@ -154,10 +199,12 @@ const SignUpPage = (props: Props) => {
                         </Grid> */}
                         <Grid item xs={12}>
                             <DefaultInput
-                                label='성명 *'
+                                label='이름 *'
                                 value={name}
                                 onChange={handleInput}
                                 name='name'
+                                helperText={nameHelper}
+                                error={nameError}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -166,6 +213,8 @@ const SignUpPage = (props: Props) => {
                                 value={phone}
                                 onChange={handleInput}
                                 name='phone'
+                                helperText={phoneHelper}
+                                error={phoneError}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -183,6 +232,7 @@ const SignUpPage = (props: Props) => {
                                 onClick={handleSignUp}
                                 color='success'
                                 fontColor='white'
+                                disabled={disSignUpBt}
                             >
                                 가입
                             </DefaultButton>
