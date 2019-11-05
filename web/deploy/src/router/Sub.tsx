@@ -1,9 +1,9 @@
 // prettier-ignore
 import { withWidth, Grid } from "@material-ui/core";
-import { Theme } from "@material-ui/core/styles";
+// import { Theme } from "@material-ui/core/styles";
 import { WithWidth } from "@material-ui/core/withWidth";
 
-import { makeStyles } from "@material-ui/styles";
+// import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
 import { history } from "../configureStore";
@@ -17,16 +17,16 @@ import LoginPage from '../layout/sub/login/LoginPage';
 import RouterStyles from './RouterStyles';
 
 const MyRoutes = () => {
-	const [ routerArray ] = React.useState([...router]);
+	const [routerArray] = React.useState([...router]);
 
 	return (
 		<Switch>
 			{console.log(routerArray.length)}
 			{
 				routerArray.map((v, i) => {
-					if('Sub' === v.route) {
+					if ('Sub' === v.route) {
 						console.log('dddddd')
-						return(
+						return (
 							<Route path={v.path} key={i} component={v.component} />
 						)
 					} else {
@@ -45,13 +45,14 @@ interface Props extends RouteComponentProps<void>, WithWidth { }
 
 const Sub = (props?: Props) => {
 	const classes = RouterStyles();
-	
+	// const subClasses = useStyles();
+
 	//useState
 
 	return (
 		<Router history={history} >
 			<div className={classes.subRoot}>
-				<Grid container justify='center'  className={classes.content}>
+				<Grid container justify='center' className={classes.content}>
 					<MyRoutes />
 				</Grid>
 			</div>
@@ -59,8 +60,8 @@ const Sub = (props?: Props) => {
 	);
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+// const useStyles = makeStyles((theme: Theme) => ({
 
-}));
+// }));
 
 export default (withRoot(withWidth()(Sub)));

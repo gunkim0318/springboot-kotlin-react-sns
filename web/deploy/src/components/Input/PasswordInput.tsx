@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, makeStyles, Theme, withStyles, TextField } from '@material-ui/core';
+import { InputAdornment, IconButton, makeStyles, Theme, TextField } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
@@ -27,7 +27,6 @@ const PasswordInput = (props: Props) => {
         // <FormControl variant="outlined" fullWidth={true} disabled={props.disabled ? true : false} >
         // <InputLabel htmlFor="outlined-adornment-password">{props.children}</InputLabel>
         <TextField
-            id="outlined-name"
             type={showPassword ? 'text' : 'password'}
             value={props.value}
             onChange={props.onChange}

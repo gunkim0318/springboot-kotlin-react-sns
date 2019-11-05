@@ -89,8 +89,8 @@ const LoginPage = (props: Props) => {
                     setPasswordError(false);
                     setPasswordInput(e.target.value);
                 }
+                break;
             default:
-
         }
 
     }

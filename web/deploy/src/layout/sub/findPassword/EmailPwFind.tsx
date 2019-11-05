@@ -108,18 +108,18 @@ const EmailPwFind = (props: Props) => {
         })
     }
 
-    const startClock = async () => {
-        for (let i = timer; i > 0; --i) {
-            await minusTime(i);
-        }
-    }
-
     //useMemo
     React.useEffect(() => {
+
+        const startClock = async () => {
+            for (let i = timer; i > 0; --i) {
+                await minusTime(i);
+            }
+        }
         if (timerSt) {
             startClock();
         }
-    }, [timerSt])
+    }, [timerSt, timer])
 
     return (
         <Grid container className={classes.root} justify='center' alignItems='center'>

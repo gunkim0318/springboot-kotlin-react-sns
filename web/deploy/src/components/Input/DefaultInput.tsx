@@ -20,7 +20,6 @@ const DefaultInput = (props: Props) => {
     return (
         <CustomTextField
             name={props.name}
-            id="outlined-name"
             label={props.label}
             value={props.value}
             onChange={props.onChange}
