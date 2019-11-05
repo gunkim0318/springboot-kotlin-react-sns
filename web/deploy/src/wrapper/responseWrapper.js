@@ -26,6 +26,8 @@ export const responseCode = (result) => {
                 body: '',
             }
 
+            alert(result.header.resMsg);
+
             return resData;
 
         } else if (2 === code % 100) {
