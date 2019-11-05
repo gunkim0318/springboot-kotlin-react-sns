@@ -61,6 +61,7 @@
         page: 요청페이지,
         netKind: 통신 종류,
         netDesc: 통신 이름,
+        resMsg: alert 메시지,
         mapKey: 로그인 전 통신인증 키,
     }
 }
@@ -75,6 +76,7 @@
                  300~399 - Error LV.3,
         netKind: handshake,
         netDesc: 통신 이름,
+        resMsg: alert 메시지,
         mapKey: 로그인 전 통신인증 키,
         jwtKey: 토큰 encoded 키
     }
