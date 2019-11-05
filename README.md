@@ -43,6 +43,7 @@
     header: {
         page: 요청페이지,
         netKind: 통신 종류,
+        netDesc: 통신 이름,
         mapKey: 로그인전 통신인증 키,
     }
     
@@ -59,6 +60,7 @@
                  ...,
         page: 요청페이지,
         netKind: 통신 종류,
+        netDesc: 통신 이름,
         mapKey: 로그인 전 통신인증 키,
     }
 }
@@ -70,6 +72,7 @@
         resCode: 200 - Success
                  100 - Error,
         netKind: handshake,
+        netDesc: 통신 이름,
         mapKey: 로그인 전 통신인증 키,
         jwtKey: 토큰 encoded 키
     }
