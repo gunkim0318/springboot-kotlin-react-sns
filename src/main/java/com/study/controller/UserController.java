@@ -83,6 +83,7 @@ public class UserController {
         util.headPut("page", "/user/handshake");
         util.headPut("page", "handshake");
         util.headPut("mapKey", key);
+        util.headPut("jwtKey", jwt);
 
         return util.jsonResult();
     }
