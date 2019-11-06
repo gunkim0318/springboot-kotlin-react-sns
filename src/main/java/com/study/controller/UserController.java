@@ -32,19 +32,19 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    public Map<String, Map<String, Object>> login(UserVO vo){
+    public Map<String, Map<String, Object>> login(@RequestBody Map<String, Map<String, Object>> reqMap){
         ParsingUtil util = new ParsingUtil();
 
-        int loginCheck = userService.login(vo);
-        if(loginCheck == 1){
-            util.headPut("resCode", 0);
-        }else if(loginCheck == 0){
-            util.headPut("resCode", 101);
-            util.headPut("netDesc", "해당 계정이 없습니다.");
-        }else{
-            util.headPut("resCode", 101);
-            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
-        }
+//        int loginCheck = userService.login(vo);
+//        if(loginCheck == 1){
+//            util.headPut("resCode", 0);
+//        }else if(loginCheck == 0){
+//            util.headPut("resCode", 101);
+//            util.headPut("netDesc", "해당 계정이 없습니다.");
+//        }else{
+//            util.headPut("resCode", 101);
+//            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
+//        }
         return util.jsonResult();
     }
 
@@ -53,19 +53,28 @@ public class UserController {
      * @param vo 회원가입 처리할 유저의 정보
      * @return
      */
-    @GetMapping("/signUp")
-    public Map<String, Map<String, Object>> signUp(UserVO vo){
-        ParsingUtil util = new ParsingUtil();
-        log.info(util.toString());
-        if(userService.signUp(vo) == 1){
-            util.headPut("resCode", 0);
-        }else{
-            util.headPut("resCode", 100);
-        }
-        util.headPut("page", "/signUp");
-        util.headPut("netKind", "get");
+    @PostMapping("/signUp")
+    public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Object>> reqMap){
+        log.info("OBJ=======");
+        log.info(reqMap.toString());
+        log.info("OBJ=======");
 
-        return util.jsonResult();
+        String jwt = reqMap.get("reqData").get("body").toString();
+
+       jwtService.jwtClar(jwt);
+
+//        ParsingUtil util = new ParsingUtil();
+//        log.info(util.toString());
+//        if(userService.signUp(vo) == 1){
+//            util.headPut("resCode", 0);
+//        }else{
+//            util.headPut("resCode", 100);
+//        }
+//        util.headPut("page", "/signUp");
+//        util.headPut("netKind", "get");
+
+//        return util.jsonResult();
+        return null;
     }
 
     /**

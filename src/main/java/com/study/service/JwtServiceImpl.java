@@ -1,9 +1,13 @@
 package com.study.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class JwtServiceImpl implements  JwtService{
 
     @Override
@@ -15,5 +19,8 @@ public class JwtServiceImpl implements  JwtService{
                 .compact();
 
         return jwtString;
+    }
+    public void jwtClar(String jwt){
+
     }
 }
