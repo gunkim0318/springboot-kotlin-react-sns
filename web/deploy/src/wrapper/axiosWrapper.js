@@ -98,8 +98,8 @@ export const handshake = () => {
         })
             .then(result => {
                 if (0 === result.data.header.resCode) {
-                    sessionStorage.setItem('mapKey', result.data.body.mapKey);
-                    sessionStorage.setItem('jwtKey', result.data.body.jwtKey);
+                    sessionStorage.setItem('mapKey', result.data.header.mapKey);
+                    sessionStorage.setItem('jwtKey', result.data.header.jwtKey);
                     resolve();
                 }
             })
