@@ -2,6 +2,8 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import * as res from './responseWrapper';
 
+import crypto from 'crypto';
+
 //GET 조회
 export const get = (url, headerObj, dataObj, props) => {
     return new Promise((resolve, reject) => {
@@ -120,13 +122,18 @@ const CreateReqData = (headerObj, dataObj) => {
 
     if (mapKey || jwtKey) {
         promise = handshake();
+
     }
+
 
     return promise
         .then(() => {
             headerObj.mapKey = sessionStorage.getItem('mapKey');
-
             let bodyObj = jwt.sign(dataObj, sessionStorage.getItem('jwtKey'));
+
+            let signature = crypto.createHmac('sha256', 'MySecret').update(bodyObj).digest('base64').replace('=', '');
+            console.log(bodyObj);
+            console.log(sessionStorage.getItem('jwtKey'))
 
             let reqData = {
                 header: headerObj,
