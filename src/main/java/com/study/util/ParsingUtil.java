@@ -1,5 +1,7 @@
 package com.study.util;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,11 +9,12 @@ import java.util.Map;
  *
  */
 public class ParsingUtil {
+    @Getter
     private Map<String, Object> headerList = new HashMap<String, Object>();
+    @Getter
     private Map<String, Object> bodyList = new HashMap<String, Object>();
 
     /**
-     *
      * @param name
      * @param obj
      * @throws Exception
@@ -21,7 +24,6 @@ public class ParsingUtil {
     }
 
     /**
-     *
      * @param name
      * @param obj
      */
