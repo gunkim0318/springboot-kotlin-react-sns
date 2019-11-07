@@ -120,9 +120,8 @@ const CreateReqData = (headerObj, dataObj) => {
 
     let promise = Promise.resolve();
 
-    if (mapKey || jwtKey) {
+    if (!mapKey || !jwtKey) {
         promise = handshake();
-
     }
 
 
