@@ -14,8 +14,8 @@ import DefaultRadio from '../../../components/Radio/DefaultRadio';
 import DefaultRadioGroup from '../../../components/Radio/DefaultRadioGroup';
 import CancelButton from '../../../components/Button/CancelButton';
 
-//CSS
-import SubStyles from '../SubStyles';
+//HOC
+import withSubRoot from '../withSubRoot';
 
 //Axios 통신모듈
 import * as axiosWrapper from '../../../wrapper/axiosWrapper';
@@ -25,11 +25,10 @@ import validator from 'validator';
 
 
 interface Props extends RouteComponentProps<void> {
-
+    classes: any,
 }
 
 const SignUpPage = (props: Props) => {
-    const classes = SubStyles();
 
     //useState
     const [selectedRadio, setSelectedRadio] = React.useState('man');
@@ -145,10 +144,10 @@ const SignUpPage = (props: Props) => {
     }
 
     return (
-        <Grid container className={classes.root} justify='center' alignItems='center' >
+        <Grid container className={props.classes.root} justify='center' alignItems='center' >
             <Grid item container xs={12} sm={12} md={12} lg={12} justify='center' >
-                <DefaultCard className={classes.card} title='회원가입' headerColor='default' icon={<PersonAddIcon fontSize='large' />}>
-                    <Grid item container spacing={2} className={classes.cardContent} >
+                <DefaultCard className={props.classes.card} title='회원가입' headerColor='default' icon={<PersonAddIcon fontSize='large' />}>
+                    <Grid item container spacing={2} className={props.classes.cardContent} >
                         <Grid item xs={12}>
                             <DefaultInput
                                 label='이메일 *'
@@ -242,4 +241,4 @@ const SignUpPage = (props: Props) => {
     );
 }
 
-export default SignUpPage;
+export default withSubRoot(SignUpPage);

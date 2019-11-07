@@ -14,13 +14,13 @@ import NotFound from './layout/error/NotFound';
 
 
 
-interface Props extends RouteComponentProps<void>, WithWidth {}
+interface Props extends RouteComponentProps<void>, WithWidth { }
 
 const App = (props?: Props) => {
 
 	//useMemo
 	React.useMemo(() => {
-		if(!sessionStorage.getItem('mapKey')) {
+		if (!sessionStorage.getItem('mapKey')) {
 			axiosWrapper.handshake();
 		}
 	}, [])
@@ -36,5 +36,6 @@ const App = (props?: Props) => {
 		</Router>
 	);
 }
-	
+
 export default (withRoot(withWidth()(App)));
+// export default App;

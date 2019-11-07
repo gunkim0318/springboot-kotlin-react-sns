@@ -10,8 +10,10 @@ import DefaultCard from '../../../components/Card/DefaultCard';
 import DefaultInput from '../../../components/Input/DefaultInput';
 import DefaultButton from '../../../components/Button/DefaultButton';
 
+//HOC
+import withSubRoot from '../withSubRoot';
+
 //CSS
-import SubStyles from '../SubStyles';
 import { makeStyles } from '@material-ui/styles';
 import CancelButton from '../../../components/Button/CancelButton';
 
@@ -23,11 +25,10 @@ import * as axiosWrapper from '../../../wrapper/axiosWrapper';
 
 
 interface Props extends RouteComponentProps<void> {
-
+    classes: any,
 }
 
 const EmailPwFind = (props: Props) => {
-    const classes = SubStyles();
     const subClasses = useStyles();
 
     //useState
@@ -122,10 +123,10 @@ const EmailPwFind = (props: Props) => {
     }, [timerSt, timer])
 
     return (
-        <Grid container className={classes.root} justify='center' alignItems='center'>
-            <Grid item container xs={12} className={classes.cardGrid} justify='center'>
-                <DefaultCard className={classes.card} title='이메일로 찾기' headerColor='default' icon={<EmailIcon fontSize='large' />}>
-                    <Grid container spacing={2} className={classes.cardContent}>
+        <Grid container className={props.classes.root} justify='center' alignItems='center'>
+            <Grid item container xs={12} className={props.classes.cardGrid} justify='center'>
+                <DefaultCard className={props.classes.card} title='이메일로 찾기' headerColor='default' icon={<EmailIcon fontSize='large' />}>
+                    <Grid container spacing={2} className={props.classes.cardContent}>
                         <Grid item xs={12} sm={9}>
                             <DefaultInput
                                 label={'이메일 ' + emailHelper}
@@ -199,4 +200,4 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     }
 }))
 
-export default EmailPwFind;
+export default withSubRoot(EmailPwFind);

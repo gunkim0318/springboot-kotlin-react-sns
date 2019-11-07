@@ -2,6 +2,9 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import * as axiosWrapper from '../../../wrapper/axiosWrapper';
 
+//HOC
+import withSubRoot from '../withSubRoot';
+
 //Material ui
 import { Grid } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
@@ -12,14 +15,14 @@ import DefaultInput from '../../../components/Input/DefaultInput';
 import DefaultButton from '../../../components/Button/DefaultButton';
 
 //CSS
-import SubStyles from '../SubStyles';
 import PasswordInput from '../../../components/Input/PasswordInput';
 
 
-interface Props extends RouteComponentProps<void> { }
+interface Props extends RouteComponentProps<void> {
+    classes: any,
+}
 
 const LoginPage = (props: Props) => {
-    const classes = SubStyles();
 
     //useState
     const [idInput, setIdInput] = React.useState('');
@@ -97,10 +100,10 @@ const LoginPage = (props: Props) => {
     }
 
     return (
-        <Grid container justify='center' alignItems='center' className={classes.root}>
-            <Grid item container xs={12} sm={12} md={12} lg={12} justify='center' className={classes.cardGrid}>
-                <DefaultCard className={classes.card} icon={<LockIcon fontSize='large' />} headerColor='default' title='로그인'>
-                    <Grid item container spacing={2} justify='center' className={classes.cardContent}>
+        <Grid container justify='center' alignItems='center' className={props.classes.root}>
+            <Grid item container xs={12} sm={12} md={12} lg={12} justify='center' className={props.classes.cardGrid}>
+                <DefaultCard className={props.classes.card} icon={<LockIcon fontSize='large' />} headerColor='default' title='로그인'>
+                    <Grid item container spacing={2} justify='center' className={props.classes.cardContent}>
                         <Grid item xs={12}>
                             <DefaultInput
                                 name='id'
@@ -160,4 +163,5 @@ const LoginPage = (props: Props) => {
     );
 }
 
-export default LoginPage;
+export default withSubRoot(LoginPage);
+// export default LoginPage;
