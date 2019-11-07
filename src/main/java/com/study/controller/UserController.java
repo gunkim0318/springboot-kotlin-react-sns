@@ -3,6 +3,9 @@ package com.study.controller;
 import com.study.service.JwtService;
 import com.study.service.UserService;
 import com.study.util.ParsingUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -27,7 +31,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JwtService jwtService;
-
+    private  String SECRET_KEY;
     /**
      * 로그인 처리
      * @return
@@ -55,10 +59,27 @@ public class UserController {
      */
     @PostMapping("/signUp")
     public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Object>> reqMap){
-        log.info("OBJ=======");
-        log.info(reqMap.toString());
-        log.info("JWT=======");
-        jwtService.jwtClar(reqMap.get("reqData").get("body").toString());
+        log.info("Map =======");
+        log.info("Map : "+jwtKeyMap.toString());
+
+//        log.info("OBJ=======");
+//        log.info(reqMap.toString());
+//        log.info("JWT=======");
+//
+        String jwt = reqMap.get("reqData").get("body").toString();
+
+      Map<String, Object> handJwt = (Map<String, Object>) reqMap.get("reqData").get("header");
+        String mapJwt = handJwt.get("mapKey").toString();
+        String signature = jwtKeyMap.get(mapJwt);
+
+        log.info("JWT : "+jwt);
+        log.info("SIGNATURE : "+signature);
+
+        SECRET_KEY = signature;
+        jwtClar(jwt);
+//
+//        log.info("MAPJWT : "+mapJwtVal);
+
 //        String jwt = reqMap.get("reqData").get("body").toString();
 //        ParsingUtil util = new ParsingUtil();
 //        log.info(util.toString());
@@ -93,4 +114,26 @@ public class UserController {
 
         return util.jsonResult();
     }
+
+    public void jwtClar(String jwt){
+        Jws<Claims> claims = null;
+        try {
+            log.info("SigningKey : "+SECRET_KEY);
+            claims = Jwts.parser().setSigningKey(SECRET_KEY.getBytes("UTF-8"))
+                    .parseClaimsJws(jwt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        log.info("JWT : "+claims.getBody());
+    }
+//    private byte[] generateKey(){
+//        byte[] key = null;
+//        try {
+//            key = SECRET_KEY.getBytes("UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            log.error("Making secret Key Error :: ", e);
+//        }
+//
+//        return key;
+//    }
 }
