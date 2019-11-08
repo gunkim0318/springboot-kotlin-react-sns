@@ -4,9 +4,11 @@ import SignUpPage from './layout/sub/signUp/SignUpPage';
 import FindPassword from './layout/sub/findPassword/FindPassword';
 import EmailPwFind from './layout/sub/findPassword/EmailPwFind';
 import PhonePwFind from './layout/sub/findPassword/PhonePwFind';
-import HomePage from './layout/main/home/HomePage';
+import NewProfile from './layout/sub/profile/NewProfile';
 
 //로그인 후
+import HomePage from './layout/main/home/HomePage';
+
 
 const router = [
     //로그인 페이지
@@ -39,6 +41,13 @@ const router = [
         route: 'Sub',
         component: PhonePwFind,
     },
+    //프로필 생성 페이지
+    {
+        path: '/NewProfile',
+        route: 'Sub',
+        component: NewProfile,
+    },
+
     //메인화면
     {
         path: '/Home',

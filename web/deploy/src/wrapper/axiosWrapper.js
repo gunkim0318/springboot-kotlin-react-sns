@@ -2,7 +2,6 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import * as res from './responseWrapper';
 
-import crypto from 'crypto';
 
 //GET 조회
 export const get = (url, headerObj, dataObj, props) => {
@@ -130,7 +129,7 @@ const CreateReqData = (headerObj, dataObj) => {
             headerObj.mapKey = sessionStorage.getItem('mapKey');
             let bodyObj = jwt.sign(dataObj, sessionStorage.getItem('jwtKey'));
 
-            let signature = crypto.createHmac('sha256', 'MySecret').update(bodyObj).digest('base64').replace('=', '');
+            // let signature = crypto.createHmac('sha256', 'MySecret').update(bodyObj).digest('base64').replace('=', '');
             console.log(bodyObj);
             console.log(sessionStorage.getItem('jwtKey'))
 
@@ -147,5 +146,6 @@ const CreateReqData = (headerObj, dataObj) => {
 const axiosResult = (result) => {
     return res.responseCode(result);
 }
+
 
 
