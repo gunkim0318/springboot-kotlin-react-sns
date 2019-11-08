@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import WithSubRoot from '../withSubRoot';
-import { Grid, FormControl, FormGroup, ButtonBase, Input } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 interface Props extends RouteComponentProps<void> {
     classes: any,
@@ -10,12 +10,8 @@ interface Props extends RouteComponentProps<void> {
 const NewProfile = (props: Props) => {
     return (
         <Grid container className={props.classes.root}>
-            <ButtonBase>
-
-            </ButtonBase>
         </Grid>
     );
 }
 
 export default WithSubRoot(NewProfile);
-
