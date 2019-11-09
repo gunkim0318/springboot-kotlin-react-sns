@@ -15,9 +15,12 @@ public class JwtServiceImpl implements  JwtService{
     private static final String SECRET_KEY = "MySecrete";
 
     private byte[] generateKey(){
+        return generateKey(SECRET_KEY);
+    }
+    private byte[] generateKey(String secKey){
         byte[] key = null;
         try {
-            key = SECRET_KEY.getBytes("UTF-8");
+            key = secKey.getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
             log.error("Making secret Key Error :: ", e);
         }
@@ -35,14 +38,20 @@ public class JwtServiceImpl implements  JwtService{
 
         return jwtString;
     }
-    public void jwtClar(String jwt){
+    public Jws<Claims> jwtClar(String jwt){
+        return jwtClar(SECRET_KEY, jwt);
+    }
+    public Jws<Claims> jwtClar(String key, String jwt){
         Jws<Claims> claims = null;
         try {
-            claims = Jwts.parser().setSigningKey(this.generateKey())
+            claims = Jwts.parser().setSigningKey(this.generateKey(key))
                     .parseClaimsJws(jwt);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-        log.info("JWT : "+claims.getBody());
+        log.info("JWT HEADER : "+claims.getHeader());
+        log.info("JWT BODY : "+claims.getBody());
+
+        return claims;
     }
 }
