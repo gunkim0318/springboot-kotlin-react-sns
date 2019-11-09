@@ -131,7 +131,16 @@ const SignUpPage = (props: Props) => {
             user_pw: password,
             user_name: name,
             user_gender: selectedRadio,
+            user_tel: phone,
         }
+        let userInfo = {
+            user_id: email,
+            user_name: name,
+            user_gender: selectedRadio,
+            user_tel: phone,
+        }
+
+        props.history.push('/NewProfile', userInfo);
 
         axiosWrapper.post('/user/signUp', headerObj, dataObj, props)
             .then(result => {
@@ -145,14 +154,7 @@ const SignUpPage = (props: Props) => {
 
                 //     props.history.push('/NewProfile', userInfo);
                 // }
-                let userInfo = {
-                    user_id: email,
-                    user_pw: password,
-                    user_name: name,
-                    user_gender: selectedRadio,
-                }
 
-                props.history.push('/NewProfile', userInfo);
                 console.log(result);
             })
             .catch(err => {

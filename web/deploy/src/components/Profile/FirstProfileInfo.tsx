@@ -16,10 +16,10 @@ const FirstProfileInfo = (props: Props) => {
 
     return (
         <Fragment>
-            <Grid item container xs={12}>
-                <DefaultInput label='이름' value={props.userName} />
+            <Grid item container xs={6}>
+                <DefaultInput label='이름' value={props.userName} disabled={true} />
             </Grid>
-            <Grid item container xs={12}>
+            <Grid item container xs={6}>
                 <DefaultInput label='성별' value={props.gender} disabled={true} />
 
             </Grid>

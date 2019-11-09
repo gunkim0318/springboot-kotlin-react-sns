@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
-import WithSubRoot from '../withSubRoot';
+import withSubRoot from '../withSubRoot';
 import { Grid } from '@material-ui/core';
 import DefaultCard from '../../../components/Card/DefaultCard';
 
@@ -25,10 +25,10 @@ const NewProfile = (props: Props) => {
             console.log(props.location.state)
             return (
                 <FirstProfileInfo
-                    userName={props.location.state.userName}
-                    gender={props.location.state.gender}
-                    email={props.location.state.email}
-                    phone={props.location.state.phone}
+                    userName={props.location.state.user_name}
+                    gender={'man' === props.location.state.user_gender ? '남자' : '여자'}
+                    email={props.location.state.user_id}
+                    phone={props.location.state.user_tel}
                 />
             )
         } else if (2 === createLv) {
@@ -69,4 +69,4 @@ const NewProfile = (props: Props) => {
     );
 }
 
-export default WithSubRoot(NewProfile);
+export default withSubRoot(NewProfile);
