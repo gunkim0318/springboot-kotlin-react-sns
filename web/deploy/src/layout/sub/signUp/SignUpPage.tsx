@@ -133,27 +133,28 @@ const SignUpPage = (props: Props) => {
             user_gender: selectedRadio,
             user_tel: phone,
         }
-        let userInfo = {
-            user_id: email,
-            user_name: name,
-            user_gender: selectedRadio,
-            user_tel: phone,
-        }
+        // let userInfo = {
+        //     user_id: email,
+        //     user_name: name,
+        //     user_gender: selectedRadio,
+        //     user_tel: phone,
+        // }
 
-        props.history.push('/NewProfile', userInfo);
+        // props.history.push('/NewProfile', userInfo);
 
         axiosWrapper.post('/user/signUp', headerObj, dataObj, props)
             .then(result => {
-                // if (0 === result.header.resCode) {
-                //     let userInfo = {
-                //         user_id: email,
-                //         user_pw: password,
-                //         user_name: name,
-                //         user_gender: selectedRadio,
-                //     }
+                if (0 === result.header.resCode) {
+                    let userInfo = {
+                        user_id: email,
+                        user_pw: password,
+                        user_name: name,
+                        user_gender: selectedRadio,
+                        user_tel: phone,
+                    }
 
-                //     props.history.push('/NewProfile', userInfo);
-                // }
+                    props.history.push('/NewProfile', userInfo);
+                }
 
                 console.log(result);
             })
