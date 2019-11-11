@@ -41,16 +41,16 @@ public class UserController {
         log.info("= LOGIN CALL ========== "+reqMap.toString());
         ParsingUtil util = new ParsingUtil();
 
-//        int loginCheck = userService.login(vo);
-//        if(loginCheck == 1){
-//            util.headPut("resCode", 0);
-//        }else if(loginCheck == 0){
-//            util.headPut("resCode", 101);
-//            util.headPut("netDesc", "해당 계정이 없습니다.");
-//        }else{
-//            util.headPut("resCode", 101);
-//            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
-//        }
+        int loginCheck = userService.login(vo);
+        if(loginCheck == 1){
+            util.headPut("resCode", 0);
+        }else if(loginCheck == 0){
+            util.headPut("resCode", 101);
+            util.headPut("netDesc", "해당 계정이 없습니다.");
+        }else{
+            util.headPut("resCode", 101);
+            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
+        }
         return util.jsonResult();
     }
 
@@ -84,14 +84,8 @@ public class UserController {
         int signCheck = userService.signUp(vo);
         if(signCheck == 1){
             util.headPut("resCode", 0);
-        }else if(signCheck == 0){
-            util.headPut("resCode", 101);
-            util.headPut("resMsg", "비밀번호가 일치하지 않습니다.");
-        }else{
-            util.headPut("resCode", 101);
-            util.headPut("resMsg", "해당 아이디가 존재하지 않습니다.");
         }
-
+        log.info("RESULT : "+util.jsonResult());
         return util.jsonResult();
     }
 
@@ -105,6 +99,9 @@ public class UserController {
         String jwt = jwtService.jwtCreate();
         String key = UUID.randomUUID().toString();
         jwtKeyMap.put(key, jwt);
+        log.info("JwtMap : ");
+        log.info("        KEY : "+key);
+        log.info("        VALUE : "+jwt);
 
         ParsingUtil util = new ParsingUtil();
         util.headPut("resCode", 0);

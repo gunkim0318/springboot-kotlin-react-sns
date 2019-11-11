@@ -12,7 +12,7 @@
     <insert id="signUp" parameterType="com.study.vo.UserVO">
         INSERT
             INTO
-                study.T_USER_M
+                T_USER_M
                 (
                     USER_ID,
                     USER_PW,
@@ -31,10 +31,10 @@
                 #{user_name},
                 #{user_gender},
                 #{user_tel},
-                #{user_status_cd},
-                #{user_pw_fail_cnt},
-                #{user_reg_id},
-                #{user_reg_date}
+                '',
+                0,
+                'admin',
+                now()
             )
     </insert>
 </mapper>
