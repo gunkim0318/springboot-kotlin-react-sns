@@ -9,6 +9,9 @@ import NewProfile from './layout/sub/profile/NewProfile';
 //로그인 후
 import HomePage from './layout/main/home/HomePage';
 
+//테스트 페이지
+import TreeView from './layout/test/treeView/TreeView';
+
 
 const router = [
     //로그인 페이지
@@ -53,6 +56,13 @@ const router = [
         path: '/Home',
         route: 'Main',
         component: HomePage,
+    },
+
+    //Test
+    {
+        path: '/TreeView',
+        route: 'Sub',
+        component: TreeView,
     },
 ]
 

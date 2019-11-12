@@ -82,6 +82,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.31",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.12",
     "@types/react": "16.9.5",
@@ -94,6 +95,8 @@
     "axios": "^0.19.0",
     "eslint-plugin-react": "7.16.0",
     "jsonwebtoken": "^8.5.1",
+    "map-tree": "^1.1.1",
+    "treemap-js": "^1.2.1",
     "validator": "^12.0.0"
   },
   "jest": {
