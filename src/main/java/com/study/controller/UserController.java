@@ -32,27 +32,27 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JwtService jwtService;
-    /**
-     * 로그인 처리
-     * @return
-     */
-    @PostMapping("/login")
-    public Map<String, Map<String, Object>> login(@RequestBody Map<String, Map<String, Object>> reqMap){
-        log.info("= LOGIN CALL ========== "+reqMap.toString());
-        ParsingUtil util = new ParsingUtil();
-
-        int loginCheck = userService.login(vo);
-        if(loginCheck == 1){
-            util.headPut("resCode", 0);
-        }else if(loginCheck == 0){
-            util.headPut("resCode", 101);
-            util.headPut("netDesc", "해당 계정이 없습니다.");
-        }else{
-            util.headPut("resCode", 101);
-            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
-        }
-        return util.jsonResult();
-    }
+//    /**
+//     * 로그인 처리
+//     * @return
+//     */
+//    @PostMapping("/login")
+//    public Map<String, Map<String, Object>> login(@RequestBody Map<String, Map<String, Object>> reqMap){
+//        log.info("= LOGIN CALL ========== "+reqMap.toString());
+//        ParsingUtil util = new ParsingUtil();
+//
+//        int loginCheck = userService.login(vo);
+//        if(loginCheck == 1){
+//            util.headPut("resCode", 0);
+//        }else if(loginCheck == 0){
+//            util.headPut("resCode", 101);
+//            util.headPut("netDesc", "해당 계정이 없습니다.");
+//        }else{
+//            util.headPut("resCode", 101);
+//            util.headPut("netDesc", "해당 비밀번호가 없습니다.");
+//        }
+//        return util.jsonResult();
+//    }
 
     /**
      * 회원가입 처리
