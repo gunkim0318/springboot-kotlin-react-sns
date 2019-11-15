@@ -63,25 +63,25 @@ public class UserController {
 
         log.info("= SIGNUP CALL ====== "+reqMap.toString());
         log.info("Map =======");
-        log.info("Map : "+jwtKeyMap.toString());
+        log.info("Map : "+this.jwtKeyMap.toString());
 
         String jwt = reqMap.get("reqData").get("body").toString();
 
         Map<String, Object> handJwt = (Map<String, Object>) reqMap.get("reqData").get("header");
         String mapJwt = handJwt.get("mapKey").toString();
-        String signature = jwtKeyMap.get(mapJwt);
+        String signature = this.jwtKeyMap.get(mapJwt);
 
         log.info("JWT : "+jwt);
         log.info("SIGNATURE : "+signature);
 
-        Jws<Claims> cla =  jwtService.jwtClar(signature, jwt);
+        Jws<Claims> cla =  this.jwtService.jwtClar(signature, jwt);
 
         VOParsingUtil voUtil = new VOParsingUtil(UserVO.class);
         UserVO vo = (UserVO) voUtil.parsing(cla);
 
         ParsingUtil util = new ParsingUtil();
 
-        int signCheck = userService.signUp(vo);
+        int signCheck = this.userService.signUp(vo);
         if(signCheck == 1){
             util.headPut("resCode", 0);
         }
@@ -96,9 +96,9 @@ public class UserController {
     @PostMapping("/handshake")
     public Map<String, Map<String, Object>> handshake() {
         log.info("= HANDSHAKE CALL =======");
-        String jwt = jwtService.jwtCreate();
+        String jwt = this.jwtService.jwtCreate();
         String key = UUID.randomUUID().toString();
-        jwtKeyMap.put(key, jwt);
+        this.jwtKeyMap.put(key, jwt);
         log.info("JwtMap : ");
         log.info("        KEY : "+key);
         log.info("        VALUE : "+jwt);
