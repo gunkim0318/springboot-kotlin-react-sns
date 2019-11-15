@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 기본 컨트롤러
+ */
 @Controller
 @RequestMapping(value = "/")
 @Slf4j

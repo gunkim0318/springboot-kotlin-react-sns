@@ -5,13 +5,26 @@ import io.jsonwebtoken.Jws;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * 해독한 Jwt를 vo로 변환하기 위한 유틸
+ * @param <T> vo타입
+ */
 public class VOParsingUtil<T> {
     private Class<T> vo;
 
+    /**
+     * 변환하기 위한 vo타입을 받음
+     * @param clas 변환하기 위한 vo타입
+     */
     public VOParsingUtil(Class<T> clas){
         this.vo = clas;
     }
 
+    /**
+     * jwt를 vo로 변환
+     * @param claims jwt
+     * @return
+     */
     public T parsing(Jws<Claims> claims){
         Claims cla = claims.getBody();
 

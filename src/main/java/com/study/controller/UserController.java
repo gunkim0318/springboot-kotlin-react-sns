@@ -78,6 +78,8 @@ public class UserController {
 
         VOParsingUtil voUtil = new VOParsingUtil(UserVO.class);
         UserVO vo = (UserVO) voUtil.parsing(cla);
+        log.info("=========== 변환 처리 ==================");
+
 
         ParsingUtil util = new ParsingUtil();
 
