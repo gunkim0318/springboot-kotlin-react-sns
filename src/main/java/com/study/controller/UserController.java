@@ -59,12 +59,12 @@ public class UserController {
      * @return
      */
     @PostMapping("/signUp")
-    public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Object>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Map<String, String>>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         log.info("= SIGNUP CALL ====== "+reqMap.toString());
-        String jwt = reqMap.get("reqData").get("body").toString();
+        String jwt = reqMap.get("reqData").get("body").get("data").toString();
 
-        Map<String, Object> handJwt = (Map<String, Object>) reqMap.get("reqData").get("header");
+        Map<String, String> handJwt = (Map<String, String>) reqMap.get("reqData").get("header");
         String mapJwt = handJwt.get("mapKey").toString();
         String signature = this.jwtKeyMap.get(mapJwt);
         Jws<Claims> cla =  this.jwtService.jwtClar(signature, jwt);
