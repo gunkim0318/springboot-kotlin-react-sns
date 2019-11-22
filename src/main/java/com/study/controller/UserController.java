@@ -62,22 +62,16 @@ public class UserController {
     public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Object>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         log.info("= SIGNUP CALL ====== "+reqMap.toString());
-        log.info("Map =======");
-        log.info("Map : "+this.jwtKeyMap.toString());
-
         String jwt = reqMap.get("reqData").get("body").toString();
 
         Map<String, Object> handJwt = (Map<String, Object>) reqMap.get("reqData").get("header");
         String mapJwt = handJwt.get("mapKey").toString();
         String signature = this.jwtKeyMap.get(mapJwt);
-
-        log.info("JWT : "+jwt);
-        log.info("SIGNATURE : "+signature);
-
         Jws<Claims> cla =  this.jwtService.jwtClar(signature, jwt);
 
         VOParsingUtil voUtil = new VOParsingUtil(UserVO.class);
         UserVO vo = (UserVO) voUtil.parsing(cla);
+        log.info("VO : "+vo.toString());
         log.info("=========== 변환 처리 ==================");
 
 
@@ -101,9 +95,9 @@ public class UserController {
         String jwt = this.jwtService.jwtCreate();
         String key = UUID.randomUUID().toString();
         this.jwtKeyMap.put(key, jwt);
-        log.info("JwtMap : ");
-        log.info("        KEY : "+key);
-        log.info("        VALUE : "+jwt);
+//        log.info("JwtMap : ");
+//        log.info("        KEY : "+key);
+//        log.info("        VALUE : "+jwt);
 
         ParsingUtil util = new ParsingUtil();
         util.headPut("resCode", 0);
