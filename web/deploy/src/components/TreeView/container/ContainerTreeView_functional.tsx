@@ -12,7 +12,7 @@ const ContainerTreeView = (props: Props) => {
 
     const [realMap, setRealMap] = React.useState(new Map());
     const [firstDepth, setFirstDepth] = React.useState([{}]);
-    const [selectedKey, setSelectedKey] = React.useState('')
+    const [selectedKey, setSelectedKey] = React.useState('');
 
     React.useMemo(() => {
         if (0 !== props.data.length) {
@@ -62,6 +62,10 @@ const ContainerTreeView = (props: Props) => {
 
         return () => { }
     }, [props])
+
+    const handleDelete = React.useCallback(() => {
+
+    }, [])
 
 
     return (
