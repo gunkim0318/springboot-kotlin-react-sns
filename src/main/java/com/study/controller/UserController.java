@@ -59,7 +59,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/signUp")
-    public String signUp(@RequestBody Map<String, Map<String, Object>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Object>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         log.info("= SIGNUP CALL ====== "+reqMap.toString());
         String jwt = reqMap.get("reqData").get("body").toString();
@@ -82,7 +82,7 @@ public class UserController {
             util.headPut("resCode", 0);
         }
         log.info("RESULT : "+util.jsonResult());
-        return jwtService.jwtCreate(util, jwt);
+        return util.jsonResult();
     }
 
     /**
