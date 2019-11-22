@@ -10,7 +10,9 @@ export const responseCode = (result, url, headerObj, dataObj, props) => {
     if (0 === code) {
         //통신성공 encoded
         let decoded;
-        if (jwt !== result.header.jwtKey) {
+        if (jwtKey !== result.header.jwtKey) {
+            console.log(jwtKey);
+            console.log(result.header.jwtKey)
             result.header.resCode = 401;
             decoded = {};
         } else {
@@ -101,20 +103,8 @@ export const responseCode = (result, url, headerObj, dataObj, props) => {
                 header: result.header,
                 body: '',
             }
-            return handshake()
-                .then(() => {
-                    return post(url, headerObj, dataObj, props)
-                })
-                .then(result => {
-                    return responseCode(result, url, headerObj, dataObj, props);
-                })
-                .then(result => {
-                    return result;
-                })
-                .catch(err => {
-                    console.log(err);
-                })
 
+            return resData;
         } else if (2 === code % 100) {
             let resData = {
                 header: result.header,
@@ -127,6 +117,21 @@ export const responseCode = (result, url, headerObj, dataObj, props) => {
                 header: result.header,
                 body: '',
             }
+
+            return handshake()
+                .then(() => {
+                    return post(url, headerObj, dataObj, props)
+                })
+                // .then(result => {
+                //     return responseCode(result.data, url, headerObj, dataObj, props);
+                // })
+                // .then(result => {
+                //     console.log(result)
+                //     return result;
+                // })
+                .catch(err => {
+                    console.log(err);
+                })
 
             return resData;
         }
