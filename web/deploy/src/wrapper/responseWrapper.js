@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-export const responseCode = (result) => {
+import { handshake, post } from './axiosWrapper';
+
+export const responseCode = (result, url, headerObj, dataObj, props) => {
     console.log(result)
     const code = result.header.resCode;
     const jwtKey = sessionStorage.getItem('jwtKey');
@@ -8,10 +10,15 @@ export const responseCode = (result) => {
     if (0 === code) {
         //통신성공 encoded
         let decoded;
-        if ('' === result.body.data) {
+        if (jwt !== result.header.jwtKey) {
+            result.header.resCode = 401;
             decoded = {};
         } else {
-            decoded = jwt.verify(result.body, jwtKey);
+            if ('' === result.body.data) {
+                decoded = {};
+            } else {
+                decoded = jwt.verify(result.body, jwtKey);
+            }
         }
 
         const resData = {
@@ -86,7 +93,7 @@ export const responseCode = (result) => {
         }
 
     } else if (3 === Math.floor(code / 100)) {
-        //
+        //300 session
         if (0 === code % 100) {
 
         } else if (1 === code % 100) {
@@ -94,8 +101,20 @@ export const responseCode = (result) => {
                 header: result.header,
                 body: '',
             }
+            return handshake()
+                .then(() => {
+                    return post(url, headerObj, dataObj, props)
+                })
+                .then(result => {
+                    return responseCode(result, url, headerObj, dataObj, props);
+                })
+                .then(result => {
+                    return result;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
 
-            return resData;
         } else if (2 === code % 100) {
             let resData = {
                 header: result.header,

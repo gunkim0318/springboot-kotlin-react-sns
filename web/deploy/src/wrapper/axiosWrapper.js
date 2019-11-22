@@ -17,7 +17,7 @@ export const get = (url, headerObj, dataObj, props) => {
                 })
             })
             .then(result => {
-                resolve(axiosResult(result));
+                resolve(axiosResult(result.data, url, headerObj, dataObj, props));
             })
 
     })
@@ -36,7 +36,7 @@ export const post = (url, headerObj, dataObj, props) => {
             })
             .then(result => {
                 console.log(result.data);
-                resolve(axiosResult(result.data));
+                resolve(axiosResult(result.data, url, headerObj, dataObj, props));
             })
             .catch(err => {
                 console.log(err + ' axiosWrapper.js');
@@ -58,7 +58,7 @@ export const put = (url, headerObj, dataObj, props) => {
                 })
             })
             .then(result => {
-                resolve(axiosResult(result));
+                resolve(axiosResult(result.data, url, headerObj, dataObj, props));
             })
     })
 
@@ -76,7 +76,7 @@ export const del = (url, headerObj, dataObj, props) => {
                 })
             })
             .then(result => {
-                resolve(axiosResult(result));
+                resolve(axiosResult(result.data, url, headerObj, dataObj, props));
             })
     })
 }
@@ -143,8 +143,8 @@ const CreateReqData = (headerObj, dataObj) => {
 }
 
 //통신을 통해 얻은 데이타 처리
-const axiosResult = (result) => {
-    return res.responseCode(result);
+const axiosResult = (result, url, headerObj, dataObj, props) => {
+    return res.responseCode(result, url, headerObj, dataObj, props);
 }
 
 
