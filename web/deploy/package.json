@@ -97,6 +97,7 @@
     "jsonwebtoken": "^8.5.1",
     "map-tree": "^1.1.1",
     "treemap-js": "^1.2.1",
+    "ts-treemap": "^1.0.0",
     "validator": "^12.0.0"
   },
   "jest": {
