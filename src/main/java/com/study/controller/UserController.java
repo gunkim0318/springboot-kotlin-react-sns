@@ -60,6 +60,7 @@ public class UserController {
      */
     @PostMapping("/signUp")
     public Map<String, Map<String, Object>> signUp(@RequestBody Map<String, Map<String, Map<String, String>>> reqMap) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        ParsingUtil util = new ParsingUtil();
 
         log.info("= SIGNUP CALL ====== "+reqMap.toString());
         String jwt = reqMap.get("reqData").get("body").get("data").toString();
@@ -67,6 +68,14 @@ public class UserController {
         Map<String, String> handJwt = (Map<String, String>) reqMap.get("reqData").get("header");
         String mapJwt = handJwt.get("mapKey").toString();
         String signature = this.jwtKeyMap.get(mapJwt);
+
+        //mapKey가 JwtKeyMap에 없을 경우
+        if(signature == null){
+            log.info("JwtKey가 존재하지 않아요.");
+            util.headPut("resCode", 303);
+            return util.jsonResult();
+        }
+
         Jws<Claims> cla =  this.jwtService.jwtClar(signature, jwt);
 
         VOParsingUtil voUtil = new VOParsingUtil(UserVO.class);
@@ -74,13 +83,11 @@ public class UserController {
         log.info("VO : "+vo.toString());
         log.info("=========== 변환 처리 ==================");
 
-
-        ParsingUtil util = new ParsingUtil();
-
         int signCheck = this.userService.signUp(vo);
         if(signCheck == 1){
             util.headPut("resCode", 0);
         }
+        util.headPut("jwtKey", signature);
         log.info("RESULT : "+util.jsonResult());
         return util.jsonResult();
     }
