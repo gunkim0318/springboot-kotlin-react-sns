@@ -39,7 +39,7 @@ public class ParsingUtil {
         Map<String, Map<String, Object>> resultMap = new HashMap<String, Map<String, Object>>();
 
         resultMap.put("header", headerList);
-        
+
         if(bodyList.isEmpty()){
             bodyPut("data", "");
         }

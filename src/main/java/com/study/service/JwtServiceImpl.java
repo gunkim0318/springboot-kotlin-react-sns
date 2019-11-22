@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.study.util.ParsingUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -38,6 +39,19 @@ public class JwtServiceImpl implements  JwtService{
 
         return jwtString;
     }
+
+    @Override
+    public String jwtCreate(ParsingUtil util, String signature) {
+        String jwtString = Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setHeaderParam("issueDate", System.currentTimeMillis())
+                .signWith(SignatureAlgorithm.HS256, this.generateKey(signature))
+                .setSubject(util.jsonResult().toString())
+                .compact();
+
+        return jwtString;
+    }
+
     public Jws<Claims> jwtClar(String jwt){
         return jwtClar(SECRET_KEY, jwt);
     }

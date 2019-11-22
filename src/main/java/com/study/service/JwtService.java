@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.study.util.ParsingUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 
@@ -12,6 +13,11 @@ public interface JwtService {
      * @return
      */
     public String jwtCreate();
+    /**
+     * JWT 생성 후 문자열로 반환함
+     * @return
+     */
+    public String jwtCreate(ParsingUtil util, String signature);
 
     /**
      * 파라미터로 받은 문자열 형태의 JWT를 받아서 해독함.
