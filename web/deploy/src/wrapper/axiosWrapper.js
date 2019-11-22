@@ -135,7 +135,7 @@ const CreateReqData = (headerObj, dataObj) => {
 
             let reqData = {
                 header: headerObj,
-                body: bodyObj,
+                body: { data: bodyObj },
             }
 
             return reqData;

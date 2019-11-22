@@ -1,12 +1,18 @@
 import jwt from 'jsonwebtoken';
 
 export const responseCode = (result) => {
+    console.log(result)
     const code = result.header.resCode;
     const jwtKey = sessionStorage.getItem('jwtKey');
 
     if (0 === code) {
         //통신성공 encoded
-        let decoded = jwt.verify(result.body.data, jwtKey);
+        let decoded;
+        if ('' === result.body.data) {
+            decoded = {};
+        } else {
+            decoded = jwt.verify(result.body, jwtKey);
+        }
 
         const resData = {
             header: result.header,
