@@ -29,7 +29,7 @@ const PresentationalTreeView = (props: Props) => {
                         label={v.group_name}
                         selectedKey={props.selectedKey}
                         setSelectedKey={(s: string) => props.setSelectedKey(s)}
-                        selectKey={i + ''}
+                        selectKey={v.group_name}
                     />
                 )
             })

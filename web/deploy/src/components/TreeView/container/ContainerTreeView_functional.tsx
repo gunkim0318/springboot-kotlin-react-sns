@@ -15,7 +15,6 @@ const ContainerTreeView = (props: Props) => {
     const [selectedKey, setSelectedKey] = React.useState('')
 
     React.useMemo(() => {
-        console.log(props.data)
         if (0 !== props.data.length) {
             let treeMap = new TreeMap();
 

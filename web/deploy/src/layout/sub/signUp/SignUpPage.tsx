@@ -31,7 +31,7 @@ interface Props extends RouteComponentProps<void> {
 const SignUpPage = (props: Props) => {
 
     //useState
-    const [selectedRadio, setSelectedRadio] = React.useState('man');
+    const [selectedRadio, setSelectedRadio] = React.useState('G101');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [name, setName] = React.useState('');
@@ -196,7 +196,7 @@ const SignUpPage = (props: Props) => {
                                     <Grid item xs={6}>
                                         <DefaultRadio
                                             selectedRadio={selectedRadio}
-                                            value='man'
+                                            value='G101'
                                             label='남자'
                                             onChange={handleSelectRadio}
                                         />
@@ -204,7 +204,7 @@ const SignUpPage = (props: Props) => {
                                     <Grid item xs={6}>
                                         <DefaultRadio
                                             selectedRadio={selectedRadio}
-                                            value='woman'
+                                            value='G102'
                                             label='여자'
                                             onChange={handleSelectRadio}
                                         />

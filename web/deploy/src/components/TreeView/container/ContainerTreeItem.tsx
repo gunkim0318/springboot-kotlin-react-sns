@@ -30,7 +30,7 @@ const ContainerTreeItem = (props: Props) => {
 
     const handleClick = React.useCallback(() => {
         setOpen(!open);
-        // console.log(typeof props.selectKey)
+        console.log(props.selectKey)
         props.setSelectedKey(props.selectKey);
     }, [open, props])
 
@@ -53,7 +53,7 @@ const ContainerTreeItem = (props: Props) => {
                     spacing={spacing + 4}
                     setSelectedKey={(s: string) => props.setSelectedKey(s)}
                     selectedKey={props.selectedKey}
-                    selectKey={props.selectKey + '-' + i}
+                    selectKey={v}
                 />
             )
         })
