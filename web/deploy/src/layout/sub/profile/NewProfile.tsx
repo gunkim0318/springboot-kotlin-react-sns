@@ -26,7 +26,7 @@ const NewProfile = (props: Props) => {
             return (
                 <FirstProfileInfo
                     userName={props.location.state.user_name}
-                    gender={'man' === props.location.state.user_gender ? '남자' : '여자'}
+                    gender={'G101' === props.location.state.user_gender ? '남자' : '여자'}
                     email={props.location.state.user_id}
                     phone={props.location.state.user_tel}
                 />
