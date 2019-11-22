@@ -49,8 +49,8 @@ public class JwtServiceImpl implements  JwtService{
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-        log.info("JWT HEADER : "+claims.getHeader());
-        log.info("JWT BODY : "+claims.getBody());
+//        log.info("JWT HEADER : "+claims.getHeader());
+//        log.info("JWT BODY : "+claims.getBody());
 
         return claims;
     }
