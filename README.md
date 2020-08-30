@@ -3,13 +3,11 @@
 
 # 개발 환경
     Jdk: 1.8
-    Ram : 1GB
     Language : Kotlin, JavaScript
     FrameWork : Spring Boot, React
-    Build Tool : WebPack, Gradle
     IDE : IntelliJ
 
-# 최초 구상 구현 목표 
+# 최초 구상 구현 요구사항
 * 게시물 등록하기
 * 게시물 삭제하기
 * 게시물 조회하기
@@ -19,3 +17,6 @@
 * 로그인, 비밀번호 찾기
 * 좋아요 누르기
 * 친구 찾기, 친구 삭제, 친구 추가
+
+# 혼자 진행하면서 변경된 점
+언어를 Java에서 Kotlin으로 변경함.
