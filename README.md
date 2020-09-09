@@ -1,10 +1,11 @@
 # 스프링 부트 + 리액트 SNS 웹 프로젝트
 친구와 함께 만들다가 로그인 화면 단계에서 흐지부지된 프로젝트를 다시 진행을 해보기 위해 private에서 public으로 전환했음.
+원래 개발했던 부분들을 싹 갈아엎고 처음부터 프론트엔드, 백엔드를 구현해나갈 예정이다.
 
 # 개발 환경
     Jdk: 1.8
-    Language : Kotlin, JavaScript
-    FrameWork : Spring Boot, React
+    Back-End : Kotlin, Spring Boot
+    Front-End : TypeScript, React
     IDE : IntelliJ
 
 # 최초 구상 구현 요구사항
@@ -19,4 +20,4 @@
 * 친구 찾기, 친구 삭제, 친구 추가
 
 # 혼자 진행하면서 변경된 점
-언어를 Java에서 Kotlin으로 변경함.
+* 언어를 Java에서 Kotlin으로 변경함.
