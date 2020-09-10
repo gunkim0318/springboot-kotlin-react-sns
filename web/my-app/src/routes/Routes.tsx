@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 
-const Routes = () => {
+const Routes: React.FC = () => {
   return (
     <div>
       <Route exact path="/" component={Home} />
