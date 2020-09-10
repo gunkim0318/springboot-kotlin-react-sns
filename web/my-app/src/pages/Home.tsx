@@ -1,14 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
-import PostsList from "../components/PostsList";
-
 const Home: React.FC = () => {
-  return (
-      <>
-        <Header/>
-        <PostsList/>
-      </>
-  );
+  return <div>Hello</div>;
 };
 
 export default Home;
