@@ -17,7 +17,7 @@ type PostsListTemplateProps = {
 const PostsListTemplate = ({ Form }: PostsListTemplateProps) => {
   const classes = useStyles();
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <Form />
       <PostsList />
     </Container>

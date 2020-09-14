@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Paper } from "@material-ui/core";
+import { Avatar, Paper, Box } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() =>
@@ -14,7 +14,14 @@ const Posts = () => {
   const classes = useStyles();
   return (
     <Paper elevation={3} className={classes.root}>
-      <Avatar>N</Avatar>
+      <Box component="div" pt={1}>
+        <div>
+          <Avatar component="span">N</Avatar>
+        </div>
+        <Box component="div" m={1}>
+          김건입니다.
+        </Box>
+      </Box>
     </Paper>
   );
 };
