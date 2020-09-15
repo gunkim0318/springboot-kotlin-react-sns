@@ -6,7 +6,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       padding: "10px",
-      marginTop: "10px",
+      margin: "7px 0",
     },
   })
 );
