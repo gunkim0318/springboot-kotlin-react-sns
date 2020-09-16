@@ -18,4 +18,8 @@ class User(
                 this.email = email
                 this.role = role
         }
+
+        override fun toString(): String {
+                return "User(id=$id, name=$name, email=$email, role=$role)"
+        }
 }
