@@ -1,5 +1,6 @@
-package com.gun.app.domain
+package com.gun.app.domain.entity
 
+import com.gun.app.domain.Role
 import javax.persistence.*
 
 class User(
@@ -13,7 +14,7 @@ class User(
         @Column(nullable = false)
         var role: Role
 ) {
-        fun update(name:String, email:String, role:Role){
+        fun update(name:String, email:String, role: Role){
                 this.name = name
                 this.email = email
                 this.role = role
