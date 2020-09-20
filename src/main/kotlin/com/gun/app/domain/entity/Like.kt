@@ -9,5 +9,5 @@ import javax.persistence.Id
 class Like(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long
+        var id: Long?
 ) : BaseTimeEntity()

@@ -10,4 +10,4 @@ class People(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long
-)
+): BaseTimeEntity()

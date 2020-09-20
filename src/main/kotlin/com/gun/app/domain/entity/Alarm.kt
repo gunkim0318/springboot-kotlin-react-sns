@@ -9,7 +9,11 @@ import javax.persistence.Id
 class Alarm(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long,
+        var id: Long?,
         var contents: String,
         var readYn: Boolean
-): BaseTimeEntity()
+): BaseTimeEntity(){
+        override fun toString(): String {
+                return "Alarm[id=$id, contents=$contents, readYn=$readYn]"
+        }
+}
