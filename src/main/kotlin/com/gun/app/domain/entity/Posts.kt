@@ -7,5 +7,8 @@ class Posts(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long,
-        var contents: String
+        var contents: String,
+        @OneToMany
+        @JoinColumn(name="like_id")
+        var likes: List<Like>
 ): BaseTimeEntity()
