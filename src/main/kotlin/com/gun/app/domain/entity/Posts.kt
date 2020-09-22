@@ -6,9 +6,12 @@ import javax.persistence.*
 class Posts(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long,
+        var id: Long?,
         var contents: String,
-        @OneToMany
-        @JoinColumn(name="like_id")
-        var likes: List<Like>
+        @ManyToOne
+        @JoinColumn(name="user_id")
+        var user: User
+//        @OneToMany
+//        @JoinColumn(name="like_id")
+//        var likes: List<Like>
 ): BaseTimeEntity()
