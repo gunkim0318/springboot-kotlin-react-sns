@@ -10,8 +10,7 @@ class Posts(
         var contents: String,
         @ManyToOne
         @JoinColumn(name="user_id")
-        var user: User
-//        @OneToMany
-//        @JoinColumn(name="like_id")
-//        var likes: List<Like>
+        var user: User,
+        @OneToMany(mappedBy = "posts")
+        var likes: List<Like>?
 ): BaseTimeEntity()
