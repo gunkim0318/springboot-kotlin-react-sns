@@ -4,24 +4,25 @@ import com.gun.app.domain.Role
 import com.gun.app.domain.repository.LikeToRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.transaction.annotation.Transactional
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest
-class PostsRepositoryTests {
-    @Autowired
-    private val likeToRepository: LikeToRepository? = null
+class LikeToRepositoryTests {
     @Autowired
     val postsRepository: PostsRepository? = null
     @Autowired
     val userRepository: UserRepository? = null
+    @Autowired
+    val likeToRepository: LikeToRepository? = null
 
     @Test
+    @Transactional
     fun insertTest(){
         val user: User = User(null,
                 "adminMan",
@@ -30,13 +31,18 @@ class PostsRepositoryTests {
         )
         userRepository?.save(user)
 
-        postsRepository?.save(Posts(null,
+
+        var posts = Posts(null,
                 "게시글 내용",
                 user
-        ))
-
-        val posts: Posts? = postsRepository?.findAll()?.get(0)
-        assertEquals(posts?.contents, "게시글 내용")
-        assertEquals(posts?.user?.name, "adminMan")
+        )
+        val likeTo = LikeTo(null,
+                null,
+                user)
+        likeToRepository?.save(likeTo)
+        posts.addLikeTo(likeTo)
+        postsRepository?.save(posts)
+//        Assert.assertEquals(findPosts?.contents, "게시글 내용")
+//        Assert.assertEquals(findPosts?.user?.name, "adminMan")
     }
 }

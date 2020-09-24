@@ -3,7 +3,7 @@ package com.gun.app.domain.entity
 import javax.persistence.*
 
 @Entity
-class Like(
+class LikeTo(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long?,
@@ -13,4 +13,8 @@ class Like(
         @OneToOne
         @JoinColumn(name="user_id")
         var user: User
-) : BaseTimeEntity()
+) : BaseTimeEntity(){
+        override fun toString(): String {
+                return "LikeTo[id=$id, posts=$posts, user=$user]"
+        }
+}
