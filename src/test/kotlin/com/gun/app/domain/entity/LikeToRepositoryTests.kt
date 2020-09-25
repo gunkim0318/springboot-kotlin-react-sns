@@ -4,6 +4,7 @@ import com.gun.app.domain.Role
 import com.gun.app.domain.repository.LikeToRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,7 +23,6 @@ class LikeToRepositoryTests {
     val likeToRepository: LikeToRepository? = null
 
     @Test
-    @Transactional
     fun insertTest(){
         val user: User = User(null,
                 "adminMan",
@@ -31,18 +31,14 @@ class LikeToRepositoryTests {
         )
         userRepository?.save(user)
 
-
-        var posts = Posts(null,
-                "게시글 내용",
-                user
-        )
         val likeTo = LikeTo(null,
                 null,
                 user)
         likeToRepository?.save(likeTo)
-        posts.addLikeTo(likeTo)
-        postsRepository?.save(posts)
-//        Assert.assertEquals(findPosts?.contents, "게시글 내용")
-//        Assert.assertEquals(findPosts?.user?.name, "adminMan")
+
+        val findLikeTo: LikeTo? = likeToRepository?.findAll()?.get(0)
+        assertEquals(findLikeTo?.user?.name, "adminMan")
+        assertEquals(findLikeTo?.user?.email, "gunkim0318@gmail.com")
+        assertEquals(findLikeTo?.user?.role, Role.ADMIN)
     }
 }
