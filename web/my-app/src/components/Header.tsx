@@ -17,6 +17,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +80,10 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
+    link: {
+      textDecoration: "none",
+      color: "black",
+    },
   })
 );
 
@@ -121,8 +126,15 @@ function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link className={classes.link} to="/profile">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
+      <Link className={classes.link} to="/account">
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      </Link>
+      <Link className={classes.link} to="/logout">
+        <MenuItem onClick={handleMenuClose}>logout</MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -164,7 +176,9 @@ function Header() {
       <AppBar position="static" color="inherit">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            SNS
+            <Link className={classes.link} to="/">
+              SNS
+            </Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

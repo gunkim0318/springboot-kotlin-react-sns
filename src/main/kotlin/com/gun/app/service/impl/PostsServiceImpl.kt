@@ -17,12 +17,9 @@ import java.util.*
 
 @Service
 class PostsServiceImpl(
-        @Autowired
-        val userRepository: UserRepository,
-        @Autowired
-        val postsRepository: PostsRepository,
-        @Autowired
-        val likeToRepository: LikeToRepository
+        private val userRepository: UserRepository,
+        private val postsRepository: PostsRepository,
+        private val likeToRepository: LikeToRepository
 ): PostsService {
 
     override fun getPostsList(name: String): List<PostsResponseDto> {
