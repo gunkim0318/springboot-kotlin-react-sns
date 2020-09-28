@@ -30,13 +30,14 @@ class PostsServiceTests{
     @Autowired
     val likeToRepository: LikeToRepository? = null
 
+    val userName = "adminMan"
     @Before
     fun setup(){
         postsRepository?.deleteAll()
         userRepository?.deleteAll()
 
         val user: User = User(null,
-                "adminMan",
+                userName,
                 "gunkim0318@gmail.com",
                 Role.ADMIN
         )
@@ -47,60 +48,59 @@ class PostsServiceTests{
                 user
         ))
     }
+    @Test
+    fun 게시글_입력_테스트(){
+        val inContents = "게시글 입력 테스트"
+        val dto: PostsRequestDto = PostsRequestDto(null, inContents)
 
+        postsService!!.createPosts(userName, dto)
+
+        val posts: Posts = postsRepository!!.findAll().get(1)
+        assertEquals(posts.contents, inContents)
+    }
     @Test
     fun 게시글_삭제_테스트(){
-        val userName: String? = userRepository?.findAll()?.get(0)?.name
-        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
+        val postsId: Long = postsRepository!!.findAll().get(0).id!!
 
-        if (postsId != null && userName != null) {
-            postsService?.deletePosts(userName, postsId)
-        }
+        postsService?.deletePosts(userName, postsId)
 
         assertEquals(postsRepository?.findAll()?.size, 0)
     }
     @Test
     fun 게시글_수정_테스트(){
-        val userName: String? = userRepository?.findAll()?.get(0)?.name
-        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
+        val postsId: Long = postsRepository!!.findAll().get(0).id!!
 
-        if (postsId != null && userName != null) {
-            postsService?.modifiedPosts(userName, PostsRequestDto(postsId, "수정된 게시글 내용"))
-        }
-        val posts: Posts? = postsRepository?.findAll()?.get(0)
-        assertEquals(posts?.contents, "수정된 게시글 내용")
+        postsService?.modifiedPosts(userName, PostsRequestDto(postsId, "수정된 게시글 내용"))
+
+        val posts: Posts = postsRepository!!.findAll().get(0)
+        assertEquals(posts.contents, "수정된 게시글 내용")
     }
     @Test
     @Transactional
     fun 좋아요_증가_테스트(){
-        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
-        val name = "adminMan"
+        val postsId: Long = postsRepository!!.findAll().get(0).id!!
 
-        if (postsId != null) {
-            postsService?.increaseLike(name, postsId)
-        }
+        postsService?.increaseLike(userName, postsId)
+
         val posts = postsRepository?.findAll()?.get(0)
         val likes = likeToRepository?.findAll()?.get(0)
 
         assertEquals(posts?.likeTos?.size, 1)
         assertEquals(likes?.posts?.likeTos?.size, 1)
-        assertEquals(likes?.user?.name, "adminMan")
+        assertEquals(likes?.user?.name, userName)
     }
     @Test
     @Transactional
     fun 좋아요_중복_방지_테스트(){
-        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
-        val name = "adminMan"
+        val postsId: Long = postsRepository!!.findAll().get(0).id!!
 
-        if (postsId != null) {
-            try{
-                postsService?.increaseLike(name, postsId)
-                postsService?.increaseLike(name, postsId)
-            }catch(e: IllegalArgumentException){
-                print("중복 입력 테스트 성공")
-                return
-            }
-            fail("좋아요 중복 입력 오류")
+        try{
+            postsService!!.increaseLike(userName, postsId)
+            postsService!!.increaseLike(userName, postsId)
+        }catch(e: IllegalArgumentException){
+            print("중복 입력 테스트 성공")
+            return
         }
+        fail("좋아요 중복 입력 오류")
     }
 }

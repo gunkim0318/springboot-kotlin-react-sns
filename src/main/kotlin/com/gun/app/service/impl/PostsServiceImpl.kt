@@ -24,10 +24,19 @@ class PostsServiceImpl(
         @Autowired
         val likeToRepository: LikeToRepository
 ): PostsService {
+
     override fun getPostsList(name: String): List<PostsResponseDto> {
         TODO("Not yet implemented")
     }
 
+    override fun createPosts(name: String, dto: PostsRequestDto) {
+        val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
+
+        postsRepository.save(Posts(null,
+                dto.contents,
+                user
+                ))
+    }
     override fun increaseLike(name: String, id: Long) {
         val posts: Posts = postsRepository.findById(id).orElseThrow { IllegalArgumentException("잘못된 posts Id : $id") }
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
@@ -47,8 +56,7 @@ class PostsServiceImpl(
 
     override fun modifiedPosts(name: String, dto: PostsRequestDto) {
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
-        val posts: Posts = postsRepository.findByIdAndUser(dto.id, user).orElseThrow { IllegalArgumentException("잘못된 posts Id : ${dto.id}") }
-
+        val posts: Posts = postsRepository.findByIdAndUser(dto.id!!, user).orElseThrow { IllegalArgumentException("잘못된 posts Id : ${dto.id}") }
         posts.contents = dto.contents
         postsRepository.save(posts)
     }
