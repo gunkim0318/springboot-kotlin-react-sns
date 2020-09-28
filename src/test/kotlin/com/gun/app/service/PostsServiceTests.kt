@@ -1,4 +1,4 @@
-package com.gun.app.domain.service
+package com.gun.app.service
 
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
@@ -6,8 +6,9 @@ import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.LikeToRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.service.PostsService
+import com.gun.app.dto.PostsRequestDto
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.transaction.annotation.Transactional
+import java.lang.IllegalArgumentException
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest
@@ -47,7 +49,7 @@ class PostsServiceTests{
     }
 
     @Test
-    fun deletePostsTest(){
+    fun 게시글_삭제_테스트(){
         val userName: String? = userRepository?.findAll()?.get(0)?.name
         val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
 
@@ -58,8 +60,19 @@ class PostsServiceTests{
         assertEquals(postsRepository?.findAll()?.size, 0)
     }
     @Test
+    fun 게시글_수정_테스트(){
+        val userName: String? = userRepository?.findAll()?.get(0)?.name
+        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
+
+        if (postsId != null && userName != null) {
+            postsService?.modifiedPosts(userName, PostsRequestDto(postsId, "수정된 게시글 내용"))
+        }
+        val posts: Posts? = postsRepository?.findAll()?.get(0)
+        assertEquals(posts?.contents, "수정된 게시글 내용")
+    }
+    @Test
     @Transactional
-    fun increaseLikeTest(){
+    fun 좋아요_증가_테스트(){
         val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
         val name = "adminMan"
 
@@ -72,5 +85,22 @@ class PostsServiceTests{
         assertEquals(posts?.likeTos?.size, 1)
         assertEquals(likes?.posts?.likeTos?.size, 1)
         assertEquals(likes?.user?.name, "adminMan")
+    }
+    @Test
+    @Transactional
+    fun 좋아요_중복_방지_테스트(){
+        val postsId: Long? = postsRepository?.findAll()?.get(0)?.id
+        val name = "adminMan"
+
+        if (postsId != null) {
+            try{
+                postsService?.increaseLike(name, postsId)
+                postsService?.increaseLike(name, postsId)
+            }catch(e: IllegalArgumentException){
+                print("중복 입력 테스트 성공")
+                return
+            }
+            fail("좋아요 중복 입력 오류")
+        }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.lang.IllegalArgumentException
+import java.util.*
 
 @Service
 class PostsServiceImpl(
@@ -28,21 +29,35 @@ class PostsServiceImpl(
     }
 
     override fun increaseLike(name: String, id: Long) {
+        val posts: Posts = postsRepository.findById(id).orElseThrow { IllegalArgumentException("잘못된 posts Id : $id") }
+        val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
+
+        val liked: Optional<LikeTo> = likeToRepository.findByPostsAndUser(posts, user);
+        if(liked.isPresent){
+            throw IllegalArgumentException()
+        }
+
         val likeTo: LikeTo = LikeTo(
                 null,
-                postsRepository.findById(id).get(),
-                userRepository.findByName(name).get()
+                posts,
+                user
         )
         likeToRepository.save(likeTo)
     }
 
     override fun modifiedPosts(name: String, dto: PostsRequestDto) {
-        TODO("Not yet implemented")
+        val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
+        val posts: Posts = postsRepository.findByIdAndUser(dto.id, user).orElseThrow { IllegalArgumentException("잘못된 posts Id : ${dto.id}") }
+
+        posts.contents = dto.contents
+        postsRepository.save(posts)
     }
 
     @Transactional
     override fun deletePosts(name: String, id: Long) {
-        val user: User = userRepository.findByName(name).get()
+        val user: User = userRepository.findByName(name)
+                .orElseThrow{IllegalArgumentException("잘못된 이름 : $name")}
+
         postsRepository.deleteByIdAndUser(id, user)
     }
 }
