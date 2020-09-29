@@ -33,8 +33,11 @@ class PostsController(
 
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
-    @PostMapping("/increase/like")
-    fun increaseLike(){
+    @PostMapping("/{id}/likes")
+    fun increaseLikes(@PathVariable id: Long): ResponseEntity<String>{
+        val name: String = "gunkim"
+        postsService.increaseLike(name, id)
 
+        return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
 }
