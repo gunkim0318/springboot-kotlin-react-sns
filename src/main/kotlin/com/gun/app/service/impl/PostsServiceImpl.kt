@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.lang.IllegalArgumentException
 import java.util.*
+import kotlin.streams.toList
 
 @Service
 class PostsServiceImpl(
@@ -23,7 +24,7 @@ class PostsServiceImpl(
 ): PostsService {
 
     override fun getPostsList(name: String): List<PostsResponseDto> {
-        TODO("Not yet implemented")
+        return postsRepository.findAll().stream().map { posts -> PostsResponseDto(posts) }.toList()
     }
 
     override fun createPosts(name: String, dto: PostsRequestDto) {
