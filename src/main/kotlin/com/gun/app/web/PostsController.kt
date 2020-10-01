@@ -35,7 +35,7 @@ class PostsController(
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
     @PutMapping("")
-    fun modifiedPosts(dto: PostsRequestDto): ResponseEntity<String>{
+    fun modifiedPosts(@RequestBody dto: PostsRequestDto): ResponseEntity<String>{
         val name: String = "gunkim"
         postsService.modifiedPosts(name, dto)
 
