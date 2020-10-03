@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getPostsList() {
-  const response = await axios.get("/api/posts/list");
+  const response = await axios.get<Posts[]>("/api/posts/list");
   return response.data;
 }
 export async function createPosts(contents: string) {

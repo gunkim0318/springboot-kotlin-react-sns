@@ -1,12 +1,14 @@
 import { combineReducers } from "redux";
 import { all } from "redux-saga/effects";
+import posts, { postsSaga } from "./posts";
 
-const rootReducer = combineReducers({});
+console.log(posts);
+const rootReducer = combineReducers({ posts });
 
-export default rootReducer;
+export function* rootSaga() {
+  yield all([postsSaga()]);
+}
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export function* rootSaga() {
-  yield all([]);
-}
+export default rootReducer;
