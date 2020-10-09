@@ -1,7 +1,7 @@
 import React from "react";
-import PostsList from "./PostsList";
 import { Container } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core";
+import PostsListContainer from "../containers/PostsListContainer";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -19,7 +19,7 @@ const PostsListTemplate = ({ Form }: PostsListTemplateProps) => {
   return (
     <Container maxWidth="sm" className={classes.root}>
       <Form />
-      <PostsList />
+      <PostsListContainer />
     </Container>
   );
 };

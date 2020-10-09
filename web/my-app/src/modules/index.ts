@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { all } from "redux-saga/effects";
-import posts, { postsSaga } from "./posts";
+import postsList from "../modules/posts/reducer";
+import { postsListSaga } from "../modules/posts/sagas";
 
-console.log(posts);
-const rootReducer = combineReducers({ posts });
+const rootReducer = combineReducers({ postsList });
 
 export function* rootSaga() {
-  yield all([postsSaga()]);
+  yield all([postsListSaga()]);
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

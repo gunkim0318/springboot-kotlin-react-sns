@@ -1,25 +1,23 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../modules";
-import { getPostsList } from "../modules/posts";
-import Posts from "./Posts";
+import React from "react";
+import { Posts } from "../apis/posts";
+import PostsItem from "../components/Posts";
 
-const PostsList = () => {
-  const { data, loading, error } = useSelector(
-    (state: RootState) => state.posts.postsList
-  );
-  const dispatch = useDispatch();
+type PostsListProps = {
+  data: Posts[] | null;
+  loading: Boolean;
+  error: Boolean | any;
+};
 
-  useEffect(() => {
-    dispatch(getPostsList());
-  }, [dispatch]);
-
+const PostsList = ({ data, loading, error }: PostsListProps) => {
   return (
     <>
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
+      {data?.map((posts) => (
+        <PostsItem
+          contents={posts.contents}
+          likes={posts.likes}
+          username={posts.username}
+        />
+      ))}
     </>
   );
 };

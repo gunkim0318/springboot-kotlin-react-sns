@@ -10,8 +10,8 @@ import {
   Avatar,
 } from "@material-ui/core";
 import ProfileItem from "../components/ProfileItem";
-import PostsList from "../components/PostsList";
 import Header from "../components/Header";
+import PostsListContainer from "../containers/PostsListContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,7 +61,7 @@ const Profile = () => {
             <ProfileItem />
           </List>
         </Paper>
-        <PostsList />
+        <PostsListContainer />
       </Container>
     </>
   );
