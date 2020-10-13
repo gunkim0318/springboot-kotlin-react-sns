@@ -13,6 +13,7 @@ const PostsList = ({ data, loading, error }: PostsListProps) => {
     <>
       {data?.map((posts) => (
         <PostsItem
+          id={posts.id}
           contents={posts.contents}
           likes={posts.likes}
           username={posts.username}

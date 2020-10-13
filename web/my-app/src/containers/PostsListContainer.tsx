@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostsList from "../components/PostsList";
 import { RootState } from "../modules";
-import { getPostsListAsync } from "../modules/posts/actions";
+import { getPostsListAsync } from "../modules/postsList/actions";
 
 const PostsListContainer = () => {
   const { data, loading, error } = useSelector(
@@ -13,7 +13,6 @@ const PostsListContainer = () => {
   useEffect(() => {
     dispatch(getPostsListAsync.request());
   }, [dispatch]);
-
   return (
     <>
       <PostsList data={data} loading={loading} error={error} />

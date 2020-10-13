@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { getPostsList, Posts } from "../../apis/posts";
 import { getPostsListAsync } from "./actions";
-import { GET_POSTS_LIST } from "../posts/actions";
+import { GET_POSTS_LIST } from "./actions";
 
 function* getPostsListSaga(
   action: ReturnType<typeof getPostsListAsync.request>

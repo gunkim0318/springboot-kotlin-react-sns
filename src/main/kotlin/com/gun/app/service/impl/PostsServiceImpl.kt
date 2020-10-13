@@ -39,17 +39,17 @@ class PostsServiceImpl(
         val posts: Posts = postsRepository.findById(id).orElseThrow { IllegalArgumentException("잘못된 posts Id : $id") }
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
 
-        val liked: Optional<LikeTo> = likeToRepository.findByPostsAndUser(posts, user);
-        if(liked.isPresent){
-            throw IllegalArgumentException()
-        }
-
-        val likeTo: LikeTo = LikeTo(
-                null,
-                posts,
-                user
-        )
-        likeToRepository.save(likeTo)
+        val liked: LikeTo = likeToRepository.findByPostsAndUser(posts, user).orElseGet {
+            val likeTo: LikeTo = LikeTo(
+                    null,
+                    posts,
+                    user,
+                    true
+            )
+            likeToRepository.save(likeTo)
+        };
+        liked.isActive = !liked.isActive
+        likeToRepository.save(liked)
     }
 
     override fun modifiedPosts(name: String, dto: PostsRequestDto) {

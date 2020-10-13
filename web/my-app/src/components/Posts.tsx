@@ -3,7 +3,9 @@ import { Avatar, Paper, Box, Badge } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import TextField from "@material-ui/core/TextField";
+import { useDispatch } from "react-redux";
+import { increasePostsLikesAsync } from "../modules/likes";
+import { getPostsListAsync } from "../modules/postsList";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,13 +28,22 @@ const useStyles = makeStyles(() =>
 );
 
 type PostsProps = {
+  id: number;
   contents: string;
   likes: number;
   username: string;
 };
 
-const Posts = ({ contents, likes, username }: PostsProps) => {
+const Posts = ({ id, contents, likes, username }: PostsProps) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const onClickLikes = () => {
+    dispatch(increasePostsLikesAsync.request(id));
+    dispatch(getPostsListAsync.request());
+  };
+
   return (
     <Paper elevation={3} className={classes.root}>
       <Box component="div" pt={2} pl={2} pr={2}>
@@ -43,7 +54,12 @@ const Posts = ({ contents, likes, username }: PostsProps) => {
           {contents}
         </Box>
         <div className={classes.likes}>
-          <Badge color="secondary" badgeContent={likes} showZero>
+          <Badge
+            color="secondary"
+            badgeContent={likes}
+            showZero
+            onClick={onClickLikes}
+          >
             <ThumbUpAltIcon />
           </Badge>
         </div>

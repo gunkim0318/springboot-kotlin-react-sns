@@ -19,13 +19,13 @@ export async function modifiedPosts(id: number, contents: number) {
 
   return response.status;
 }
-export async function increaseLikes(id: number) {
-  const response = await axios.post("/api/posts/$id/likes");
-
-  return response.status;
+export async function increasePostsLikes(id: number) {
+  const response = await axios.post<string>(`/api/posts/${id}/likes`);
+  return response.data;
 }
 
 export interface Posts {
+  id: number;
   contents: string;
   likes: number;
   username: string;
