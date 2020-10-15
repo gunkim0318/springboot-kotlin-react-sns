@@ -32,17 +32,11 @@ type PostsProps = {
   contents: string;
   likes: number;
   username: string;
+  onClick: () => void;
 };
 
-const Posts = ({ id, contents, likes, username }: PostsProps) => {
+const Posts = ({ id, contents, likes, username, onClick }: PostsProps) => {
   const classes = useStyles();
-
-  const dispatch = useDispatch();
-
-  const onClickLikes = () => {
-    dispatch(increasePostsLikesAsync.request(id));
-    dispatch(getPostsListAsync.request());
-  };
 
   return (
     <Paper elevation={3} className={classes.root}>
@@ -58,9 +52,9 @@ const Posts = ({ id, contents, likes, username }: PostsProps) => {
             color="secondary"
             badgeContent={likes}
             showZero
-            onClick={onClickLikes}
+            onClick={onClick}
           >
-            <ThumbUpAltIcon />
+            <ThumbUpAltIcon/>
           </Badge>
         </div>
       </Box>

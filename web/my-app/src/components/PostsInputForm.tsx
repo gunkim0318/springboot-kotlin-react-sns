@@ -10,6 +10,8 @@ import {
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
+import {useDispatch} from "react-redux";
+import {writePostsAsync} from "../modules/write";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const PostsInputForm = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,6 +49,16 @@ const PostsInputForm = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+      dispatch(writePostsAsync.request(value));
+      handleClose();
+      setValue('');
+  }
+  const onChange = (e: any) => {
+      setValue(e.target.value);
   };
   return (
     <Paper className={classes.paper}>
@@ -55,6 +68,7 @@ const PostsInputForm = () => {
         variant="filled"
         fullWidth
         onClick={handleOpen}
+        onChange={onChange}
         disabled
       />
       <Modal
@@ -78,12 +92,15 @@ const PostsInputForm = () => {
               rows={4}
               variant="outlined"
               fullWidth
+              value={value}
+              onChange={onChange}
             />
             <Button
               variant="contained"
               color="primary"
               fullWidth
               className={classes.button}
+              onClick={onSubmit}
             >
               등록
             </Button>

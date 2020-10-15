@@ -2,6 +2,8 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { getPostsList, Posts } from "../../apis/posts";
 import { getPostsListAsync } from "./actions";
 import { GET_POSTS_LIST } from "./actions";
+import {INCREASE_POSTS_LIKES_SUCCESS} from "../likes";
+import {WRITE_POSTS_SUCCESS} from "../write";
 
 function* getPostsListSaga(
   action: ReturnType<typeof getPostsListAsync.request>
@@ -15,4 +17,6 @@ function* getPostsListSaga(
 }
 export function* postsListSaga() {
   yield takeEvery(GET_POSTS_LIST, getPostsListSaga);
+  yield takeEvery(INCREASE_POSTS_LIKES_SUCCESS, getPostsListSaga);
+  yield takeEvery(WRITE_POSTS_SUCCESS, getPostsListSaga)
 }

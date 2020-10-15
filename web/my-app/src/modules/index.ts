@@ -5,6 +5,7 @@ import likes from "./likes/reducer";
 
 import { postsListSaga } from "./postsList";
 import { likesSaga } from "./likes";
+import {writeSaga } from './write';
 
 const rootReducer = combineReducers({
   postsList,
@@ -12,7 +13,7 @@ const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
-  yield all([postsListSaga(), likesSaga()]);
+  yield all([postsListSaga(), likesSaga(), writeSaga()]);
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -5,7 +5,7 @@ export async function getPostsList() {
   return response.data;
 }
 export async function createPosts(contents: string) {
-  const response = await axios.post("/api/posts");
+  const response = await axios.post("/api/posts", { contents: contents });
 
   return response.status;
 }

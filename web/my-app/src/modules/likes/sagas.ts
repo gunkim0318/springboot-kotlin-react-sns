@@ -1,8 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { increasePostsLikes } from "../../apis/posts";
+
 import {
   increasePostsLikesAsync,
-  INCREASE_POSTS_LIKES,
+  INCREASE_POSTS_LIKES
 } from "../likes/actions";
 
 function* increasePostsLikesSaga(
