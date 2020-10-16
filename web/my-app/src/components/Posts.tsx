@@ -1,11 +1,8 @@
 import React from "react";
-import { Avatar, Paper, Box, Badge } from "@material-ui/core";
+import {Avatar, Paper, Box, Badge, Accordion, AccordionSummary, Typography, AccordionDetails} from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { useDispatch } from "react-redux";
-import { increasePostsLikesAsync } from "../modules/likes";
-import { getPostsListAsync } from "../modules/postsList";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,6 +21,9 @@ const useStyles = makeStyles(() =>
       padding: "0px",
       cursor: "pointer",
     },
+    downIcon: {
+      margin: '0 auto'
+    }
   })
 );
 
@@ -58,9 +58,20 @@ const Posts = ({ id, contents, likes, username, onClick }: PostsProps) => {
           </Badge>
         </div>
       </Box>
-      <div className={classes.downTap}>
-        <ArrowDropDownIcon />
-      </div>
+        <Accordion>
+            <AccordionSummary
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.downTap}
+            >
+                <ArrowDropDownIcon className={classes.downIcon}/>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography>
+                    탭입니다
+                </Typography>
+            </AccordionDetails>
+        </Accordion>
     </Paper>
   );
 };
