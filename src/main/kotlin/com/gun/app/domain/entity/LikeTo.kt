@@ -16,8 +16,7 @@ class LikeTo(
         var posts: Posts?,
         @OneToOne
         @JoinColumn(name="user_id")
-        var user: User,
-        var isActive: Boolean
+        var user: User
 ) : BaseTimeEntity() {
         init {
                 this.posts?.likeTos?.add(this)

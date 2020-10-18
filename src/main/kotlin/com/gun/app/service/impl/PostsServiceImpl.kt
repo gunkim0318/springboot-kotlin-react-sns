@@ -43,12 +43,10 @@ class PostsServiceImpl(
             val likeTo: LikeTo = LikeTo(
                     null,
                     posts,
-                    user,
-                    true
+                    user
             )
             likeToRepository.save(likeTo)
         };
-        liked.isActive = !liked.isActive
         likeToRepository.save(liked)
     }
 

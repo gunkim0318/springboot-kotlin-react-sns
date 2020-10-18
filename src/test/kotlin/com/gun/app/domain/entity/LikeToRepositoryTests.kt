@@ -33,7 +33,8 @@ class LikeToRepositoryTests {
 
         val likeTo = LikeTo(null,
                 null,
-                user)
+                user
+        )
         likeToRepository?.save(likeTo)
 
         val findLikeTo: LikeTo? = likeToRepository?.findAll()?.get(0)
