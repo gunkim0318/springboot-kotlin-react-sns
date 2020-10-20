@@ -30,3 +30,8 @@ export interface Posts {
   likes: number;
   username: string;
 }
+export interface Profile {
+  id: number;
+  contents: string;
+  username: string;
+}

@@ -1,5 +1,14 @@
 import React from "react";
-import {Avatar, Paper, Box, Badge, Accordion, AccordionSummary, Typography, AccordionDetails} from "@material-ui/core";
+import {
+    Avatar,
+    Paper,
+    Box,
+    Badge,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    TextField
+} from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -67,9 +76,14 @@ const Posts = ({ id, contents, likes, username, onClick }: PostsProps) => {
                 <ArrowDropDownIcon className={classes.downIcon}/>
             </AccordionSummary>
             <AccordionDetails>
-                <Typography>
-                    탭입니다
-                </Typography>
+                <TextField
+                    id="outlined-multiline-static"
+                    label="댓글"
+                    multiline
+                    rows={1}
+                    variant="outlined"
+                    fullWidth
+                />
             </AccordionDetails>
         </Accordion>
     </Paper>
