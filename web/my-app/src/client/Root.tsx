@@ -13,7 +13,6 @@ const sagaMiddleware = createSagaMiddleware();
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0px;
-    background-color: #f4f9ff;
   }
 `;
 
