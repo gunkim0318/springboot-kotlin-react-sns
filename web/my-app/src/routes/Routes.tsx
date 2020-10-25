@@ -5,6 +5,7 @@ import About from "../pages/About";
 import Profile from "../pages/Profile";
 import Accont from "../pages/Accont";
 import { People } from "@material-ui/icons";
+import Login from "../pages/Login";
 
 const Routes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Routes: React.FC = () => {
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/account" component={Accont} />
       <Route exact path="/people" component={People} />
+      <Route exact path="/login" component={Login} />
     </div>
   );
 };
