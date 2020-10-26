@@ -1,68 +1,51 @@
 import React from "react";
-import {
-  Paper,
-  Typography,
-  Container,
-  createStyles,
-  Theme,
-  makeStyles,
-  List,
-  Avatar,
-} from "@material-ui/core";
-import ProfileItem from "../components/ProfileItem";
-import Header from "../components/Header";
-import PostsListContainer from "../containers/PostsListContainer";
+import { Grid, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button/Button";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Input from "@material-ui/core/Input/Input";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      paddingTop: "10px",
-    },
-    root2: {
-      width: "100%",
-      maxWidth: "36ch",
-      backgroundColor: theme.palette.background.paper,
-    },
-    padding: {
-      padding: "30px",
-    },
-    inline: {
-      display: "inline",
-    },
-    large: {
-      width: theme.spacing(30),
-      height: theme.spacing(30),
-      margin: "0 auto",
-    },
-    header: {
-      margin: "20px 0px",
-    },
-  })
-);
 const Profile = () => {
-  const classes = useStyles();
   return (
     <>
-      <Header />
-      <Container maxWidth="sm" className={classes.root}>
-        <Paper className={classes.padding}>
-          <Avatar alt="Gunkim" src="empty.png" className={classes.large} />
-          <Typography
-            align="center"
-            variant="h4"
-            component="h4"
-            className={classes.header}
-          >
-            소개
-          </Typography>
-          <List className={classes.root2}>
-            <ProfileItem />
-            <ProfileItem />
-            <ProfileItem />
-          </List>
-        </Paper>
-        <PostsListContainer />
-      </Container>
+      <Grid container direction="row" justify="flex-start">
+        <Grid style={{ padding: 10 }}>
+          <Button>
+            <ArrowBackIcon />
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid container justify="center">
+        <Typography variant="h3">프로필 수정</Typography>
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        style={{ marginTop: "50px" }}
+      >
+        <Grid style={{ padding: 10 }} xs={10} sm={4}>
+          <Grid xs={12}>
+            <Input
+              placeholder="닉네임을 입력해주세요"
+              inputProps={{ "aria-label": "description" }}
+              fullWidth={true}
+            />
+          </Grid>
+          <Grid xs={12} style={{ marginTop: "20px" }}>
+            <Input
+              placeholder="소개를 입력해주세요"
+              inputProps={{ "aria-label": "description" }}
+              fullWidth={true}
+            />
+          </Grid>
+          <Grid xs={12} style={{ marginTop: "20px" }}>
+            <Button variant="outlined" color="primary" fullWidth={true}>
+              수정
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };
