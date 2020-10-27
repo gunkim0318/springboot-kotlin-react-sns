@@ -1,92 +1,31 @@
 import React from "react";
-import {
-    Avatar,
-    Paper,
-    Box,
-    Badge,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    TextField
-} from "@material-ui/core";
-import { createStyles, makeStyles } from "@material-ui/core";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import { Paper } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography/Typography";
+import Button from "@material-ui/core/Button/Button";
+import { ArrowDropDown } from "@material-ui/icons";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      margin: "7px 0",
-    },
-    likes: {
-      textAlign: "center",
-      paddingTop: "20px",
-      paddingBottom: "10px",
-    },
-    downTap: {
-      background: "#f5f5f5",
-      textAlign: "center",
-      margin: "0px",
-      padding: "0px",
-      cursor: "pointer",
-    },
-    downIcon: {
-      margin: '0 auto'
-    }
-  })
-);
-
-type PostsProps = {
-  id: number;
-  contents: string;
-  likes: number;
-  username: string;
-  onClick: () => void;
-};
-
-const Posts = ({ id, contents, likes, username, onClick }: PostsProps) => {
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: "6px 16px",
+  },
+}));
+const Posts = () => {
   const classes = useStyles();
-
   return (
-    <Paper elevation={3} className={classes.root}>
-      <Box component="div" pt={2} pl={2} pr={2}>
-        <div>
-          <Avatar component="span">{username}</Avatar>
-        </div>
-        <Box component="div" m={1}>
-          {contents}
-        </Box>
-        <div className={classes.likes}>
-          <Badge
-            color="secondary"
-            badgeContent={likes}
-            showZero
-            onClick={onClick}
-          >
-            <ThumbUpAltIcon/>
-          </Badge>
-        </div>
-      </Box>
-        <Accordion>
-            <AccordionSummary
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                className={classes.downTap}
-            >
-                <ArrowDropDownIcon className={classes.downIcon}/>
-            </AccordionSummary>
-            <AccordionDetails>
-                <TextField
-                    id="outlined-multiline-static"
-                    label="댓글"
-                    multiline
-                    rows={1}
-                    variant="outlined"
-                    fullWidth
-                />
-            </AccordionDetails>
-        </Accordion>
-    </Paper>
+    <>
+      <Paper elevation={3} className={classes.paper}>
+        <Typography variant="h6" component="h6">
+          크기가 커진다잉~~~~~~~~~
+        </Typography>
+      </Paper>
+      <Typography variant="body2" color="textSecondary">
+        <Button>
+          <ArrowDropDown />
+        </Button>
+        20-10-22 9:30 am. write by 김건
+      </Typography>
+    </>
   );
 };
 

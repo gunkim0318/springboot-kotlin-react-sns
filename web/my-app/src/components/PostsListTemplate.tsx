@@ -1,26 +1,26 @@
 import React from "react";
-import { Container } from "@material-ui/core";
-import { createStyles, makeStyles } from "@material-ui/core";
-import PostsListContainer from "../containers/PostsListContainer";
+import { Grid, Typography } from "@material-ui/core";
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      paddingTop: "10px",
-    },
-  })
-);
 type PostsListTemplateProps = {
-  Form: any;
+  form: JSX.Element;
+  children: React.ReactNode;
 };
 
-const PostsListTemplate = ({ Form }: PostsListTemplateProps) => {
-  const classes = useStyles();
+const PostsListTemplate = ({ form, children }: PostsListTemplateProps) => {
   return (
-    <Container maxWidth="sm" className={classes.root}>
-      <Form />
-      <PostsListContainer />
-    </Container>
+    <>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid>
+          <Typography variant="h4">글을 입력하세요</Typography>
+        </Grid>
+      </Grid>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid xs={10} md={5}>
+          <Grid>{form}</Grid>
+          <Grid style={{ marginTop: "30px" }}>{children}</Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
