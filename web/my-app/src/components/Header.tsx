@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Popper from "@material-ui/core/Popper/Popper";
 import { Settings } from "@material-ui/icons";
 import React, { RefObject } from "react";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 type HeaderProps = {
   open: boolean;
@@ -27,6 +28,9 @@ function Header({
     <>
       <Grid container direction="row" justify="flex-end" alignItems="center">
         <Grid style={{ padding: 10 }}>
+          <Button>
+            <NotificationsIcon />
+          </Button>
           <Button
             ref={anchorRef}
             aria-controls={open ? "menu-list-grow" : undefined}

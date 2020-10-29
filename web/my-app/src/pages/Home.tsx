@@ -1,6 +1,5 @@
 import React from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import DefaultInput from "../components/DefaultInput";
 import Header from "../components/Header";
 import Posts from "../components/Posts";

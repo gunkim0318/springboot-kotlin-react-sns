@@ -4,8 +4,8 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Profile from "../pages/Profile";
 import Accont from "../pages/Accont";
-import { People } from "@material-ui/icons";
 import Login from "../pages/Login";
+import People from "../pages/People";
 
 const Routes: React.FC = () => {
   return (
