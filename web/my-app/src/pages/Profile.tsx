@@ -1,49 +1,33 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button/Button";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Input from "@material-ui/core/Input/Input";
+import { Grid, Typography, Paper, Avatar } from "@material-ui/core";
+import BackButton from "../components/BackButton";
+import Posts from "../components/Posts";
 
 const Profile = () => {
   return (
     <>
-      <Grid container direction="row" justify="flex-start">
-        <Grid style={{ padding: 10 }}>
-          <Button>
-            <ArrowBackIcon />
-          </Button>
-        </Grid>
-      </Grid>
+      <BackButton />
       <Grid container justify="center">
-        <Typography variant="h3">프로필 수정</Typography>
-      </Grid>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        style={{ marginTop: "50px" }}
-      >
-        <Grid style={{ padding: 10 }} xs={10} sm={4}>
-          <Grid xs={12}>
-            <Input
-              placeholder="닉네임을 입력해주세요"
-              inputProps={{ "aria-label": "description" }}
-              fullWidth={true}
-            />
-          </Grid>
-          <Grid xs={12} style={{ marginTop: "20px" }}>
-            <Input
-              placeholder="소개를 입력해주세요"
-              inputProps={{ "aria-label": "description" }}
-              fullWidth={true}
-            />
-          </Grid>
-          <Grid xs={12} style={{ marginTop: "20px" }}>
-            <Button variant="outlined" color="primary" fullWidth={true}>
-              수정
-            </Button>
-          </Grid>
+        <Grid xs={11} md={5}>
+          <Paper style={{ padding: "20px" }}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Typography variant="h3">프로필</Typography>
+              <Avatar style={{ width: "200px", height: "200px" }}>Gun</Avatar>
+              <Typography variant="h4">김건</Typography>
+              <Grid>
+                follow <b>1</b> following <b>2</b>
+              </Grid>
+            </Grid>
+          </Paper>
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
         </Grid>
       </Grid>
     </>

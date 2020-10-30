@@ -1,8 +1,16 @@
 import React from "react";
-import Header from "../components/Header";
+import { Grid, Typography } from "@material-ui/core";
+import BackButton from "../components/BackButton";
 
-const people: React.FC = () => {
-  return <></>;
+const People: React.FC = () => {
+  return (
+    <>
+      <BackButton />
+      <Grid container justify="center">
+        <Typography variant="h3">친구 추천</Typography>
+      </Grid>
+    </>
+  );
 };
 
-export default people;
+export default People;
