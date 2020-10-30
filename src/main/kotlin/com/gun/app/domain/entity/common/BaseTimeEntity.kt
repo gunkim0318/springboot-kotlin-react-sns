@@ -1,4 +1,4 @@
-package com.gun.app.domain.entity
+package com.gun.app.domain.entity.common
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
