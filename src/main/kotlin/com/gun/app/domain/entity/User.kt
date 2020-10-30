@@ -1,27 +1,38 @@
 package com.gun.app.domain.entity
 
 import com.gun.app.domain.Role
+import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
 @Entity
 class User(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long?,
-        @Column(nullable = false, length = 10)
+        @Column(nullable = false)
         var name: String,
-        @Column(nullable = true, length = 20)
         var email: String?,
         @Column(nullable = false)
         var role: Role
 ): BaseTimeEntity() {
-        fun update(name:String, email:String, role: Role){
-                this.name = name
-                this.email = email
-                this.role = role
-        }
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null
+        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+        var postsList: MutableList<Posts> = ArrayList<Posts>()
+        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+        var replyList: MutableList<Reply> = ArrayList<Reply>()
+        @OneToOne(mappedBy = "user")
+        var profile: Profile? = null
+        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+        var alarmList: MutableList<Alarm> = ArrayList<Alarm>()
+        @OneToOne(mappedBy = "user")
+        var likes: Likes? = null
 
-        override fun toString(): String {
-                return "User(id=$id, name=$name, email=$email, role=$role)"
+        fun modifyName(name: String){
+                this.name = name
+        }
+        fun modifyEmail(email: String){
+                this.email = email
+        }
+        fun modifyRole(role: Role){
+                this.role = role
         }
 }

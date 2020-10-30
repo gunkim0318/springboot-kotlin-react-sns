@@ -4,15 +4,13 @@ import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
 @Entity
-class Reply(
-        @Column(nullable = false)
-        var contents: String,
-        @ManyToOne
-        @JoinColumn(name="user_id")
-        var user: User,
+class Likes(
         @ManyToOne
         @JoinColumn(name="posts_id")
-        var posts: Posts
+        var posts: Posts,
+        @OneToOne
+        @JoinColumn(name="user_id")
+        var user: User
 ): BaseTimeEntity(){
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

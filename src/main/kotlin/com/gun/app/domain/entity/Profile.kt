@@ -1,18 +1,17 @@
 package com.gun.app.domain.entity
 
-import com.gun.app.domain.entity.BaseTimeEntity
+import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
 @Entity
 class Profile(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long?,
         var image: String?,
-        var info1: String?,
-        var info2: String?,
-        var info3: String?,
+        var info: String?,
         @OneToOne
         @JoinColumn(name="user_id")
         var user: User
-) : BaseTimeEntity()
+) : BaseTimeEntity(){
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null
+}

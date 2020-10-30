@@ -1,19 +1,19 @@
 package com.gun.app.domain.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.gun.app.domain.entity.common.BaseTimeEntity
+import javax.persistence.*
 
 @Entity
 class Alarm(
+        @Column(nullable = false)
+        var contents: String,
+        @Column(nullable = false)
+        var readYn: Boolean,
+        @ManyToOne
+        @JoinColumn(name="user_id")
+        var user: User
+): BaseTimeEntity(){
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long?,
-        var contents: String,
-        var readYn: Boolean
-): BaseTimeEntity(){
-        override fun toString(): String {
-                return "Alarm[id=$id, contents=$contents, readYn=$readYn]"
-        }
+        var id: Long? = null
 }
