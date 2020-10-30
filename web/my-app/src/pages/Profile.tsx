@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Typography, Paper, Avatar } from "@material-ui/core";
 import BackButton from "../components/BackButton";
+import Posts from "../components/Posts";
 
 const Profile = () => {
   return (
@@ -23,6 +24,10 @@ const Profile = () => {
               </Grid>
             </Grid>
           </Paper>
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
         </Grid>
       </Grid>
     </>
