@@ -16,4 +16,8 @@ class Alarm(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
+
+        init {
+                this.user.alarmList.add(this)
+        }
 }

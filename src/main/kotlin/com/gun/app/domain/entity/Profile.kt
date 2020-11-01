@@ -1,5 +1,6 @@
 package com.gun.app.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
@@ -14,4 +15,8 @@ class Profile(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
+
+        override fun toString(): String {
+                return "Profile[id=$id, image=$image, info=$info, username=${user.name}]"
+        }
 }

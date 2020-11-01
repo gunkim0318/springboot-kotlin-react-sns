@@ -8,11 +8,16 @@ class Likes(
         @ManyToOne
         @JoinColumn(name="posts_id")
         var posts: Posts,
-        @OneToOne
+        @ManyToOne
         @JoinColumn(name="user_id")
         var user: User
 ): BaseTimeEntity(){
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
+
+        init {
+                this.posts.likesList.add(this)
+                this.user.likesList.add(this)
+        }
 }

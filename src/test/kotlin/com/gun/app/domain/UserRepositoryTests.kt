@@ -1,0 +1,61 @@
+package com.gun.app.domain
+
+import com.gun.app.domain.entity.User
+import com.gun.app.domain.repository.UserRepository
+import junit.framework.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+
+@RunWith(SpringJUnit4ClassRunner::class)
+@DataJpaTest
+class UserRepositoryTests {
+    @Autowired
+    private lateinit var userRepository: UserRepository
+
+    @Before
+    fun setup(){
+        userRepository.deleteAll()
+
+        val user: User = User(
+                "gunkim",
+                "gunkim0318@gmail.com",
+                Role.USER
+        )
+        userRepository.save(user)
+    }
+
+    @Test
+    fun insertTest(){
+        val user: User = userRepository.findAll()[0]
+
+        assertEquals("gunkim", user.name)
+        assertEquals("gunkim0318@gmail.com", user.email)
+    }
+    @Test
+    fun updateTest(){
+        val user: User = userRepository.findAll()[0]
+        user.modifyName("kimgun")
+        user.modifyEmail("gunkim0318@daum.net")
+
+        userRepository.save(user)
+
+        val findUser: User = userRepository.findAll()[0]
+        assertEquals("kimgun", findUser.name)
+        assertEquals("gunkim0318@daum.net", findUser.email)
+    }
+    @Test
+    fun deleteTest(){
+        val user: User = userRepository.findAll()[0]
+        userRepository.delete(user)
+
+        val userSize: Int = userRepository.findAll().size
+        assertEquals(userSize, 0)
+    }
+}
