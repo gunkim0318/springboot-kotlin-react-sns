@@ -18,6 +18,5 @@ class Likes(
 
         init {
                 this.posts.likesList.add(this)
-                this.user.likesList.add(this)
         }
 }

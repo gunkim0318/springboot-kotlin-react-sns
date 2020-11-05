@@ -15,16 +15,12 @@ class User(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
         var postsList: MutableList<Posts> = ArrayList<Posts>()
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
-        var replyList: MutableList<Reply> = ArrayList<Reply>()
-        @OneToOne(mappedBy = "user", cascade = [CascadeType.REMOVE])
+        @OneToOne(mappedBy = "user", orphanRemoval = true)
         var profile: Profile? = null
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
         var alarmList: MutableList<Alarm> = ArrayList<Alarm>()
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
-        var likesList: MutableList<Likes> = ArrayList<Likes>()
 
         fun modifyName(name: String){
                 this.name = name
@@ -35,8 +31,10 @@ class User(
         fun modifyRole(role: Role){
                 this.role = role
         }
-
+        fun deletePosts(posts: Posts){
+                this.postsList.remove(posts)
+        }
         override fun toString(): String {
-                return "User[id=$id, name=$name, email=$email, role=$role, profile=$profile]"
+                return "User[id=$id, name=$name, email=$email, role=$role, profile=$profile, postsList=$postsList]"
         }
 }
