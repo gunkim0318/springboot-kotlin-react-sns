@@ -16,6 +16,10 @@ class Profile(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
 
+        fun modifyProfile(image: String?, info: String?){
+                this.image = image
+                this.info = info
+        }
         override fun toString(): String {
                 return "Profile[id=$id, image=$image, info=$info, username=${user.name}]"
         }

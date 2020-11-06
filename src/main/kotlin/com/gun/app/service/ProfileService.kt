@@ -7,14 +7,14 @@ interface ProfileService {
     /**
      * TODO: 해당 유저의 프로필 반환
      */
-    fun getProfile(name: String): ProfileResponseDto
+    fun getProfile(): ProfileResponseDto
     /**
      * TODO: 해당 유저의 프로필 작성
      */
-    fun createProfile(name: String, dto: ProfileRequestDto)
+    fun createProfile(dto: ProfileRequestDto)
 
     /**
      * TODO: 해당 유저의 프로필 수정
      */
-    fun modifiedProfile(name: String, dto: ProfileRequestDto)
+    fun modifiedProfile(dto: ProfileRequestDto)
 }

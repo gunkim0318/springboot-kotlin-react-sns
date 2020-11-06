@@ -15,26 +15,27 @@ class ProfileServiceImpl(
         private val profileRepository: ProfileRepository,
         private val userRepository: UserRepository
 ): ProfileService {
-    override fun getProfile(name: String): ProfileResponseDto{
+    override fun getProfile(): ProfileResponseDto{
+        val name: String = "gunkim"
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("해당 유저 ${name}를 찾을 수 없습니다.") }
         val profile: Profile = profileRepository.findByUser(user).orElseThrow { IllegalArgumentException("해당 유저 ${name}의 프로필을 찾을 수 없습니다.") }
         return ProfileResponseDto(profile)
     }
 
-    override fun createProfile(name: String, dto: ProfileRequestDto) {
+    override fun createProfile(dto: ProfileRequestDto) {
+        val name: String = "gunkim"
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("해당 유저 ${name}를 찾을 수 없습니다.") }
 
         val profile: Profile = dto.toEntity(user)
         profileRepository.save(profile)
     }
 
-    override fun modifiedProfile(name: String, dto: ProfileRequestDto) {
+    override fun modifiedProfile(dto: ProfileRequestDto) {
+        val name: String = "gunkim"
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("해당 유저 ${name}를 찾을 수 없습니다.") }
         val profile: Profile = profileRepository.findByUser(user).orElseThrow { IllegalArgumentException("해당 유저 ${name}의 프로필을 찾을 수 없습니다.") }
-        profile.info1 = dto.info1
-        profile.info2 = dto.info2
-        profile.info3 = dto.info3
-        profile.image = dto.image
+
+        profile.modifyProfile(dto.image, dto.info)
         profileRepository.save(profile)
     }
 }
