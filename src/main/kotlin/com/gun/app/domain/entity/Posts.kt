@@ -17,13 +17,17 @@ class Posts(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-    @OneToMany(mappedBy = "posts", cascade = [CascadeType.PERSIST], orphanRemoval = true)
+    @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
     var replyList: MutableList<Reply> = ArrayList<Reply>()
-    @OneToMany(mappedBy = "posts", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
     var likesList: MutableSet<Likes> = HashSet<Likes>()
 
     fun modifyContents(contents: String){
         this.contents = contents
+    }
+    fun addLikes(likes: Likes){
+        this.likesList.add(likes)
+        likes.posts = this
     }
 
     override fun toString(): String {

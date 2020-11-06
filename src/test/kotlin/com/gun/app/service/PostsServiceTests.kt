@@ -3,12 +3,11 @@ package com.gun.app.service
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.LikeToRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.PostsRequestDto
+import com.gun.app.dto.PostsResponseDto
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,91 +15,77 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.transaction.annotation.Transactional
-import java.lang.IllegalArgumentException
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest
 class PostsServiceTests{
     @Autowired
-    val postsService: PostsService? = null
+    private lateinit var postsService: PostsService
     @Autowired
-    val postsRepository: PostsRepository? = null
+    private lateinit var postsRepository: PostsRepository
     @Autowired
-    val userRepository: UserRepository? = null
-    @Autowired
-    val likeToRepository: LikeToRepository? = null
+    private lateinit var userRepository: UserRepository
 
-    val userName = "adminMan"
+    val userName = "gunkim"
     @Before
     fun setup(){
-        postsRepository?.deleteAll()
-        userRepository?.deleteAll()
+        userRepository.deleteAll()
 
-        val user: User = User(null,
-                userName,
+        val user: User = User(userName,
                 "gunkim0318@gmail.com",
                 Role.ADMIN
         )
-        userRepository?.save(user)
+        userRepository.save(user)
 
-        postsRepository?.save(Posts(null,
+        val posts: Posts = Posts(
                 "게시글 내용",
                 user
-        ))
+        )
+        postsRepository.save(posts)
     }
     @Test
-    fun 게시글_입력_테스트(){
-        val inContents = "게시글 입력 테스트"
-        val dto: PostsRequestDto = PostsRequestDto(null, inContents)
+    fun createPostsTest(){
+        postsRepository.deleteAll()
 
-        postsService!!.createPosts(userName, dto)
-
-        val posts: Posts = postsRepository!!.findAll().get(1)
-        assertEquals(posts.contents, inContents)
+        val contents: String = "게시글 테스트입니다."
+        val dto: PostsRequestDto = PostsRequestDto(
+                null,
+                contents
+        )
+        postsService.createPosts(dto)
+        val findPosts: Posts = postsRepository.findAll()[0]
+        assertEquals(contents, findPosts.contents)
     }
     @Test
-    fun 게시글_삭제_테스트(){
-        val postsId: Long = postsRepository!!.findAll().get(0).id!!
-
-        postsService?.deletePosts(userName, postsId)
-
-        assertEquals(postsRepository?.findAll()?.size, 0)
+    fun deletePostsTest(){
+        val postsId: Long = postsRepository.findAll()[0].id!!
+        postsService.deletePosts(postsId)
+        val postsSize: Int = postsRepository.findAll().size
+        assertEquals(postsSize, 0)
     }
     @Test
-    fun 게시글_수정_테스트(){
-        val postsId: Long = postsRepository!!.findAll().get(0).id!!
-
-        postsService?.modifiedPosts(userName, PostsRequestDto(postsId, "수정된 게시글 내용"))
-
-        val posts: Posts = postsRepository!!.findAll().get(0)
-        assertEquals(posts.contents, "수정된 게시글 내용")
-    }
-    @Test
-    @Transactional
-    fun 좋아요_증가_테스트(){
-        val postsId: Long = postsRepository!!.findAll().get(0).id!!
-
-        postsService?.increaseLike(userName, postsId)
-
-        val posts = postsRepository?.findAll()?.get(0)
-        val likes = likeToRepository?.findAll()?.get(0)
-
-        assertEquals(posts?.likeTos?.size, 1)
-        assertEquals(likes?.posts?.likeTos?.size, 1)
-        assertEquals(likes?.user?.name, userName)
+    fun getPostsListTest(){
+        val postsList: List<PostsResponseDto> = postsService.getPostsList()
     }
     @Test
     @Transactional
-    fun 좋아요_중복_방지_테스트(){
-        val postsId: Long = postsRepository!!.findAll().get(0).id!!
+    fun increaseLikeTest(){
+        val postsId: Long = postsRepository.findAll()[0].id!!
+        postsService.increaseLike(postsId)
+        postsService.increaseLike(postsId)
 
-        try{
-            postsService!!.increaseLike(userName, postsId)
-            postsService!!.increaseLike(userName, postsId)
-        }catch(e: IllegalArgumentException){
-            print("중복 입력 테스트 성공")
-            return
-        }
-        fail("좋아요 중복 입력 오류")
+        val findPosts: Posts = postsRepository.findAll()[0]
+        assertEquals(findPosts.likesList.size, 1)
+    }
+    @Test
+    fun modifiedPostsTest(){
+        val postsId: Long = postsRepository.findAll()[0].id!!
+        val contents: String = "수정된 게시글 내용입니다."
+        val dto: PostsRequestDto = PostsRequestDto(
+                postsId,
+                contents
+        )
+
+        postsService.modifiedPosts(dto)
     }
 }
