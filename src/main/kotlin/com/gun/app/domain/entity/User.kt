@@ -22,6 +22,16 @@ class User(
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
         var alarmList: MutableList<Alarm> = ArrayList<Alarm>()
 
+        @ManyToMany(cascade = [CascadeType.ALL])
+        @JoinTable(
+                name = "USER_RELATIONS",
+                joinColumns = [JoinColumn(name = "FOLLOWED_ID")],
+                inverseJoinColumns = [JoinColumn(name = "FOLLOWER_ID")]
+        )
+        var followers: MutableSet<User> = HashSet<User>()
+        @ManyToMany(mappedBy = "followers")
+        var following: MutableSet<User> = HashSet<User>()
+
         fun modifyName(name: String){
                 this.name = name
         }
@@ -30,6 +40,13 @@ class User(
         }
         fun modifyRole(role: Role){
                 this.role = role
+        }
+        fun addFollowers(follower: User){
+                followers.add(follower)
+                follower.following.add(this)
+        }
+        fun addFollowing(followed: User){
+                followed.addFollowers(this)
         }
         fun deletePosts(posts: Posts){
                 this.postsList.remove(posts)

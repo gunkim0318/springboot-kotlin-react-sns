@@ -58,4 +58,34 @@ class UserRepositoryTests {
         val userSize: Int = userRepository.findAll().size
         assertEquals(userSize, 0)
     }
+    @Test
+    fun followInsertTest(){
+        userRepository.save(User(
+                "gun",
+                "gunkim0318@gmail.com",
+                Role.USER
+        ))
+        val user1: User = userRepository.findAll()[0]
+        val user2: User = userRepository.findAll()[1]
+        user1.addFollowers(user2)
+        userRepository.save(user1)
+
+        val findUser: User = userRepository.findAll()[0]
+        assertEquals(findUser.followers.size, 1)
+    }
+    @Test
+    fun followingInsertTest(){
+        userRepository.save(User(
+                "gun",
+                "gunkim0318@gmail.com",
+                Role.USER
+        ))
+        val user1: User = userRepository.findAll()[0]
+        val user2: User = userRepository.findAll()[1]
+        user1.addFollowing(user2)
+        userRepository.save(user1)
+
+        val findUser: User = userRepository.findAll()[0]
+        assertEquals(findUser.following.size, 1)
+    }
 }
