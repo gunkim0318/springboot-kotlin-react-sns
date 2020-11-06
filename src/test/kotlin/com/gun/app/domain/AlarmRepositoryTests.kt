@@ -30,7 +30,6 @@ class AlarmRepositoryTests {
         userRepository.save(user)
         val alarm: Alarm = Alarm(
                 "알림 내용",
-                false,
                 user
         )
         alarmRepository.save(alarm)

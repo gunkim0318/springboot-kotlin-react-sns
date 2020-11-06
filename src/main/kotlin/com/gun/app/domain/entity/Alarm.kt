@@ -7,8 +7,6 @@ import javax.persistence.*
 class Alarm(
         @Column(nullable = false)
         var contents: String,
-        @Column(nullable = false)
-        var readYn: Boolean,
         @ManyToOne
         @JoinColumn(name="user_id")
         var user: User
@@ -16,8 +14,13 @@ class Alarm(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
+        @Column(nullable = false)
+        var readYn: Boolean = false
 
         init {
                 this.user.alarmList.add(this)
+        }
+        fun modifiedReadAlarm(){
+                this.readYn = true
         }
 }
