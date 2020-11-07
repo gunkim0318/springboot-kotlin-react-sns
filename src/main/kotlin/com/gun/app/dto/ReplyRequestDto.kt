@@ -1,4 +1,6 @@
 package com.gun.app.dto
 
-class ReplyRequestDto {
-}
+class ReplyRequestDto(
+        val id: Long?,
+        val contents: String
+)

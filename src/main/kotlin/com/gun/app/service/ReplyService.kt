@@ -7,15 +7,15 @@ interface ReplyService {
     /**
      * TODO: 해당 게시글 댓글 목록을 반환
      */
-    fun getReplyList(id: Long): List<ReplyResponseDto>
+    fun getReplyList(postsId: Long): List<ReplyResponseDto>
 
     /**
-     * TODO: 해당 댓글의 작성자가 맞을 경우 댓글 수정
+     * TODO: 해당 댓글의 내용 수정
      */
-    fun modifiedReply(name: String, dto: ReplyRequestDto)
+    fun modifyReply(dto: ReplyRequestDto)
 
     /**
-     * TODO: 해당 댓글의 작성자가 맞을 경우 댓글 삭제
+     * TODO: 해당 번호의 댓글 삭제
      */
-    fun deleteReply(name: String, id: Long)
+    fun deleteReply(id: Long)
 }

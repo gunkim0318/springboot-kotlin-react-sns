@@ -17,4 +17,8 @@ class Reply(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
+
+        fun modifyContents(contents: String){
+                this.contents = contents
+        }
 }
