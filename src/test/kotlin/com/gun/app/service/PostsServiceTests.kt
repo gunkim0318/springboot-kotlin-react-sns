@@ -3,7 +3,6 @@ package com.gun.app.service
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.LikesRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.PostsRequestDto
@@ -75,10 +74,12 @@ class PostsServiceTests{
     fun increaseLikeTest(){
         val postsId: Long = postsRepository.findAll()[0].id!!
         postsService.increaseLike(postsId)
+        postsService.increaseLike(postsId)
+        postsService.increaseLike(postsId)
 
         val findPosts: Posts = postsRepository.findAll()[0]
 
-        assertThat(findPosts.likesList.size, `is`(1))
+        assertThat(findPosts.likes.size, `is`(1))
     }
     @Test
     fun modifiedPostsTest(){

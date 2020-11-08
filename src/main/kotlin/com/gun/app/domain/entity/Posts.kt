@@ -19,15 +19,20 @@ class Posts(
     var id: Long? = null
     @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
     var replyList: MutableList<Reply> = ArrayList<Reply>()
-    @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var likesList: MutableSet<Likes> = HashSet<Likes>()
+
+    @ManyToMany(cascade = [CascadeType.ALL])
+    @JoinTable(
+            name = "LIKES_RELATIONS",
+            joinColumns = [JoinColumn(name = "LIKED_ID")],
+            inverseJoinColumns = [JoinColumn(name = "LIKES_ID")]
+    )
+    var likes: MutableSet<User> = HashSet<User>()
 
     fun modifyContents(contents: String){
         this.contents = contents
     }
-    fun addLikes(likes: Likes){
-        this.likesList.add(likes)
-        likes.posts = this
+    fun addLikes(user: User){
+        this.likes.add(user)
     }
 
     override fun toString(): String {
