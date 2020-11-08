@@ -1,23 +1,19 @@
 package com.gun.app.domain.entity
 
-import com.gun.app.domain.entity.common.BaseTimeEntity
 import org.springframework.lang.NonNull
 import java.io.Serializable
-import javax.persistence.*
+import javax.persistence.Embeddable
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 
-@Entity
-@IdClass(LikesPrimaryKey::class)
-class Likes(
-        @Id
+@Embeddable
+class LikesPrimaryKey(
+        @NonNull
         @ManyToOne
         @JoinColumn(name="user_id")
         var user: User,
-        @Id
+        @NonNull
         @ManyToOne
         @JoinColumn(name="posts_id")
         var posts: Posts
-) : BaseTimeEntity(){
-        init {
-                this.posts.likesList.add(this)
-        }
-}
+): Serializable

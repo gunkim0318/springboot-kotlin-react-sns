@@ -6,7 +6,8 @@ import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.LikesRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import junit.framework.Assert.assertEquals
+import org.hamcrest.CoreMatchers.`is`
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,19 +41,24 @@ class LikesRepositoryTests {
         )
         postsRepository.save(posts)
         val likes: Likes = Likes(
-                posts,
-                user
+                user,
+                posts
         )
         likesRepository.save(likes)
     }
     @Test
     fun insertTest(){
         val likesListSize: Int = likesRepository.findAll().size
-        val postsLikesSize: Int = postsRepository.findAll()[0].likesList.size
-        val userLikesSize: Int = userRepository.findAll()[0].likesList.size
 
-        assertEquals(1, likesListSize)
-        assertEquals(1, postsLikesSize)
-        assertEquals(1, userLikesSize)
+        assertThat(likesListSize, `is`(1))
+    }
+    @Test
+    fun deleteTest(){
+        val likes: Likes = likesRepository.findAll()[0]
+
+        likesRepository.delete(likes)
+
+        val likesListSize: Int = likesRepository.findAll().size
+        assertThat(likesListSize, `is`(0))
     }
 }

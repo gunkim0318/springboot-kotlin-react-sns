@@ -1,9 +1,9 @@
 package com.gun.app.service.impl
 
 import com.gun.app.domain.entity.Likes
+import com.gun.app.domain.entity.LikesPrimaryKey
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.LikesRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.PostsRequestDto
@@ -38,7 +38,10 @@ class PostsServiceImpl(
         val name = "gunkim"
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
         val posts: Posts = postsRepository.findById(id).orElseThrow { IllegalArgumentException("잘못된 posts Id : $id") }
-        posts.addLikes(Likes(user, posts))
+        posts.addLikes(Likes(
+                user,
+                posts
+        ))
     }
     override fun modifiedPosts(dto: PostsRequestDto) {
         val name: String = "gunkim"
