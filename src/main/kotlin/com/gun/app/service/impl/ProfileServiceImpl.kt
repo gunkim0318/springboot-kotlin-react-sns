@@ -15,8 +15,7 @@ class ProfileServiceImpl(
         private val profileRepository: ProfileRepository,
         private val userRepository: UserRepository
 ): ProfileService {
-    override fun getProfile(): ProfileResponseDto{
-        val name: String = "gunkim"
+    override fun getProfile(name: String): ProfileResponseDto{
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("해당 유저 ${name}를 찾을 수 없습니다.") }
         val profile: Profile = profileRepository.findByUser(user).orElseThrow { IllegalArgumentException("해당 유저 ${name}의 프로필을 찾을 수 없습니다.") }
         return ProfileResponseDto(profile)

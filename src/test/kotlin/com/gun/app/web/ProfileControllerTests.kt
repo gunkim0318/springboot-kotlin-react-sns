@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Profile
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.ProfileRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.ProfileRequestDto
@@ -30,32 +29,26 @@ class ProfileControllerTests {
     private val port: Int = 0
 
     @Autowired
-    private val postsRepository: PostsRepository? = null
+    private lateinit var userRepository: UserRepository
+    @Autowired
+    private lateinit var profileRepository: ProfileRepository
 
     @Autowired
-    private val userRepository: UserRepository? = null
+    private lateinit var context: WebApplicationContext
 
-    @Autowired
-    private val profileRepository: ProfileRepository? = null
-
-    @Autowired
-    private val context: WebApplicationContext? = null
-
-    private var mvc: MockMvc? = null
+    private lateinit var mvc: MockMvc
 
     private val url: String = "http://localhost:$port/api/profile"
 
     @Before
     fun setup(){
         this.mvc = MockMvcBuilders
-                .webAppContextSetup(context!!)
+                .webAppContextSetup(context)
                 .build();
 
-        postsRepository!!.deleteAll()
-        profileRepository!!.deleteAll()
-        userRepository!!.deleteAll()
+        userRepository.deleteAll()
 
-        val user: User = User(null,
+        val user: User = User(
                 "gunkim",
                 "gunkim0318@gmail.com",
                 Role.ADMIN
@@ -63,11 +56,8 @@ class ProfileControllerTests {
         userRepository.save(user)
 
         profileRepository.save(Profile(
-                null,
                 "이미지 주소",
-                "앗뇽1",
-                "앗뇽2",
-                "앗뇽3",
+                "Hello!",
                 user
         ))
     }
@@ -76,11 +66,9 @@ class ProfileControllerTests {
         val dto: ProfileRequestDto = ProfileRequestDto(
             null,
             "입력된 이미지 주소",
-            "입력된 정보1",
-            "입력된 정보2",
-            "입력된 정보3"
+            "Hello!"
         )
-        mvc!!.perform(get(url)
+        mvc.perform(get("$url/gunkim")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk)
     }
@@ -89,39 +77,33 @@ class ProfileControllerTests {
         val dto: ProfileRequestDto = ProfileRequestDto(
                 null,
                 "바뀐 이미지 주소",
-                "바뀐 정보1",
-                "바뀐 정보2",
-                "바뀐 정보3"
+                "Update Hello!"
         )
-        mvc!!.perform(put(url)
+        mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(ObjectMapper().writeValueAsString(dto)))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
-        val profile: Profile = profileRepository!!.findAll()[0]
+        val profile: Profile = profileRepository.findAll()[0]
         assertEquals(profile.image, dto.image)
-        assertEquals(profile.info1, dto.info1)
-        assertEquals(profile.info2, dto.info2)
-        assertEquals(profile.info3, dto.info3)
+        assertEquals(profile.info, dto.info)
     }
     @Test
     fun createProfileTest(){
+        profileRepository.deleteAll()
+
         val dto: ProfileRequestDto = ProfileRequestDto(
                 null,
                 "입력된 이미지 주소",
-                "입력된 정보1",
-                "입력된 정보2",
-                "입력된 정보3"
+                "Hello!"
         )
-        mvc!!.perform(post(url)
+        mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(ObjectMapper().writeValueAsString(dto)))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
-        val profile: Profile = profileRepository!!.findAll()[1]
+        val profile: Profile = profileRepository.findAll()[0]
         assertEquals(profile.image, dto.image)
-        assertEquals(profile.info1, dto.info1)
-        assertEquals(profile.info2, dto.info2)
-        assertEquals(profile.info3, dto.info3)
+        assertEquals(profile.info, dto.info)
     }
 }

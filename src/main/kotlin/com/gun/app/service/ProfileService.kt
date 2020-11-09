@@ -7,7 +7,7 @@ interface ProfileService {
     /**
      * TODO: 해당 유저의 프로필 반환
      */
-    fun getProfile(): ProfileResponseDto
+    fun getProfile(name: String): ProfileResponseDto
     /**
      * TODO: 해당 유저의 프로필 작성
      */

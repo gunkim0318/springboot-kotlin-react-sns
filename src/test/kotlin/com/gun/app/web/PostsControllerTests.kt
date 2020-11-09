@@ -1,6 +1,7 @@
 package com.gun.app.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
@@ -8,6 +9,7 @@ import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.PostsRequestDto
 import org.assertj.core.api.Assertions.assertThat
+import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,45 +22,45 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.context.WebApplicationContext
 import java.util.stream.IntStream
-
+import org.junit.Assert.assertThat
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostsControllerTests {
     @LocalServerPort
-    private val port: Int = 0
+    private val port: Int = 2030
 
     @Autowired
-    private val postsRepository: PostsRepository? = null
+    private lateinit var postsRepository: PostsRepository
 
     @Autowired
-    private val userRepository: UserRepository? = null
+    private lateinit var userRepository: UserRepository
 
     @Autowired
-    private val context: WebApplicationContext? = null
+    private lateinit var context: WebApplicationContext
 
-    private var mvc: MockMvc? = null
+    private lateinit var mvc: MockMvc
 
     private val url: String = "http://localhost:$port/api/posts"
 
     @Before
     fun setup(){
-        this.mvc = MockMvcBuilders
-                .webAppContextSetup(context!!)
-                .build();
+        userRepository.deleteAll()
 
-        postsRepository!!.deleteAll()
-        userRepository!!.deleteAll()
+        this.mvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .build();
     }
     @Test
-    fun 게시글_입력_테스트(){
-        val user: User = User(null,
+    fun createPostsTest(){
+        val user: User = User(
                 "gunkim",
                 "gunkim0318@gmail.com",
                 Role.USER
         )
-        userRepository!!.save(user)
+        userRepository.save(user)
 
         val contents: String = "게시글 입력 테스트"
 
@@ -67,27 +69,36 @@ class PostsControllerTests {
                 contents
         )
 
-        mvc!!.perform(post(url)
+        mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(ObjectMapper().writeValueAsString(dto)))
                 .andExpect(status().isOk())
 
-        val posts: Posts = postsRepository!!.findAll().get(0)
+        val posts: Posts = postsRepository.findAll().get(0)
         assertThat(posts.contents).isEqualTo(contents)
     }
     @Test
-    fun 게시글_수정_테스트(){
+    fun modifyPostsTest(){
         val contents: String = "수정 테스트"
 
-        val user: User = User(null, "gunkim", "gunkim0318@gmail.com", Role.USER)
-        userRepository!!.save(user)
-        postsRepository!!.save(Posts(null, "새 게시글", user))
+        val user: User = User(
+                "gunkim",
+                "gunkim0318@gmail.com",
+                Role.USER
+        )
+        userRepository.save(user)
+        postsRepository.save(
+                Posts(
+                        "새 게시글",
+                        user
+                )
+        )
 
         val postsId: Long = postsRepository.findAll().get(0).id!!
 
         val dto: PostsRequestDto = PostsRequestDto(postsId, contents)
 
-        mvc!!.perform(put(url)
+        mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(ObjectMapper().writeValueAsString(dto)))
                 .andExpect(status().isOk())
@@ -96,18 +107,27 @@ class PostsControllerTests {
         assertThat(posts.contents).isEqualTo(contents)
     }
     @Test
-    fun 게시글_삭제_테스트(){
+    fun deletePostsTest(){
         val contents: String = "수정 테스트"
 
-        val user: User = User(null, "gunkim", "gunkim0318@gmail.com", Role.USER)
-        userRepository!!.save(user)
-        postsRepository!!.save(Posts(null, "새 게시글", user))
+        val user: User = User(
+                "gunkim",
+                "gunkim0318@gmail.com",
+                Role.USER
+        )
+        userRepository.save(user)
+        postsRepository.save(
+                Posts(
+                        "새 게시글",
+                        user
+                )
+        )
 
         val postsId: Long = postsRepository.findAll().get(0).id!!
 
         val url = "${this.url.toString()}/$postsId"
 
-        mvc!!.perform(delete(url))
+        mvc.perform(delete(url))
                 .andExpect(status().isOk())
 
         val postsCnt: Int = postsRepository.findAll().size
@@ -115,18 +135,60 @@ class PostsControllerTests {
         assertThat(postsCnt).isEqualTo(0)
     }
     @Test
-    fun 게시글_목록_조회_테스트(){
-        val user: User = User(null, "gunkim", "gunkim0318@gmail.com", Role.USER)
-        userRepository!!.save(user)
+    @Transactional
+    fun getPostsListTest(){
+        val user: User = User(
+                "gunkim",
+                "gunkim0318@gmail.com",
+                Role.USER
+        )
+        userRepository.save(user)
 
         IntStream.rangeClosed(1, 100).forEach{i ->
-            postsRepository!!.save(Posts(null, "new Posts $i", user))
+            postsRepository.save(
+                    Posts(
+                            "new Posts $i",
+                            user
+                    )
+            )
         }
 
         val url: String = "${this.url.toString()}/list"
+        val result: String = mvc.perform(get(url))
+                .andExpect(status().isOk)
+                .andReturn()
+                .response.getContentAsString()
 
-        val result: String = mvc!!.perform(get(url)).andExpect(status().isOk).andReturn().response.getContentAsString()
+        val resList: Collection<Map<String, String>> = ObjectMapper().readValue<Collection<Map<String, String>>>(result)
 
-        print(result)
+        resList.forEach { map ->
+            println(map)
+        }
+    }
+    @Test
+    @Transactional
+    fun increaseLikesTest(){
+        val user: User = User(
+                "gunkim",
+                "gunkim0318@gmail.com",
+                Role.USER
+        )
+        userRepository.save(user)
+        postsRepository.save(
+                Posts(
+                        "new Posts",
+                        user
+                )
+        )
+
+        val postsId: Long = postsRepository.findAll()[0].id!!
+        val url: String = "${this.url}/likes/$postsId"
+
+        mvc.perform(post(url))
+                .andExpect(status().isOk)
+
+        val posts: Posts = postsRepository.findAll()[0]
+
+        assertThat(posts.likes.size, `is`(1))
     }
 }

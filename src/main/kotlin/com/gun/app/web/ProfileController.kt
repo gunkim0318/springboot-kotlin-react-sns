@@ -9,19 +9,16 @@ import org.springframework.web.bind.annotation.*
 class ProfileController(
         private val profileService: ProfileService
 ) {
-    @GetMapping("")
-    fun getProfile(){
-        val name: String = "gunkim"
+    @GetMapping("/{name}")
+    fun getProfile(@PathVariable name: String){
         profileService.getProfile(name)
     }
     @PutMapping("")
     fun modifyProfile(@RequestBody dto: ProfileRequestDto){
-        val name: String = "gunkim"
-        profileService.modifiedProfile(name, dto)
+        profileService.modifiedProfile(dto)
     }
     @PostMapping("")
     fun createProfile(@RequestBody dto: ProfileRequestDto){
-        val name: String = "gunkim"
-        profileService.createProfile(name, dto)
+        profileService.createProfile(dto)
     }
 }

@@ -90,6 +90,6 @@ class PostsServiceTests{
                 contents
         )
 
-        postsService.modifiedPosts(dto)
+        postsService.modifyPosts(dto)
     }
 }

@@ -7,6 +7,6 @@ interface PostsService {
     fun createPosts(dto: PostsRequestDto)
     fun getPostsList():List<PostsResponseDto>
     fun increaseLike(id: Long)
-    fun modifiedPosts(dto: PostsRequestDto)
+    fun modifyPosts(dto: PostsRequestDto)
     fun deletePosts(id: Long)
 }

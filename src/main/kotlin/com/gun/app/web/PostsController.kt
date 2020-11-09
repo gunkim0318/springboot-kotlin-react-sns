@@ -15,37 +15,27 @@ class PostsController(
 ) {
     @GetMapping("/list")
     fun getPostsList(): ResponseEntity<List<PostsResponseDto>>{
-        val name: String = "gunkim"
-        val postsList = postsService.getPostsList(name)
-
+        val postsList = postsService.getPostsList()
         return ResponseEntity(postsList, HttpStatus.OK)
     }
     @PostMapping("")
     fun createPosts(@RequestBody dto: PostsRequestDto): ResponseEntity<String>{
-        val name: String = "gunkim"
-        postsService.createPosts(name, dto)
-
+        postsService.createPosts(dto)
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
     @DeleteMapping("/{id}")
     fun deletePosts(@PathVariable id: Long): ResponseEntity<String>{
-        val name: String = "gunkim"
-        postsService.deletePosts(name, id)
-
+        postsService.deletePosts(id)
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
     @PutMapping("")
     fun modifiedPosts(@RequestBody dto: PostsRequestDto): ResponseEntity<String>{
-        val name: String = "gunkim"
-        postsService.modifiedPosts(name, dto)
-
+        postsService.modifyPosts(dto)
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
-    @PostMapping("/{id}/likes")
+    @PostMapping("/likes/{id}")
     fun increaseLikes(@PathVariable id: Long): ResponseEntity<String>{
-        val name: String = "gunkim"
-        postsService.increaseLike(name, id)
-
+        postsService.increaseLike(id)
         return ResponseEntity("SUCCESS", HttpStatus.OK)
     }
 }

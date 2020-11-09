@@ -45,7 +45,7 @@ class ProfileServiceTests {
 
     @Test
     fun getProfileTest(){
-        val dto: ProfileResponseDto = profileService.getProfile()
+        val dto: ProfileResponseDto = profileService.getProfile("gunkim")
 
         assertEquals(dto.image, "이미지 주소")
         assertEquals(dto.info, "저는 사람입니다.")
