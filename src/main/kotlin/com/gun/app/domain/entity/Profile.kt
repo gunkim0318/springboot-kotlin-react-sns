@@ -8,6 +8,7 @@ import javax.persistence.*
 class Profile(
         var image: String?,
         var info: String?,
+        var nickname: String?,
         @OneToOne
         @JoinColumn(name="user_id")
         var user: User
@@ -16,8 +17,12 @@ class Profile(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
 
-        fun modifyProfile(image: String?, info: String?){
+        init {
+                this.user.profile = this
+        }
+        fun modifyProfile(image: String?, nickname: String?, info: String?){
                 this.image = image
+                this.nickname = nickname
                 this.info = info
         }
         override fun toString(): String {

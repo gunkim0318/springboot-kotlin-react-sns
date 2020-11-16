@@ -34,7 +34,7 @@ class ProfileServiceImpl(
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("해당 유저 ${name}를 찾을 수 없습니다.") }
         val profile: Profile = profileRepository.findByUser(user).orElseThrow { IllegalArgumentException("해당 유저 ${name}의 프로필을 찾을 수 없습니다.") }
 
-        profile.modifyProfile(dto.image, dto.info)
+        profile.modifyProfile(dto.image, dto.info, dto.nickname)
         profileRepository.save(profile)
     }
 }
