@@ -26,7 +26,7 @@ class Application{
         userRepository.save(user)
 
         val profile = Profile(
-                "image",
+                "https://i.pinimg.com/originals/05/1f/f3/051ff3fb781ff83c9b0f8a32f9922fa6.png",
                 "안녕하세요 gunkim입니다.",
                 "Strong Man",
                 user

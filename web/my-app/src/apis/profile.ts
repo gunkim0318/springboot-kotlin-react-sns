@@ -13,4 +13,6 @@ export interface Profile {
   image: string;
   info: string;
   nickname: string;
+  followers: number;
+  following: number;
 }

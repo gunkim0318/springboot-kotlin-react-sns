@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import DefaultInput from "./DefaultInput";
+import DefaultInput from "./atoms/DefaultInput";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { Reply } from "@material-ui/icons";
 

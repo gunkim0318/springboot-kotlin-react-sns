@@ -20,4 +20,4 @@ export const modifyProfileAsync = createAsyncAction(
   MODIFY_PROFILE,
   MODIFY_PROFILE_SUCCESS,
   MODIFY_PROFILE_ERROR
-)<undefined, undefined, AxiosError>();
+)<Profile, undefined, AxiosError>();

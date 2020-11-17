@@ -21,12 +21,7 @@ export function* modifyProfileSaga(
   action: ReturnType<typeof modifyProfileAsync.request>
 ) {
   try {
-    const profile: Profile = {
-      image: "이미지",
-      info: "수정된 소개입니다.",
-      nickname: "핫둘핫둘",
-    };
-    yield call(modifyProfile, profile);
+    yield call(modifyProfile, action.payload);
     yield put(modifyProfileAsync.success());
   } catch (e) {
     yield put(modifyProfileAsync.failure(e));

@@ -7,4 +7,6 @@ class ProfileResponseDto(profile: Profile){
     val info: String? = profile.info
     val nickname: String? = profile.nickname
     val name: String = profile.user.name
+    val followers: Int = profile.user.followers.size
+    val following: Int = profile.user.following.size
 }

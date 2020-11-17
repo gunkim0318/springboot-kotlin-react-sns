@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/organisms/MyHeader";
 
 const People: React.FC = () => {
   return (
