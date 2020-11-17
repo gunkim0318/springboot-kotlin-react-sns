@@ -4,8 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import DefaultInput from "./atoms/DefaultInput";
-import { Grid, Paper, Typography } from "@material-ui/core";
-import { Reply } from "@material-ui/icons";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

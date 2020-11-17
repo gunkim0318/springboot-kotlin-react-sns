@@ -8,7 +8,6 @@ import {
   MenuList,
   Paper,
   Popper,
-  Typography,
 } from "@material-ui/core";
 import { Settings, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";

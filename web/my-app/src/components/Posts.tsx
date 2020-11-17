@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
-import { ArrowDropDown, Reply, MoreHoriz } from "@material-ui/icons";
+import { Reply, MoreHoriz } from "@material-ui/icons";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";

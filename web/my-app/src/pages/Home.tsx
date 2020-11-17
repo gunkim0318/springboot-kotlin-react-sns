@@ -1,5 +1,4 @@
-import { Avatar, Button, Grid, Paper, Typography } from "@material-ui/core";
-import { ArrowDropDown } from "@material-ui/icons";
+import { Avatar, Grid, Paper, Typography } from "@material-ui/core";
 import React from "react";
 import { useRef, useEffect } from "react";
 import DefaultInput from "../components/atoms/DefaultInput";

@@ -7,7 +7,7 @@ import { getProfileAsync } from "../modules/profile";
 export const ProfileContainer = memo(() => {
   const dispatch = useDispatch();
 
-  const { data: profile, loading, error } = useSelector(
+  const { data, loading, error } = useSelector(
     (state: RootState) => state.profile
   );
 
@@ -15,16 +15,8 @@ export const ProfileContainer = memo(() => {
     dispatch(getProfileAsync.request(""));
   }, [dispatch]);
 
-  if (profile) {
-    return (
-      <Profile
-        name={profile.nickname}
-        info={profile.info}
-        image={profile.image}
-        followers={profile.followers}
-        following={profile.following}
-      />
-    );
+  if (data) {
+    return <Profile data={data} loading={loading} error={error} />;
   }
   return <></>;
 });

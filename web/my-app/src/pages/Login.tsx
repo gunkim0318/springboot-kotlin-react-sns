@@ -10,7 +10,11 @@ const Login = () => {
             <Typography variant="h4" align="center">
               로그인
             </Typography>
-            <img src="/button/kakao.png" style={{ width: "200px" }} />
+            <img
+              src="/button/kakao.png"
+              style={{ width: "200px" }}
+              alt="로그인 버튼"
+            />
           </Paper>
         </Grid>
       </Grid>

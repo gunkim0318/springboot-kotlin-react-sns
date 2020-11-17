@@ -1,7 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { PageInfo } from "../atoms/PageInfo";
-import { ProfileImage } from "../atoms/ProfileImage";
 
 type AccountTemplateProps = {
   children: React.ReactNode;

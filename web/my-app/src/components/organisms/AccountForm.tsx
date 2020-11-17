@@ -6,10 +6,6 @@ import { DefaultButton } from "../atoms/DefaultButton";
 import { ProfileImage } from "../atoms/ProfileImage";
 import { TextInput } from "../atoms/TextInput";
 
-const style = {
-  marginBottom: "20px",
-};
-
 type AccountFormProps = {
   nickname: string;
   info: string;
