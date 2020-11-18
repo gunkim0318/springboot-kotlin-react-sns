@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { PostsList } from "../components/PostsList";
 import { RootState } from "../modules";
 import { getPostsListAsync } from "../modules/postsList";
-import postsList from "../modules/postsList/reducer";
 
 const PostsListContainer = () => {
   const dispatch = useDispatch();
