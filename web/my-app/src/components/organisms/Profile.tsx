@@ -6,7 +6,7 @@ import { Profile as ProfileType } from "../../apis/profile";
 type ProfileProps = {
   data: ProfileType;
   loading: Boolean;
-  error: any;
+  error: Error | null;
 };
 const Profile = ({ data, loading, error }: ProfileProps) => {
   const { nickname, image, info, followers, following } = data;

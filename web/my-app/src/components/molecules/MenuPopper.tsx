@@ -6,14 +6,14 @@ import {
   Paper,
   Popper,
 } from "@material-ui/core";
-import React from "react";
+import React, { RefObject } from "react";
 import { Link } from "react-router-dom";
 
 type MenuPopperType = {
-  open: any;
-  anchorRef: any;
-  handleClose: any;
-  handleKeyDown: any;
+  open: boolean;
+  anchorRef: RefObject<HTMLButtonElement>;
+  handleClose: (event: React.MouseEvent<EventTarget>) => void;
+  handleKeyDown: (event: React.KeyboardEvent) => void;
 };
 
 export const MenuPopper = ({
