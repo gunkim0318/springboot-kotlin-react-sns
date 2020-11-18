@@ -42,7 +42,12 @@ class PostsServiceImpl(
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
         val posts: Posts = postsRepository.findById(id).orElseThrow { IllegalArgumentException("잘못된 posts Id : $id") }
 
-        posts.likes.add(user)
+        val isLikes: Boolean = posts.likes.contains(user)
+        if(isLikes){
+            posts.likes.remove(user)
+        }else{
+            posts.likes.add(user)
+        }
     }
     override fun modifyPosts(dto: PostsRequestDto) {
         val name: String = "gunkim"
