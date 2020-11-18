@@ -20,7 +20,7 @@ export async function modifiedPosts(id: number, contents: number) {
   return response.status;
 }
 export async function increasePostsLikes(id: number) {
-  const response = await axios.post<string>(`/api/posts/${id}/likes`);
+  const response = await axios.post<string>(`/api/posts/likes/${id}`);
   return response.data;
 }
 

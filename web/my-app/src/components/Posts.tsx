@@ -19,14 +19,16 @@ const useStyles = makeStyles(() => ({
 }));
 
 type PostsProps = {
+  id: number;
   name: string;
   contents: string;
   likeCnt: number;
   isLikes: boolean;
   creDate: string;
+  onClick: () => void;
 };
 
-const Posts = ({ name, contents, likeCnt, isLikes, creDate }: PostsProps) => {
+const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, onClick }: PostsProps) => {
   const classes = useStyles();
   return (
     <>
@@ -48,8 +50,8 @@ const Posts = ({ name, contents, likeCnt, isLikes, creDate }: PostsProps) => {
         <Grid xs={12}>{contents}</Grid>
         <Grid container justify="center" style={{ marginTop: "20px" }}>
           <Button>
-            <Badge badgeContent={likeCnt} color="primary" showZero>
-              <ThumbUpIcon className={isLikes ? classes.myLikes : ""} />
+            <Badge badgeContent={likeCnt} color="primary" showZero onClick={onClick}>
+              <ThumbUpIcon className={isLikes ? classes.myLikes : ""}/>
             </Badge>
           </Button>
           <Button>

@@ -1,9 +1,9 @@
 import React from "react";
-import { Posts as PostsType } from "../apis/posts";
-import Posts from "./Posts";
+import { Posts } from "../apis/posts";
+import PostsContainer from "../containers/PostsContainer";
 
 type PostsListProps = {
-  postsList: PostsType[] | null;
+  postsList: Posts[] | null;
   loading: boolean;
   error: any;
 };
@@ -12,12 +12,13 @@ export const PostsList = ({ postsList, loading, error }: PostsListProps) => {
     <>
       {postsList &&
         postsList.map((posts) => (
-          <Posts
-            name={posts.name}
-            contents={posts.contents}
-            likeCnt={posts.likeCnt}
-            isLikes={posts.isLikes}
-            creDate={posts.creDate}
+          <PostsContainer
+              id={posts.id}
+              name={posts.name}
+              contents={posts.contents}
+              likeCnt={posts.likeCnt}
+              isLikes={posts.isLikes}
+              creDate={posts.creDate}
           />
         ))}
     </>
