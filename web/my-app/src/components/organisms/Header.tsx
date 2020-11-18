@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 import {
   Grid,
   Button,
@@ -12,20 +12,40 @@ import {
 import { Settings, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-type HeaderProps = {
-  open: boolean;
-  anchorRef: RefObject<HTMLButtonElement>;
-  handleToggle: () => void;
-  handleClose: (event: React.MouseEvent<EventTarget>) => void;
-  handleKeyDown: (event: React.KeyboardEvent) => void;
-};
-function Header({
-  open,
-  anchorRef,
-  handleToggle,
-  handleClose,
-  handleKeyDown,
-}: HeaderProps) {
+function Header() {
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    }
+  };
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = useRef(open);
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
   return (
     <>
       <Grid container direction="row" justify="flex-end" alignItems="center">

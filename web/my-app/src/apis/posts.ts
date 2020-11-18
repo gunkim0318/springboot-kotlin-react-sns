@@ -27,6 +27,8 @@ export async function increasePostsLikes(id: number) {
 export interface Posts {
   id: number;
   contents: string;
-  likes: number;
-  username: string;
+  likeCnt: number;
+  isLikes: boolean;
+  name: string;
+  creDate: string;
 }
