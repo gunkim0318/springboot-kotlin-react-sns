@@ -1,16 +1,7 @@
-import React, { RefObject, useEffect, useRef } from "react";
-import {
-  Grid,
-  Button,
-  ClickAwayListener,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-} from "@material-ui/core";
+import React, { useEffect, useRef } from "react";
+import { Grid, Button } from "@material-ui/core";
 import { Settings, Notifications } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { MenuPopper } from "../molecules/MenuPopper";
 
 function Header() {
   const [open, setOpen] = React.useState(false);
@@ -63,41 +54,12 @@ function Header() {
           </Button>
         </Grid>
       </Grid>
-      <Popper
+      <MenuPopper
         open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-        disablePortal
-      >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleKeyDown}
-                >
-                  <Link to="/profile">
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  </Link>
-                  <Link to="/account">
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                  </Link>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
+        anchorRef={anchorRef}
+        handleClose={handleClose}
+        handleKeyDown={handleKeyDown}
+      />
     </>
   );
 }
