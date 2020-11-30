@@ -4,7 +4,7 @@ import { increasePostsLikes } from "../../apis/posts";
 import {
   increasePostsLikesAsync,
   INCREASE_POSTS_LIKES
-} from "../likes/actions";
+} from "./actions";
 
 function* increasePostsLikesSaga(
   action: ReturnType<typeof increasePostsLikesAsync.request>
