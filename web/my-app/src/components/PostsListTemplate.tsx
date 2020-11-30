@@ -10,11 +10,6 @@ const PostsListTemplate = ({ form, children }: PostsListTemplateProps) => {
   return (
     <>
       <Grid container direction="row" justify="center" alignItems="center">
-        <Grid>
-          <Typography variant="h4">글을 입력하세요</Typography>
-        </Grid>
-      </Grid>
-      <Grid container direction="row" justify="center" alignItems="center">
         <Grid xs={10} md={5}>
           <Grid>{form}</Grid>
           <Grid style={{ marginTop: "30px" }}>{children}</Grid>

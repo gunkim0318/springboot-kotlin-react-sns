@@ -6,15 +6,17 @@ const style = {
 };
 type DefaultInputType = {
   value: string;
+  placeholder: string;
   onChange: (e:any) => void;
   onSubmit: (e:any) => void;
 }
-const DefaultInput = ({value, onChange, onSubmit}:DefaultInputType) => {
+const DefaultInput = ({value, placeholder, onChange, onSubmit}:DefaultInputType) => {
   return (
     <form onSubmit={onSubmit}>
       <Input
           inputProps={{ "aria-label": "description" }}
           fullWidth={true}
+          placeholder={placeholder}
           style={style}
           onChange={onChange}
           value={value}
