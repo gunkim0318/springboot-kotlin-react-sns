@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getPostsList() {
-  const response = await axios.get<Posts[]>("/api/posts/list");
+  const response = await axios.get<Posts[]>(`/api/posts/list/1`);
   return response.data;
 }
 export async function createPosts(contents: string) {
@@ -14,7 +14,7 @@ export async function deletePosts(id: number) {
 
   return response.status;
 }
-export async function modifiedPosts(id: number, contents: number) {
+export async function modifyPosts(id: number, contents: string) {
   const response = await axios.put("/api/posts/");
 
   return response.status;
@@ -31,4 +31,5 @@ export interface Posts {
   isLikes: boolean;
   name: string;
   creDate: string;
+  image: string;
 }
