@@ -11,9 +11,9 @@ type ProfileProps = {
 const Profile = ({ data, loading, error }: ProfileProps) => {
   const { nickname, image, info, followers, following } = data;
   return (
-    <Paper style={{ padding: "40px" }} elevation={3}>
+    <Paper style={{ padding: "40px"}} elevation={3}>
       <Grid container direction="column" justify="center" alignItems="center">
-        <ProfileImage url={image} name={nickname} width={200} height={200} />
+        <ProfileImage url={image} name={nickname} width={250} height={250} />
         <Typography variant="h4">{nickname}</Typography>
         <Typography variant="body1">{info}</Typography>
         <div>
