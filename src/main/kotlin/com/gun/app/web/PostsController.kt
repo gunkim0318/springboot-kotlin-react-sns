@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*
 class PostsController(
         private val postsService: PostsService
 ) {
-    @GetMapping("/list")
-    fun getPostsList(): ResponseEntity<List<PostsResponseDto>>{
-        val postsList = postsService.getPostsList()
+    @GetMapping("/list/{pageNum}")
+    fun getPostsList(@PathVariable pageNum: Int): ResponseEntity<List<PostsResponseDto>>{
+        val postsList = postsService.getPostsList(pageNum)
         return ResponseEntity(postsList, HttpStatus.OK)
     }
     @PostMapping("")

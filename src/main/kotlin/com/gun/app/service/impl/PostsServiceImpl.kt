@@ -21,10 +21,14 @@ class PostsServiceImpl(
 ): PostsService {
 
     @Transactional(readOnly = true)
-    override fun getPostsList(): List<PostsResponseDto> {
+    override fun getPostsList(pageNum: Int): List<PostsResponseDto> {
+        if(pageNum < 1){
+            IllegalArgumentException("페이지 번호가 잘못되었습니다. : $pageNum")
+        }
         val name: String = "gunkim"
-        val user: User = userRepository.findAll()[0]
-        return postsRepository.findAll(PageRequest.of(0, 10))
+        val user: User = userRepository.findByName(name)
+                .orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
+        return postsRepository.findAllByOrderByIdDesc(PageRequest.of((pageNum - 1), 10))
                 .stream().map { posts -> PostsResponseDto(posts, user) }.toList()
     }
 
