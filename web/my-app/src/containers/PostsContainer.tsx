@@ -10,8 +10,9 @@ type PostsContainerProps = {
   likeCnt: number;
   isLikes: boolean;
   creDate: string;
+  image: string;
 };
-const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate }: PostsContainerProps) => {
+const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }: PostsContainerProps) => {
   const dispatch = useDispatch();
 
   const onClick = () => {
@@ -26,6 +27,7 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate }: Posts
         likeCnt={likeCnt}
         isLikes={isLikes}
         creDate={creDate}
+        image={image}
         onClick={onClick}
       />
   )

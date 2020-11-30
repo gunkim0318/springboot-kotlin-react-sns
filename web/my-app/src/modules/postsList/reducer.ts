@@ -17,10 +17,9 @@ const postsList = createReducer<PostsListState, PostsListAction>(initialState, {
     data: null,
   }),
   [GET_POSTS_LIST_SUCCESS]: (state, action) => ({
-    ...state,
     loading: false,
     error: null,
-    data: action.payload,
+    data: action.payload
   }),
   [GET_POSTS_LIST_ERROR]: (state, action) => ({
     ...state,

@@ -13,12 +13,14 @@ export const PostsList = ({ postsList, loading, error }: PostsListProps) => {
       {postsList &&
         postsList.map((posts) => (
           <PostsContainer
+              key={posts.id}
               id={posts.id}
               name={posts.name}
               contents={posts.contents}
               likeCnt={posts.likeCnt}
               isLikes={posts.isLikes}
               creDate={posts.creDate}
+              image={posts.image}
           />
         ))}
     </>

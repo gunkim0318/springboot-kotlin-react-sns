@@ -6,6 +6,7 @@ import { Reply, MoreHoriz } from "@material-ui/icons";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import { PostsButton } from "./molecules/PostsButton";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -25,16 +26,17 @@ type PostsProps = {
   likeCnt: number;
   isLikes: boolean;
   creDate: string;
+  image: string;
   onClick: () => void;
 };
 
-const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, onClick }: PostsProps) => {
+const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }: PostsProps) => {
   const classes = useStyles();
   return (
     <>
       <Paper elevation={3} className={classes.paper}>
-        <Grid xs={12} style={{ minHeight: "60px" }}>
-          <Avatar style={{ float: "left", marginRight: "10px" }}>gun</Avatar>
+        <Grid style={{ minHeight: "60px" }}>
+          <Avatar style={{ float: "left", marginRight: "10px" }} src={image}>gun</Avatar>
           <Grid style={{ float: "left" }}>
             <Typography variant="h5" component="h5">
               {name}
@@ -42,12 +44,12 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, onClick }: Posts
             <div>{creDate}</div>
           </Grid>
           <span style={{ float: "right" }}>
-            <Button>
+            <PostsButton>
               <MoreHoriz />
-            </Button>
+            </PostsButton>
           </span>
         </Grid>
-        <Grid xs={12}>{contents}</Grid>
+        <Grid>{contents}</Grid>
         <Grid container justify="center" style={{ marginTop: "20px" }}>
           <Button>
             <Badge badgeContent={likeCnt} color="primary" showZero onClick={onClick}>
