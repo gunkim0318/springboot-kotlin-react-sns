@@ -54,7 +54,6 @@ const ReplyListTemplate = () => {
             <Grid container justify="center">
               <Typography variant="h6">댓글을 입력하세요</Typography>
             </Grid>
-            <DefaultInput />
           </div>
         </Fade>
       </Modal>
