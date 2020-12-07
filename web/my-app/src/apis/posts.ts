@@ -10,7 +10,7 @@ export async function createPosts(contents: string) {
   return response.status;
 }
 export async function deletePosts(id: number) {
-  const response = await axios.delete("/api/posts/$id");
+  const response = await axios.delete(`/api/posts/${id}`);
 
   return response.status;
 }
