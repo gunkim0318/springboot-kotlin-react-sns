@@ -44,7 +44,7 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }
             <div>{creDate}</div>
           </Grid>
           <span style={{ float: "right" }}>
-            <PostsButton>
+            <PostsButton id={id}>
               <MoreHoriz />
             </PostsButton>
           </span>

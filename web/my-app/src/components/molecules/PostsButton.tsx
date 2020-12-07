@@ -1,27 +1,26 @@
 import React, {KeyboardEvent, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react'
 import {Button, MenuItem} from "@material-ui/core";
 import {MyPopper} from "../atoms/MyPopper";
+import { deletePostsAsync } from '../../modules/posts';
+import { useDispatch } from 'react-redux';
 
 type PostsButtonType = {
+    id: number;
     children: ReactNode;
 }
 
-export const PostsButton = ({children}: PostsButtonType) => {
+export const PostsButton = ({id, children}: PostsButtonType) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
+    const dispatch = useDispatch();
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const handleClose = (event: MouseEvent<EventTarget>) => {
-        if (
-            anchorRef.current &&
-            anchorRef.current.contains(event.target as HTMLElement)
-        ) {
-            return;
-        }
-
+    const handleClose = (e: MouseEvent<EventTarget>) => {
+        dispatch(deletePostsAsync.request(id));
+        
         setOpen(false);
     };
 
