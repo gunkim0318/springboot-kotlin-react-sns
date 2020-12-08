@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { increasePostsLikesAsync } from "../modules/likes";
-import Posts from "../components/Posts";
+import Posts from "../components/molecules/Posts";
+import { ReplyListContainer } from './ReplyListContainer';
 
 type PostsContainerProps = {
   id: number;
@@ -18,8 +19,8 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
   const onClick = () => {
     dispatch(increasePostsLikesAsync.request(id));
   }
-
   return (
+    <>
       <Posts
         id={id}
         name={name}
@@ -30,6 +31,8 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
         image={image}
         onClick={onClick}
       />
+      <ReplyListContainer/>
+    </>
   )
 };
 

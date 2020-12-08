@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/organisms/Header";
-import PostsListTemplate from "../components/PostsListTemplate";
+import PostsListTemplate from "../components/templates/PostsListTemplate";
 import { PostsInputContainer } from "../containers/PostsInputContainer";
 import PostsListContainer from "../containers/PostsListContainer";
 
