@@ -3,9 +3,11 @@ package com.gun.app
 import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.Profile
+import com.gun.app.domain.entity.Reply
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.ProfileRepository
+import com.gun.app.domain.repository.ReplyRepository
 import com.gun.app.domain.repository.UserRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -18,7 +20,7 @@ import java.util.stream.IntStream
 @SpringBootApplication
 class Application{
     @Bean
-    fun testDataInsert(userRepository: UserRepository, profileRepository: ProfileRepository, postsRepository: PostsRepository) = CommandLineRunner {
+    fun testDataInsert(userRepository: UserRepository, profileRepository: ProfileRepository, postsRepository: PostsRepository, replyRepository: ReplyRepository) = CommandLineRunner {
         val user = User(
                 "gunkim",
                 "gunkim0318@gmail.com",
@@ -41,6 +43,17 @@ class Application{
                 user
         )
         profileRepository.save(profile)
+
+        val posts: Posts = postsRepository.findAll()[0]
+
+        IntStream.rangeClosed(1, 10).forEach { i ->
+            val reply: Reply = Reply(
+                    "댓글 테스트 $i",
+                    user,
+                    posts
+            )
+            replyRepository.save(reply)
+        }
     }
 }
 
