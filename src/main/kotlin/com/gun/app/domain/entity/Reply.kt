@@ -5,6 +5,9 @@ import javax.persistence.*
 
 @Entity
 class Reply(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null,
         @Column(nullable = false)
         var contents: String,
         @ManyToOne
@@ -14,10 +17,6 @@ class Reply(
         @JoinColumn(name="posts_id")
         var posts: Posts
 ): BaseTimeEntity(){
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null
-
         fun modifyContents(contents: String){
                 this.contents = contents
         }

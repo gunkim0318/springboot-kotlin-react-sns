@@ -55,23 +55,23 @@ class ReplyControllerTests {
                 .build();
 
         val user: User = User(
-                "gunkim",
-                "test",
-                Role.USER
+                name = "gunkim",
+                email = "test",
+                role = Role.USER
         )
         userRepository.save(user)
 
 
         val posts: Posts = Posts(
-                "안녕하세요",
-                user
+                contents = "안녕하세요",
+                user = user
         )
         postsRepository.save(posts)
         replyRepository.save(
                 Reply(
-                        "New Reply",
-                        user,
-                        posts
+                        contents = "New Reply",
+                        user = user,
+                        posts = posts
                 )
         )
     }
@@ -84,9 +84,9 @@ class ReplyControllerTests {
         IntStream.rangeClosed(1, 30).forEach { i ->
             replyRepository.save(
                     Reply(
-                            "New Reply $i",
-                            user,
-                            posts
+                            contents = "New Reply $i",
+                            user = user,
+                            posts = posts
                     )
             )
         }

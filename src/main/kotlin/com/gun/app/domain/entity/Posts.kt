@@ -5,6 +5,9 @@ import javax.persistence.*
 
 @Entity
 class Posts(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null,
         @Column(nullable = false)
         var contents: String,
         @ManyToOne
@@ -14,9 +17,6 @@ class Posts(
     init {
         this.user.postsList.add(this)
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
     @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
     var replyList: MutableList<Reply> = ArrayList<Reply>()
 

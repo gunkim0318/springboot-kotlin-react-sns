@@ -11,13 +11,13 @@ export const ReplyListContainer = () => {
     dispatch(getReplyListAsync.request(1));
   }, [dispatch]);
 
-  const { data: replyList, loading, error } = useSelector(
-    (state: RootState) => state.replys
-  );
+  // const { data: replyList, loading, error } = useSelector(
+  //   (state: RootState) => state.replys
+  // );
 
   return (
     <>
-      <ReplyList data={replyList} loading={loading} error={error} />
+      {/* <ReplyList data={replyList} loading={loading} error={error} /> */}
     </>
   );
 };

@@ -56,9 +56,9 @@ class PostsControllerTests {
     @Test
     fun createPostsTest(){
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
 
@@ -82,15 +82,15 @@ class PostsControllerTests {
         val contents: String = "수정 테스트"
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
         postsRepository.save(
                 Posts(
-                        "새 게시글",
-                        user
+                        contents = "새 게시글",
+                        user = user
                 )
         )
 
@@ -111,15 +111,15 @@ class PostsControllerTests {
         val contents: String = "수정 테스트"
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
         postsRepository.save(
                 Posts(
-                        "새 게시글",
-                        user
+                        contents = "새 게시글",
+                        user = user
                 )
         )
 
@@ -138,17 +138,17 @@ class PostsControllerTests {
     @Transactional
     fun getPostsListTest(){
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
 
         IntStream.rangeClosed(1, 100).forEach{i ->
             postsRepository.save(
                     Posts(
-                            "new Posts $i",
-                            user
+                            contents = "new Posts $i",
+                            user = user
                     )
             )
         }
@@ -169,15 +169,15 @@ class PostsControllerTests {
     @Transactional
     fun increaseLikesTest(){
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
         postsRepository.save(
                 Posts(
-                        "new Posts",
-                        user
+                        contents = "new Posts",
+                        user = user
                 )
         )
 

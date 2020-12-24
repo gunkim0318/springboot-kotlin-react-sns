@@ -6,17 +6,16 @@ import javax.persistence.*
 
 @Entity
 class Profile(
-        var image: String?,
-        var info: String?,
-        var nickname: String?,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null,
+        var image: String? = null,
+        var info: String? = null,
+        var nickname: String? = null,
         @OneToOne
         @JoinColumn(name="user_id")
         var user: User
 ) : BaseTimeEntity(){
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null
-
         init {
                 this.user.profile = this
         }

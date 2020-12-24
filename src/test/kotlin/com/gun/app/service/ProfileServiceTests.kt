@@ -30,16 +30,16 @@ class ProfileServiceTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.ADMIN
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.ADMIN
         )
         userRepository.save(user)
 
         profileRepository.save(Profile(
-                "이미지 주소",
-                "저는 사람입니다.",
-                user
+                image = "이미지 주소",
+                info = "저는 사람입니다.",
+                user = user
         ))
     }
 
@@ -55,9 +55,9 @@ class ProfileServiceTests {
         profileRepository.deleteAll()
 
         val dto: ProfileRequestDto = ProfileRequestDto(
-                null,
-                "이미지 주소",
-                "저는 사람입니다."
+                image = "이미지 주소",
+                info = "저는 사람입니다.",
+                nickname = "안녕하지라"
         )
         profileService.createProfile(dto)
 
@@ -68,9 +68,9 @@ class ProfileServiceTests {
     @Test
     fun modifyProfileTest(){
         val dto: ProfileRequestDto = ProfileRequestDto(
-                null,
-                "바뀐 이미지 주소",
-                "저는 사람입니다."
+                image = "바뀐 이미지 주소",
+                info = "저는 사람입니다.",
+                nickname = "안녕하지라"
         )
         profileService.modifiedProfile(dto)
 

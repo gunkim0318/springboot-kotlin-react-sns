@@ -26,16 +26,16 @@ class ProfileRepositoryTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
 
         val profile: Profile = Profile(
-                "이미지 주소",
-                "Hello! World!",
-                user
+                image = "이미지 주소",
+                info = "Hello! World!",
+                user = user
         )
         user.profile = profile
         profileRepository.save(profile)

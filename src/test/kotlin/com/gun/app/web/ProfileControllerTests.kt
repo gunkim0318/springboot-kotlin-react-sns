@@ -49,24 +49,24 @@ class ProfileControllerTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.ADMIN
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.ADMIN
         )
         userRepository.save(user)
 
         profileRepository.save(Profile(
-                "이미지 주소",
-                "Hello!",
-                user
+                image = "이미지 주소",
+                info = "Hello!",
+                user = user
         ))
     }
     @Test
     fun getProfileTest(){
         val dto: ProfileRequestDto = ProfileRequestDto(
-            null,
-            "입력된 이미지 주소",
-            "Hello!"
+            image = "입력된 이미지 주소",
+            info = "Hello!",
+            nickname = "안녕하지라"
         )
         mvc.perform(get("$url/gunkim")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -75,9 +75,9 @@ class ProfileControllerTests {
     @Test
     fun modifyProfileTest(){
         val dto: ProfileRequestDto = ProfileRequestDto(
-                null,
-                "바뀐 이미지 주소",
-                "Update Hello!"
+                image = "바뀐 이미지 주소",
+                info = "Update Hello!",
+                nickname = "안녕하지"
         )
         mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -93,9 +93,9 @@ class ProfileControllerTests {
         profileRepository.deleteAll()
 
         val dto: ProfileRequestDto = ProfileRequestDto(
-                null,
-                "입력된 이미지 주소",
-                "Hello!"
+                image = "입력된 이미지 주소",
+                info = "Hello!",
+                nickname = "안녕하지라"
         )
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

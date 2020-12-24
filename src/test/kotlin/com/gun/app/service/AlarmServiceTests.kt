@@ -32,15 +32,15 @@ class AlarmServiceTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.ADMIN
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.ADMIN
         )
         userRepository.save(user)
 
         val alarm: Alarm = Alarm(
-                "알림 테스트",
-                user
+                contents = "알림 테스트",
+                user = user
         )
         alarmRepository.save(alarm)
     }
@@ -51,8 +51,8 @@ class AlarmServiceTests {
 
         IntStream.rangeClosed(1, 20).forEach { i ->
             val alarm: Alarm = Alarm(
-                    "알림 테스트 $i",
-                    user
+                    contents = "알림 테스트 $i",
+                    user = user
             )
             alarmRepository.save(alarm)
         }

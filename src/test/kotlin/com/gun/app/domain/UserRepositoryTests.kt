@@ -24,9 +24,9 @@ class UserRepositoryTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         )
         userRepository.save(user)
     }
@@ -61,9 +61,9 @@ class UserRepositoryTests {
     @Test
     fun followInsertTest(){
         userRepository.save(User(
-                "gun",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gun",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         ))
         val user1: User = userRepository.findAll()[0]
         val user2: User = userRepository.findAll()[1]
@@ -76,9 +76,9 @@ class UserRepositoryTests {
     @Test
     fun followingInsertTest(){
         userRepository.save(User(
-                "gun",
-                "gunkim0318@gmail.com",
-                Role.USER
+                name = "gun",
+                email = "gunkim0318@gmail.com",
+                role = Role.USER
         ))
         val user1: User = userRepository.findAll()[0]
         val user2: User = userRepository.findAll()[1]

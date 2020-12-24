@@ -22,25 +22,26 @@ class Application{
     @Bean
     fun testDataInsert(userRepository: UserRepository, profileRepository: ProfileRepository, postsRepository: PostsRepository, replyRepository: ReplyRepository) = CommandLineRunner {
         val user = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.ADMIN
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.ADMIN
         )
+
         userRepository.save(user)
 
         IntStream.rangeClosed(1, 30).forEach { i ->
             val posts: Posts = Posts(
-                    "안녕하세요 $i",
-                    user
+                    contents = "안녕하세요 $i",
+                    user = user
             )
             postsRepository.save(posts)
         }
 
         val profile = Profile(
-                "https://i.pinimg.com/originals/05/1f/f3/051ff3fb781ff83c9b0f8a32f9922fa6.png",
-                "안녕하세요 gunkim입니다.",
-                "Strong Man",
-                user
+                image = "https://i.pinimg.com/originals/05/1f/f3/051ff3fb781ff83c9b0f8a32f9922fa6.png",
+                info = "안녕하세요 gunkim입니다.",
+                nickname = "Strong Man",
+                user = user
         )
         profileRepository.save(profile)
 
@@ -48,9 +49,9 @@ class Application{
 
         IntStream.rangeClosed(1, 10).forEach { i ->
             val reply: Reply = Reply(
-                    "댓글 테스트 $i",
-                    user,
-                    posts
+                    contents = "댓글 테스트 $i",
+                    user = user,
+                    posts = posts
             )
             replyRepository.save(reply)
         }

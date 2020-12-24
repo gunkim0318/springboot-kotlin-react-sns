@@ -6,19 +6,19 @@ import javax.persistence.*
 
 @Entity
 class User(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null,
+        @OneToOne(mappedBy = "user", orphanRemoval = true)
+        var profile: Profile? = null,
         @Column(nullable = false)
         var name: String,
         var email: String?,
         @Column(nullable = false)
         var role: Role
 ): BaseTimeEntity() {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
         var postsList: MutableList<Posts> = ArrayList<Posts>()
-        @OneToOne(mappedBy = "user", orphanRemoval = true)
-        var profile: Profile? = null
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
         var alarmList: MutableList<Alarm> = ArrayList<Alarm>()
 

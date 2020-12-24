@@ -36,22 +36,22 @@ class ReplyServiceTests {
         userRepository.deleteAll()
 
         val user: User = User(
-                "gunkim",
-                "gunkim0318@gmail.com",
-                Role.ADMIN
+                name = "gunkim",
+                email = "gunkim0318@gmail.com",
+                role = Role.ADMIN
         )
         userRepository.save(user)
 
         val posts: Posts = Posts(
-                "게시글 내용",
-                user
+                contents = "게시글 내용",
+                user = user
         )
         postsRepository.save(posts)
 
         val reply: Reply = Reply(
-                "댓글 내용",
-                user,
-                posts
+                contents = "댓글 내용",
+                user = user,
+                posts = posts
         )
         replyRepository.save(reply)
     }
