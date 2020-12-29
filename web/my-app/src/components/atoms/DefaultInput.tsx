@@ -1,16 +1,17 @@
 import { Input } from "@material-ui/core";
 import React from "react";
 
-const style = {
-  fontSize: "2rem",
-};
 type DefaultInputType = {
-  value: string;
+  value?: string | '';
   placeholder: string;
-  onChange: (e:any) => void;
-  onSubmit: (e:any) => void;
+  onChange?: (e:any) => void | null;
+  onSubmit?: (e:any) => void | null;
+  fontSize?: number | 2;
 }
-const DefaultInput = ({value, placeholder, onChange, onSubmit}:DefaultInputType) => {
+const DefaultInput = ({value, placeholder, onChange, onSubmit, fontSize}:DefaultInputType) => {
+  const style = {
+    fontSize: `${fontSize}rem`
+  };
   return (
     <form onSubmit={onSubmit}>
       <Input

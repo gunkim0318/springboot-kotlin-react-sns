@@ -7,6 +7,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { PostsButton } from "./PostsButton";
+import { ReplyContainer } from '../../containers/ReplyContainer';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -60,6 +61,7 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }
             <Reply />
           </Button>
         </Grid>
+        <ReplyContainer/>
       </Paper>
     </>
   );

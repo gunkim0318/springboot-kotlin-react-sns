@@ -20,6 +20,12 @@ export const PostsInputContainer = () => {
     }
 
     return (
-        <DefaultInput value={value} onChange={onChange} onSubmit={onSubmit} placeholder="무슨 생각을 하고 계세요?" />
+        <DefaultInput 
+            value={value} 
+            onChange={onChange} 
+            onSubmit={onSubmit} 
+            placeholder="무슨 생각을 하고 계세요?" 
+            fontSize={2}
+        />
     )
 }

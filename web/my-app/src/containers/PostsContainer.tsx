@@ -31,7 +31,6 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
         image={image}
         onClick={onClick}
       />
-      <ReplyListContainer/>
     </>
   )
 };
