@@ -4,20 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getReplyListAsync } from "../modules/replys";
 import { RootState } from "../modules";
 
-export const ReplyListContainer = () => {
+type ReplyListContainerProps = {
+  postsId: number;
+}
+export const ReplyListContainer = ({postsId}: ReplyListContainerProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getReplyListAsync.request(1));
+    dispatch(getReplyListAsync.request(postsId));
   }, [dispatch]);
 
-  // const { data: replyList, loading, error } = useSelector(
-  //   (state: RootState) => state.replys
-  // );
-
+  const { data: replyList, loading, error } = useSelector(
+    (state: RootState) => state.replys
+  );
+  console.log(replyList)
   return (
     <>
-      {/* <ReplyList data={replyList} loading={loading} error={error} /> */}
+       {/*<ReplyList data={replyList[postsId]} loading={loading} error={error} />*/}
     </>
   );
 };

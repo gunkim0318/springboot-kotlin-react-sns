@@ -11,14 +11,12 @@ type ReplyListProps = {
 };
 export const ReplyList = ({ data, loading, error }: ReplyListProps) => {
   return (
-    <Paper elevation={3}>
-      {data && data.map((reply) => reply.name)}
-      <Reply />
-      <Reply />
-      <Reply />
-      <Reply />
-      <Reply />
-      <Reply />
-    </Paper>
+    <>
+        {
+            data && data.map((reply) => (
+                <Reply name={reply.name} contents={reply.contents} profileImage={reply.profileImage}/>
+            ))
+        }
+    </>
   );
 };

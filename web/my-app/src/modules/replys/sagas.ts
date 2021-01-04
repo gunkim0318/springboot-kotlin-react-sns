@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { getReplyListAsync } from ".";
+import {getReplyListAsync, ReplyData} from ".";
 import { getReplyList, Reply } from "../../apis/reply";
 import { GET_REPLY_LIST } from "./actions";
 
@@ -8,7 +8,11 @@ export function* getReplyListSaga(
 ) {
   try {
     const response: Reply[] = yield call(getReplyList, action.payload);
-    yield put(getReplyListAsync.success(response));
+    const data: ReplyData = {
+      [action.payload]: response
+    };
+
+    yield put(getReplyListAsync.success(data));
   } catch (e) {
     yield put(getReplyListAsync.failure(e));
   }

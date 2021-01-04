@@ -1,6 +1,7 @@
 import { createAsyncAction } from "typesafe-actions";
 import { AxiosError } from "axios";
 import { Reply } from "../../apis/reply";
+import {ReplyData} from "./types";
 
 export const GET_REPLY_LIST = "GET_REPLY_LIST";
 export const GET_REPLY_LIST_SUCCESS = "GET_REPLY_LIST_SUCCESS";
@@ -10,4 +11,4 @@ export const getReplyListAsync = createAsyncAction(
   GET_REPLY_LIST,
   GET_REPLY_LIST_SUCCESS,
   GET_REPLY_LIST_ERROR
-)<number, Reply[], AxiosError>();
+)<number, ReplyData, AxiosError>();

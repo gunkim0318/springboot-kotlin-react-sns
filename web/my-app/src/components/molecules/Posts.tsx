@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid/Grid";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { PostsButton } from "./PostsButton";
 import { ReplyContainer } from '../../containers/ReplyContainer';
+import {ReplyListContainer} from "../../containers/ReplyListContainer";
+import DefaultInput from "../atoms/DefaultInput";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -61,7 +63,11 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }
             <Reply />
           </Button>
         </Grid>
-        <ReplyContainer/>
+        <hr/>
+        <DefaultInput
+            placeholder="지금 댓글을 입력해보세요!"
+        />
+        <ReplyListContainer postsId={id}/>
       </Paper>
     </>
   );

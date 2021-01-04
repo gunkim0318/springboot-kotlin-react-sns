@@ -3,5 +3,13 @@ import { Reply } from "../../apis/reply";
 import { AsyncState } from "../../lib/asyncUtils";
 import * as actions from "./actions";
 
+export type ReplyData = {
+    [key: number]: Reply[];
+}
+
 export type ReplysAction = ActionType<typeof actions>;
-export type ReplysState = AsyncState<Reply[], Error>;
+export type ReplysState = {
+    data: ReplyData | {};
+    loading: boolean;
+    error: Error | null;
+};

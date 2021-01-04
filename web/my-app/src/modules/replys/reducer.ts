@@ -1,4 +1,4 @@
-import { ReplysState } from ".";
+import { ReplysState, ReplyData } from ".";
 import { asyncState } from "../../lib/asyncUtils";
 import { createReducer } from "typesafe-actions";
 import { ReplysAction } from "./types";
@@ -8,7 +8,11 @@ import {
   GET_REPLY_LIST_SUCCESS,
 } from "./actions";
 
-const initialState: ReplysState = asyncState.initial();
+const initialState: ReplysState = {
+  loading: false,
+  data: {},
+  error: null,
+}
 
 const replys = createReducer<ReplysState, ReplysAction>(initialState, {
   [GET_REPLY_LIST]: (state) => ({
@@ -20,7 +24,10 @@ const replys = createReducer<ReplysState, ReplysAction>(initialState, {
     ...state,
     loading: false,
     error: null,
-    data: action.payload,
+    data: {
+        ...state.data,
+        ...action.payload
+    },
   }),
   [GET_REPLY_LIST_ERROR]: (state, action) => ({
     ...state,
