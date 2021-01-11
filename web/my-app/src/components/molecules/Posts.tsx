@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Avatar, Badge, Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
@@ -35,6 +35,11 @@ type PostsProps = {
 
 const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }: PostsProps) => {
   const classes = useStyles();
+  const [showReply, setShowReply] = useState(false);
+
+  const onShowReply = () => {
+    setShowReply(!showReply);
+  }
   return (
     <>
       <Paper elevation={3} className={classes.paper}>
@@ -60,14 +65,18 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }
             </Badge>
           </Button>
           <Button>
-            <Reply />
+            <Reply onClick={onShowReply}/>
           </Button>
         </Grid>
-        <hr/>
-        <DefaultInput
-            placeholder="지금 댓글을 입력해보세요!"
-        />
-        <ReplyListContainer postsId={id}/>
+        {showReply ?
+            <>
+              <hr/>
+              <DefaultInput
+                  placeholder="지금 댓글을 입력해보세요!"
+              />
+              <ReplyListContainer postsId={id}/>
+            </>
+            :''}
       </Paper>
     </>
   );
