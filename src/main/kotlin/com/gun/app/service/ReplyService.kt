@@ -10,6 +10,11 @@ interface ReplyService {
     fun getReplyList(postsId: Long): List<ReplyResponseDto>
 
     /**
+     * TODO: 댓글 작성
+     */
+    fun createReply(requestDto: ReplyRequestDto)
+
+    /**
      * TODO: 해당 댓글의 내용 수정
      */
     fun modifyReply(dto: ReplyRequestDto)
