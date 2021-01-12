@@ -6,6 +6,7 @@ export async function getReplyList(postsId: number) {
 }
 export async function createReply(reply: Reply) {
   const response = await axios.post("/api/reply", reply)
+  return response.data
 }
 export async function modifyReply(reply: Reply) {
   const response = await axios.put("/api/reply", reply)
@@ -17,6 +18,7 @@ export async function deleteReply(replyId: number) {
 }
 
 export interface Reply {
+  postsId: number
   contents: string
   name: string
   profileImage: string

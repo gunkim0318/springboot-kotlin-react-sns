@@ -31,9 +31,10 @@ type PostsProps = {
   creDate: string;
   image: string;
   onClick: () => void;
+  onInputSubmit: (e: any) => void;
 };
 
-const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }: PostsProps) => {
+const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick, onInputSubmit }: PostsProps) => {
   const classes = useStyles();
   const [showReply, setShowReply] = useState(false);
 
@@ -73,6 +74,7 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick }
               <hr/>
               <DefaultInput
                   placeholder="지금 댓글을 입력해보세요!"
+                  onSubmit={onInputSubmit}
               />
               <ReplyListContainer postsId={id}/>
             </>

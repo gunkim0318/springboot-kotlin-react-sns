@@ -15,6 +15,7 @@ const DefaultInput = ({value, placeholder, onChange, onSubmit, fontSize}:Default
   return (
     <form onSubmit={onSubmit}>
       <Input
+          name="myValue"
           inputProps={{ "aria-label": "description" }}
           fullWidth={true}
           placeholder={placeholder}

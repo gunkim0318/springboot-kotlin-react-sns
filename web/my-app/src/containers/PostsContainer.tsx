@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { increasePostsLikesAsync } from "../modules/likes";
 import Posts from "../components/molecules/Posts";
 import { ReplyListContainer } from './ReplyListContainer';
+import {Reply} from "../apis/reply";
+import {writeReplyAsync} from "../modules/reply/actions";
 
 type PostsContainerProps = {
   id: number;
@@ -19,6 +21,19 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
   const onClick = () => {
     dispatch(increasePostsLikesAsync.request(id));
   }
+  const onInputSubmit = (e: any) => {
+    e.preventDefault()
+
+    const contents = e.target.myValue.value
+    const reply: Reply = {
+      contents: contents,
+      postsId: id,
+      name: '',
+      profileImage: ''
+    }
+
+    dispatch(writeReplyAsync.request(reply))
+  }
   return (
     <>
       <Posts
@@ -30,6 +45,7 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
         creDate={creDate}
         image={image}
         onClick={onClick}
+        onInputSubmit={onInputSubmit}
       />
     </>
   )

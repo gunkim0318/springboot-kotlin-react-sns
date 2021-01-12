@@ -1,4 +1,4 @@
-import {ActionType} from "typesafe-actions";
+    import {ActionType} from "typesafe-actions";
 import * as actions from "../posts/actions";
 import {AsyncState} from "../../lib/asyncUtils";
 
