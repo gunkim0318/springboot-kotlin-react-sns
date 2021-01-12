@@ -1,20 +1,23 @@
 import axios from "axios";
 
 export async function getReplyList(postsId: number) {
-  const response = await axios.get<Reply>(`/api/reply/${postsId}`);
-  return response.data;
+  const response = await axios.get<Reply>(`/api/reply/${postsId}`)
+  return response.data
+}
+export async function createReply(reply: Reply) {
+  const response = await axios.post("/api/reply", reply)
 }
 export async function modifyReply(reply: Reply) {
-  const response = await axios.post("/api/reply", reply);
+  const response = await axios.put("/api/reply", reply)
   return response.data;
 }
 export async function deleteReply(replyId: number) {
-  const response = await axios.delete(`/api/reply/${replyId}`);
+  const response = await axios.delete(`/api/reply/${replyId}`)
   return response.data;
 }
 
 export interface Reply {
-  contents: string;
-  name: string;
-  profileImage: string;
+  contents: string
+  name: string
+  profileImage: string
 }
