@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery, getContext } from "redux-saga/effects";
 import { getProfile, Profile, modifyProfile } from "../../apis/profile";
 import {
   getProfileAsync,
@@ -23,6 +23,9 @@ export function* modifyProfileSaga(
   try {
     yield call(modifyProfile, action.payload);
     yield put(modifyProfileAsync.success());
+    const history = yield getContext('history')
+    console.log(history)
+    history.push('/')
   } catch (e) {
     yield put(modifyProfileAsync.failure(e));
   }
