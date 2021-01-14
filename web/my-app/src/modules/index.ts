@@ -5,12 +5,14 @@ import likes from "./likes/reducer";
 import profile from "./profile/reducer";
 import posts from "./posts/reducer";
 import replys from "./replys/reducer";
+import reply from "./reply/reducer";
 
 import { postsListSaga } from "./postsList";
 import { likesSaga } from "./likes";
 import { profileSaga } from "./profile";
 import { postsSaga } from "./posts";
 import { replysSaga } from "./replys";
+import { replySaga } from "./reply";
 
 const rootReducer = combineReducers({
   postsList,
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   profile,
   posts,
   replys,
+  reply
 });
 
 export function* rootSaga() {
@@ -27,6 +30,7 @@ export function* rootSaga() {
     profileSaga(),
     postsSaga(),
     replysSaga(),
+    replySaga()
   ]);
 }
 

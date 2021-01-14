@@ -25,14 +25,19 @@ const PostsContainer = ({ id, name, contents, likeCnt, isLikes, creDate, image }
     e.preventDefault()
 
     const contents = e.target.myValue.value
+
+    if(contents.trim() === ''){
+      return
+    }
+
     const reply: Reply = {
       contents: contents,
       postsId: id,
       name: '',
       profileImage: ''
     }
-
     dispatch(writeReplyAsync.request(reply))
+    e.target.myValue.value = ""
   }
   return (
     <>

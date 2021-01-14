@@ -1,6 +1,15 @@
-import {DELETE_REPLY, deleteReplyAsync, UPDATE_REPLY, updateReplyAsync, WRITE_REPLY, writeReplyAsync} from "./actions";
+import {
+    DELETE_REPLY,
+    deleteReplyAsync,
+    UPDATE_REPLY,
+    updateReplyAsync,
+    WRITE_REPLY,
+    WRITE_REPLY_SUCCESS,
+    writeReplyAsync
+} from "./actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {createReply, deleteReply, modifyReply} from "../../apis/reply";
+import {getReplyListAsync} from "../replys";
 
 function* writeReplySaga(
     action: ReturnType<typeof writeReplyAsync.request>
@@ -8,6 +17,7 @@ function* writeReplySaga(
     try{
         const response = yield call(createReply, action.payload)
         yield put(writeReplyAsync.success(response))
+        yield put(getReplyListAsync.request(action.payload.postsId))
     }catch(e){
         yield put(writeReplyAsync.failure(e))
     }

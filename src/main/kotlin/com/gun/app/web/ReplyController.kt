@@ -25,10 +25,10 @@ class ReplyController(
     @ApiOperation("댓글 작성")
     @ApiImplicitParams(
             ApiImplicitParam(name="postsId", value="게시물 번호", dataType="long"),
-            ApiImplicitParam(name="contents", value="댓글 내", dataType="string")
+            ApiImplicitParam(name="contents", value="댓글 내용", dataType="string")
     )
     @PostMapping("")
-    fun createReply(requestDto: ReplyRequestDto): ResponseEntity<String> {
+    fun createReply(@RequestBody requestDto: ReplyRequestDto): ResponseEntity<String> {
         replyService.createReply(requestDto)
 
         return ResponseEntity("SUCCESS", HttpStatus.OK)
