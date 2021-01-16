@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Avatar, Badge, Paper } from "@material-ui/core";
+import {Avatar, Badge, Collapse, Paper} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
 import { Reply, MoreHoriz } from "@material-ui/icons";
@@ -69,16 +69,14 @@ const Posts = ({ id, name, contents, likeCnt, isLikes, creDate, image, onClick, 
             <Reply onClick={onShowReply}/>
           </Button>
         </Grid>
-        {showReply ?
-            <>
-              <hr/>
-              <DefaultInput
-                  placeholder="지금 댓글을 입력해보세요!"
-                  onSubmit={onInputSubmit}
-              />
-              <ReplyListContainer postsId={id}/>
-            </>
-            :''}
+        <Collapse in={showReply}>
+          <hr/>
+          <DefaultInput
+              placeholder="지금 댓글을 입력해보세요!"
+              onSubmit={onInputSubmit}
+          />
+          <ReplyListContainer postsId={id}/>
+        </Collapse>
       </Paper>
     </>
   );
