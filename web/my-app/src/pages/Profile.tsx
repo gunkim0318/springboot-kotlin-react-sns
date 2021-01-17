@@ -8,9 +8,9 @@ const Profile = () => {
   return (
     <>
       <MyHeader />
-      <ProfileTemplate />
       <Grid container direction="row" justify="center" alignContent="center" alignItems="center">
-          <Grid xs={5}>
+          <Grid xs={10} md={5}>
+              <ProfileTemplate />
               <PostsListContainer/>
           </Grid>
       </Grid>
