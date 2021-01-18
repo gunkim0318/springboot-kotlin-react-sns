@@ -15,16 +15,17 @@ export const AccountFormContainer = () => {
     dispatch(getProfileAsync.request(""));
   }, [dispatch]);
 
-  if (profile) {
-    return (
-      <AccountForm
-        nickname={profile.nickname}
-        info={profile.info}
-        image={profile.image}
-        loading={loading}
-        error={error}
-      />
-    );
-  }
-  return <div></div>;
+  return (
+    <>
+      {profile && (
+        <AccountForm
+          nickname={profile.nickname}
+          info={profile.info}
+          image={profile.image}
+          loading={loading}
+          error={error}
+        />
+      )}
+    </>
+  );
 };
