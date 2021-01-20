@@ -14,8 +14,8 @@ export async function deletePosts(id: number) {
 
   return response.status;
 }
-export async function modifyPosts(id: number, contents: string) {
-  const response = await axios.put("/api/posts/");
+export async function modifyPosts(posts: Posts) {
+  const response = await axios.put("/api/posts", posts);
 
   return response.status;
 }
