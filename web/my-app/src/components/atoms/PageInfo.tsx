@@ -9,7 +9,7 @@ type pageInfoProps = {
 };
 export const PageInfo = ({ value }: pageInfoProps) => {
   return (
-    <Typography variant="h3" style={style}>
+    <Typography variant="h3" style={style} align="center">
       {value}
     </Typography>
   );
