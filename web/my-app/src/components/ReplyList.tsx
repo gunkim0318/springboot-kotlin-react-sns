@@ -1,7 +1,7 @@
 import React from "react";
-import { Reply } from "../molecules/Reply";
+import { Reply } from "./Reply";
 import { Paper } from "@material-ui/core";
-import { Reply as ReplyType } from "../../apis/reply";
+import { Reply as ReplyType } from "../apis/reply";
 import { AxiosError } from "axios";
 
 type ReplyListProps = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography, Paper } from "@material-ui/core";
-import { ProfileImage } from "../atoms/ProfileImage";
-import { Profile as ProfileType } from "../../apis/profile";
+import { ProfileImage } from "./ProfileImage";
+import { Profile as ProfileType } from "../apis/profile";
 
 type ProfileProps = {
   data: ProfileType;

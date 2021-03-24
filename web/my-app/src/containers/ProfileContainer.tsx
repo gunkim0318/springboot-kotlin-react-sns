@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Profile from "../components/organisms/Profile";
+import Profile from "../components/Profile";
 import { RootState } from "../modules";
 import { getProfileAsync } from "../modules/profile";
 

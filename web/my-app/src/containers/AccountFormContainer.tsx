@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AccountForm } from "../components/organisms/AccountForm";
+import { AccountForm } from "../components/AccountForm";
 import { RootState } from "../modules";
 import { getProfileAsync } from "../modules/profile";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid, Paper} from "@material-ui/core";
-import DefaultInput from "../atoms/DefaultInput";
+import DefaultInput from "./DefaultInput";
 import { Avatar } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 

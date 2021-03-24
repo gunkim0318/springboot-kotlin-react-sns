@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { PageInfo } from "../atoms/PageInfo";
-import { ProfileContainer } from "../../containers/ProfileContainer";
+import { PageInfo } from "./PageInfo";
+import { ProfileContainer } from "../containers/ProfileContainer";
 
 export const ProfileTemplate = () => {
   return (

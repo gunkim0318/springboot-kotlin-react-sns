@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid} from "@material-ui/core";
 import {Notifications, Settings} from "@material-ui/icons";
-import {PopButton} from "../molecules/PopButton";
+import {PopButton} from "./PopButton";
 
 function Header() {
   return (

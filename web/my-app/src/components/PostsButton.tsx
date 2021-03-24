@@ -7,8 +7,8 @@ import React, {
   useState,
 } from "react";
 import { Button, MenuItem } from "@material-ui/core";
-import { MyPopper } from "../atoms/MyPopper";
-import { deletePostsAsync } from "../../modules/posts";
+import { MyPopper } from "./MyPopper";
+import { deletePostsAsync } from "../modules/posts";
 import { useDispatch } from "react-redux";
 
 type PostsButtonType = {

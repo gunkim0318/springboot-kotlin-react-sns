@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { increasePostsLikesAsync } from "../modules/likes";
-import Posts from "../components/molecules/Posts";
+import Posts from "../components/Posts";
 import { ReplyListContainer } from './ReplyListContainer';
 import {Reply} from "../apis/reply";
 import {writeReplyAsync} from "../modules/reply/actions";

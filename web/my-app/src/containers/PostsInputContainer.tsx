@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import DefaultInput from "../components/atoms/DefaultInput";
+import DefaultInput from "../components/DefaultInput";
 import {writePostsAsync} from "../modules/posts";
 
 export const PostsInputContainer = () => {

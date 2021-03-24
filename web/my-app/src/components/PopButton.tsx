@@ -1,6 +1,6 @@
 import React, {KeyboardEvent, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react'
 import {Button, MenuItem} from "@material-ui/core";
-import {MyPopper} from "../atoms/MyPopper";
+import {MyPopper} from "./MyPopper";
 import {Link} from "react-router-dom";
 
 type PopButtonType = {

@@ -1,6 +1,6 @@
 import React from "react";
-import { Posts } from "../../apis/posts";
-import PostsContainer from "../../containers/PostsContainer";
+import { Posts } from "../apis/posts";
+import PostsContainer from "../containers/PostsContainer";
 
 type PostsListProps = {
   postsList: Posts[] | null;

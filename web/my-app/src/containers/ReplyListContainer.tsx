@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ReplyList } from "../components/organisms/ReplyList";
+import { ReplyList } from "../components/ReplyList";
 import { useDispatch, useSelector } from "react-redux";
 import {getReplyListAsync, ReplyData} from "../modules/replys";
 import { RootState } from "../modules";

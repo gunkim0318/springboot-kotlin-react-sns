@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PostsList } from "../components/organisms/PostsList";
+import { PostsList } from "../components/PostsList";
 import { RootState } from "../modules";
 import { getPostsListAsync } from "../modules/postsList";
 

@@ -1,6 +1,6 @@
 import { Avatar, Grid, Typography } from "@material-ui/core";
 import React from "react";
-import DefaultInput from "../components/atoms/DefaultInput";
+import DefaultInput from "../components/DefaultInput";
 
 export const ReplyContainer = () => {
   return (
