@@ -51,5 +51,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  },
+  "lint": "eslint pc/src/main/fe/**/*.jsx mobile/src/main/fe/**/*.jsx"
 }
