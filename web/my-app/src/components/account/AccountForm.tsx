@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Profile } from "../apis/profile";
-import { modifyProfileAsync } from "../modules/profile";
-import { DefaultButton } from "./DefaultButton";
-import { ProfileImage } from "./ProfileImage";
-import { TextInput } from "./TextInput";
+import { Profile } from "../../apis/profile";
+import { modifyProfileAsync } from "../../modules/profile";
+import { DefaultButton } from "../common/DefaultButton";
+import { ProfileImage } from "../profile/ProfileImage";
+import { TextInput } from "../common/TextInput";
 
 type AccountFormProps = {
   nickname: string;

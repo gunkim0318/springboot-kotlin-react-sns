@@ -1,7 +1,7 @@
 import React from "react";
-import {Grid} from "@material-ui/core";
-import {Notifications, Settings} from "@material-ui/icons";
-import {PopButton} from "./PopButton";
+import { Grid } from "@material-ui/core";
+import { Notifications, Settings } from "@material-ui/icons";
+import { PopButton } from "./PopButton";
 
 function Header() {
   return (
@@ -12,7 +12,7 @@ function Header() {
             <Notifications />
           </PopButton>
           <PopButton>
-            <Settings/>
+            <Settings />
           </PopButton>
         </Grid>
       </Grid>

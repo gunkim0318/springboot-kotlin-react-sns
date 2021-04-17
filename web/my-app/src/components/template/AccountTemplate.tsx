@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import { PageInfo } from "./PageInfo";
+import { PageInfo } from "../common/PageInfo";
 
 type AccountTemplateProps = {
   children: React.ReactNode;

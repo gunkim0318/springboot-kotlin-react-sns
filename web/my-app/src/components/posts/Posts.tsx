@@ -15,13 +15,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { PostsButton } from "./PostsButton";
-import { ReplyListContainer } from "../containers/ReplyListContainer";
-import DefaultInput from "./DefaultInput";
+import { ReplyListContainer } from "../../containers/ReplyListContainer";
+import DefaultInput from "../common/DefaultInput";
 import { useDispatch } from "react-redux";
-import { Reply as ReplyType } from "../apis/reply";
-import { updateReplyAsync } from "../modules/reply";
-import { Posts as PostsType } from "../apis/posts";
-import { updatePostsAsync } from "../modules/posts";
+import { Posts as PostsType } from "../../apis/posts";
+import { updatePostsAsync } from "../../modules/posts";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -68,10 +66,6 @@ const Posts = ({
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(contents);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
