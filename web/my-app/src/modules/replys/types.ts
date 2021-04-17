@@ -1,6 +1,5 @@
 import { ActionType } from "typesafe-actions";
 import { Reply } from "../../apis/reply";
-import { AsyncState } from "../../lib/asyncUtils";
 import * as actions from "./actions";
 
 export type ReplyData = {

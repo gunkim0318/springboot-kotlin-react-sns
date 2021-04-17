@@ -1,5 +1,4 @@
-import { ReplysState, ReplyData } from ".";
-import { asyncState } from "../../lib/asyncUtils";
+import { ReplysState } from ".";
 import { createReducer } from "typesafe-actions";
 import { ReplysAction } from "./types";
 import {

@@ -4,7 +4,6 @@ import {
     UPDATE_REPLY,
     updateReplyAsync,
     WRITE_REPLY,
-    WRITE_REPLY_SUCCESS,
     writeReplyAsync
 } from "./actions";
 import { call, put, takeEvery } from "redux-saga/effects";
