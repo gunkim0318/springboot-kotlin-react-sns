@@ -55,16 +55,16 @@ class PostsControllerTests {
     }
     @Test
     fun createPostsTest(){
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
         )
         userRepository.save(user)
 
-        val contents: String = "게시글 입력 테스트"
+        val contents = "게시글 입력 테스트"
 
-        val dto: PostsRequestDto = PostsRequestDto(
+        val dto = PostsRequestDto(
                 null,
                 contents
         )
@@ -79,9 +79,9 @@ class PostsControllerTests {
     }
     @Test
     fun modifyPostsTest(){
-        val contents: String = "수정 테스트"
+        val contents = "수정 테스트"
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
@@ -96,7 +96,7 @@ class PostsControllerTests {
 
         val postsId: Long = postsRepository.findAll().get(0).id!!
 
-        val dto: PostsRequestDto = PostsRequestDto(postsId, contents)
+        val dto = PostsRequestDto(postsId, contents)
 
         mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -108,9 +108,7 @@ class PostsControllerTests {
     }
     @Test
     fun deletePostsTest(){
-        val contents: String = "수정 테스트"
-
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
@@ -125,7 +123,7 @@ class PostsControllerTests {
 
         val postsId: Long = postsRepository.findAll().get(0).id!!
 
-        val url = "${this.url.toString()}/$postsId"
+        val url = "${this.url}/$postsId"
 
         mvc.perform(delete(url))
                 .andExpect(status().isOk())
@@ -137,7 +135,7 @@ class PostsControllerTests {
     @Test
     @Transactional
     fun getPostsListTest(){
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
@@ -153,13 +151,13 @@ class PostsControllerTests {
             )
         }
 
-        val url: String = "${this.url.toString()}/list"
+        val url = "${this.url}/list"
         val result: String = mvc.perform(get(url))
                 .andExpect(status().isOk)
                 .andReturn()
                 .response.getContentAsString()
 
-        val resList: Collection<Map<String, String>> = ObjectMapper().readValue<Collection<Map<String, String>>>(result)
+        val resList: Collection<Map<String, String>> = ObjectMapper().readValue(result)
 
         resList.forEach { map ->
             println(map)
@@ -168,7 +166,7 @@ class PostsControllerTests {
     @Test
     @Transactional
     fun increaseLikesTest(){
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
@@ -182,7 +180,7 @@ class PostsControllerTests {
         )
 
         val postsId: Long = postsRepository.findAll()[0].id!!
-        val url: String = "${this.url}/likes/$postsId"
+        val url = "${this.url}/likes/$postsId"
 
         mvc.perform(post(url))
                 .andExpect(status().isOk)

@@ -22,13 +22,13 @@ class AlarmRepositoryTests {
 
     @Before
     fun setup(){
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
         )
         userRepository.save(user)
-        val alarm: Alarm = Alarm(
+        val alarm = Alarm(
                 contents = "알림 내용",
                 user = user
         )

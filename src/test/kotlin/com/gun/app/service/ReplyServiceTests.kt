@@ -35,20 +35,20 @@ class ReplyServiceTests {
     fun setup(){
         userRepository.deleteAll()
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.ADMIN
         )
         userRepository.save(user)
 
-        val posts: Posts = Posts(
+        val posts = Posts(
                 contents = "게시글 내용",
                 user = user
         )
         postsRepository.save(posts)
 
-        val reply: Reply = Reply(
+        val reply = Reply(
                 contents = "댓글 내용",
                 user = user,
                 posts = posts
@@ -67,9 +67,9 @@ class ReplyServiceTests {
     fun modifyReplyTest(){
         val replyId: Long = replyRepository.findAll()[0].id!!
 
-        val dto: ReplyRequestDto = ReplyRequestDto(
-            replyId,
-                "댓글 수정"
+        val dto = ReplyRequestDto(
+            replyId=replyId,
+            contents="댓글 수정"
         )
         replyService.modifyReply(dto)
 

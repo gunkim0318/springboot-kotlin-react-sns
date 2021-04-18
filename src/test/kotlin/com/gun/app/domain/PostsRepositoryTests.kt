@@ -26,14 +26,14 @@ class PostsRepositoryTests {
     fun setup(){
         userRepository.deleteAll()
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER
         )
         userRepository.save(user)
 
-        val posts: Posts = Posts(
+        val posts = Posts(
                 contents = "게시글 내용",
                 user = user
         )

@@ -54,7 +54,7 @@ class ReplyControllerTests {
                 .webAppContextSetup(context)
                 .build();
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "test",
                 role = Role.USER
@@ -62,7 +62,7 @@ class ReplyControllerTests {
         userRepository.save(user)
 
 
-        val posts: Posts = Posts(
+        val posts = Posts(
                 contents = "안녕하세요",
                 user = user
         )
@@ -79,7 +79,7 @@ class ReplyControllerTests {
     fun getReplyList(){
         val user: User = userRepository.findAll()[0]
         val posts: Posts = postsRepository.findAll()[0]
-        val url: String = "${url}/${posts.id}"
+        val url = "${url}/${posts.id}"
 
         IntStream.rangeClosed(1, 30).forEach { i ->
             replyRepository.save(
@@ -94,7 +94,7 @@ class ReplyControllerTests {
                 .andExpect(status().isOk())
                 .andReturn().response.getContentAsString()
 
-        val resList: Collection<Map<String, String>> = ObjectMapper().readValue<Collection<Map<String, String>>>(result)
+        val resList: Collection<Map<String, String>> = ObjectMapper().readValue(result)
 
         resList.forEach { map ->
             println(map)
@@ -102,12 +102,12 @@ class ReplyControllerTests {
     }
     @Test
     fun modifyReply(){
-        val contents: String = "modify Reply"
+        val contents = "modify Reply"
 
         val replyId: Long = replyRepository.findAll()[0].id!!
-        val requestDto: ReplyRequestDto = ReplyRequestDto(
-                replyId,
-                contents
+        val requestDto = ReplyRequestDto(
+                replyId=replyId,
+                contents=contents
         )
         mvc.perform(
                 post(url).contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -120,7 +120,7 @@ class ReplyControllerTests {
     @Test
     fun deleteReply(){
         val replyId: Long = replyRepository.findAll()[0].id!!
-        val url: String = "$url/$replyId"
+        val url = "$url/$replyId"
 
         mvc.perform(delete(url))
                 .andExpect(status().isOk())

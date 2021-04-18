@@ -23,7 +23,7 @@ class UserRepositoryTests {
     fun setup(){
         userRepository.deleteAll()
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.USER

@@ -33,14 +33,14 @@ class PostsServiceTests{
     fun setup(){
         userRepository.deleteAll()
 
-        val user: User = User(
+        val user = User(
                 name = userName,
                 email = "gunkim0318@gmail.com",
                 role = Role.ADMIN
         )
         userRepository.save(user)
 
-        val posts: Posts = Posts(
+        val posts = Posts(
                 contents = "게시글 내용",
                 user = user
         )
@@ -50,8 +50,8 @@ class PostsServiceTests{
     fun createPostsTest(){
         postsRepository.deleteAll()
 
-        val contents: String = "게시글 테스트입니다."
-        val dto: PostsRequestDto = PostsRequestDto(
+        val contents = "게시글 테스트입니다."
+        val dto = PostsRequestDto(
                 contents = contents
         )
         postsService.createPosts(dto)
@@ -64,10 +64,6 @@ class PostsServiceTests{
         postsService.deletePosts(postsId)
         val postsSize: Int = postsRepository.findAll().size
         assertEquals(postsSize, 0)
-    }
-    @Test
-    fun getPostsListTest(){
-        val postsList: List<PostsResponseDto> = postsService.getPostsList(1)
     }
     @Test
     @Transactional
@@ -84,8 +80,8 @@ class PostsServiceTests{
     @Test
     fun modifiedPostsTest(){
         val postsId: Long = postsRepository.findAll()[0].id!!
-        val contents: String = "수정된 게시글 내용입니다."
-        val dto: PostsRequestDto = PostsRequestDto(
+        val contents = "수정된 게시글 내용입니다."
+        val dto = PostsRequestDto(
                 postsId,
                 contents
         )

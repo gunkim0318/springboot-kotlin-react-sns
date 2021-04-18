@@ -31,14 +31,14 @@ class AlarmServiceTests {
     fun setup(){
         userRepository.deleteAll()
 
-        val user: User = User(
+        val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
                 role = Role.ADMIN
         )
         userRepository.save(user)
 
-        val alarm: Alarm = Alarm(
+        val alarm = Alarm(
                 contents = "알림 테스트",
                 user = user
         )
@@ -50,7 +50,7 @@ class AlarmServiceTests {
         val user: User = userRepository.findAll()[0]
 
         IntStream.rangeClosed(1, 20).forEach { i ->
-            val alarm: Alarm = Alarm(
+            val alarm = Alarm(
                     contents = "알림 테스트 $i",
                     user = user
             )
