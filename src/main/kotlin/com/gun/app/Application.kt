@@ -1,14 +1,8 @@
 package com.gun.app
 
 import com.gun.app.domain.Role
-import com.gun.app.domain.entity.Posts
-import com.gun.app.domain.entity.Profile
-import com.gun.app.domain.entity.Reply
-import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.PostsRepository
-import com.gun.app.domain.repository.ProfileRepository
-import com.gun.app.domain.repository.ReplyRepository
-import com.gun.app.domain.repository.UserRepository
+import com.gun.app.domain.entity.*
+import com.gun.app.domain.repository.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -20,7 +14,7 @@ import java.util.stream.IntStream
 @SpringBootApplication
 class Application{
     @Bean
-    fun testDataInsert(userRepository: UserRepository, profileRepository: ProfileRepository, postsRepository: PostsRepository, replyRepository: ReplyRepository) = CommandLineRunner {
+    fun testDataInsert(userRepository: UserRepository, profileRepository: ProfileRepository, postsRepository: PostsRepository, replyRepository: ReplyRepository, alarmRepository: AlarmRepository) = CommandLineRunner {
         val user = User(
                 name = "gunkim",
                 email = "gunkim0318@gmail.com",
@@ -44,6 +38,15 @@ class Application{
                 user = user
         )
         profileRepository.save(profile)
+
+
+        for (i in IntStream.rangeClosed(1, 50)) {
+            val alarm = Alarm(
+                contents = "Test=${i}",
+                user = user
+            )
+            alarmRepository.save(alarm)
+        }
 
         val posts: Posts = postsRepository.findAll()[0]
 
