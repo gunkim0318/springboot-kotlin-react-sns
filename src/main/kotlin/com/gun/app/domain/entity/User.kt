@@ -5,7 +5,7 @@ import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
 @Entity
-class User(
+data class User(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
@@ -50,8 +50,5 @@ class User(
         }
         fun deletePosts(posts: Posts){
                 this.postsList.remove(posts)
-        }
-        override fun toString(): String {
-                return "User[id=$id, name=$name, email=$email, role=$role, profile=$profile, postsList=$postsList]"
         }
 }

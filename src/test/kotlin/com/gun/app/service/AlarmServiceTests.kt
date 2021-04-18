@@ -5,8 +5,6 @@ import com.gun.app.domain.entity.Alarm
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.AlarmRepository
 import com.gun.app.domain.repository.UserRepository
-import junit.framework.Assert
-import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
