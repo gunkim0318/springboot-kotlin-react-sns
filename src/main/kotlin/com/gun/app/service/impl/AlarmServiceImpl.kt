@@ -3,7 +3,7 @@ package com.gun.app.service.impl
 import com.gun.app.domain.entity.Alarm
 import com.gun.app.domain.query.AlarmQueryRepository
 import com.gun.app.domain.repository.AlarmRepository
-import com.gun.app.dto.AlarmResponseDto
+import com.gun.app.service.dto.AlarmResponseDto
 import com.gun.app.service.AlarmService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

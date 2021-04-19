@@ -1,6 +1,6 @@
 package com.gun.app.domain.query
 
-import com.gun.app.dto.AlarmResponseDto
+import com.gun.app.service.dto.AlarmResponseDto
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.gun.app.domain.entity.QAlarm.alarm as qAlarm

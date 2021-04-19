@@ -6,8 +6,8 @@ import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.ReplyRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.ReplyRequestDto
-import com.gun.app.dto.ReplyResponseDto
+import com.gun.app.web.dto.ReplyRequestDto
+import com.gun.app.service.dto.ReplyResponseDto
 import com.gun.app.service.ReplyService
 import org.springframework.stereotype.Service
 import java.lang.IllegalArgumentException

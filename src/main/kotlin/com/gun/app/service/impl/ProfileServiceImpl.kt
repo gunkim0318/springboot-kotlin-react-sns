@@ -5,8 +5,8 @@ import com.gun.app.domain.entity.User
 import com.gun.app.domain.query.ProfileQueryRepository
 import com.gun.app.domain.repository.ProfileRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.ProfileRequestDto
-import com.gun.app.dto.ProfileResponseDto
+import com.gun.app.web.dto.ProfileRequestDto
+import com.gun.app.service.dto.ProfileResponseDto
 import com.gun.app.service.ProfileService
 import org.springframework.stereotype.Service
 import java.lang.IllegalArgumentException
@@ -17,7 +17,7 @@ class ProfileServiceImpl(
         private val userRepository: UserRepository,
         private val profileQueryRepository: ProfileQueryRepository
 ): ProfileService {
-    override fun getProfile(name: String): ProfileResponseDto{
+    override fun getProfile(name: String): ProfileResponseDto {
        return profileQueryRepository.findByUsername(name)
     }
 

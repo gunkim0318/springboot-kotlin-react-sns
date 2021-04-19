@@ -1,7 +1,7 @@
 package com.gun.app.web
 
-import com.gun.app.dto.ProfileRequestDto
-import com.gun.app.dto.ProfileResponseDto
+import com.gun.app.web.dto.ProfileRequestDto
+import com.gun.app.service.dto.ProfileResponseDto
 import com.gun.app.service.ProfileService
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiImplicitParams

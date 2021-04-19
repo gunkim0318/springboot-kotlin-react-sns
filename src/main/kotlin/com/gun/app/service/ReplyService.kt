@@ -1,7 +1,7 @@
 package com.gun.app.service
 
-import com.gun.app.dto.ReplyRequestDto
-import com.gun.app.dto.ReplyResponseDto
+import com.gun.app.web.dto.ReplyRequestDto
+import com.gun.app.service.dto.ReplyResponseDto
 
 interface ReplyService {
     /**

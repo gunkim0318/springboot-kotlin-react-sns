@@ -4,13 +4,12 @@ import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.PostsRequestDto
-import com.gun.app.dto.PostsResponseDto
+import com.gun.app.web.dto.PostsRequestDto
+import com.gun.app.service.dto.PostsResponseDto
 import com.gun.app.service.PostsService
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.awt.print.Pageable
 import java.lang.IllegalArgumentException
 import kotlin.streams.toList
 

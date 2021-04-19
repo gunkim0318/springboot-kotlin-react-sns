@@ -1,7 +1,7 @@
 package com.gun.app.service
 
-import com.gun.app.dto.ProfileRequestDto
-import com.gun.app.dto.ProfileResponseDto
+import com.gun.app.web.dto.ProfileRequestDto
+import com.gun.app.service.dto.ProfileResponseDto
 
 interface ProfileService {
     /**

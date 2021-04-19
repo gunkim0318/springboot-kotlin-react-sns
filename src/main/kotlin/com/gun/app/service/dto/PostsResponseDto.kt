@@ -1,4 +1,4 @@
-package com.gun.app.dto
+package com.gun.app.service.dto
 
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User

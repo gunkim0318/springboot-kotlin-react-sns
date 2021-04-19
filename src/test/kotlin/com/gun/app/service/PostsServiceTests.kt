@@ -5,8 +5,7 @@ import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.PostsRequestDto
-import com.gun.app.dto.PostsResponseDto
+import com.gun.app.web.dto.PostsRequestDto
 import junit.framework.Assert.assertEquals
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat

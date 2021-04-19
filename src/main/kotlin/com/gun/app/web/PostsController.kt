@@ -1,7 +1,7 @@
 package com.gun.app.web
 
-import com.gun.app.dto.PostsRequestDto
-import com.gun.app.dto.PostsResponseDto
+import com.gun.app.web.dto.PostsRequestDto
+import com.gun.app.service.dto.PostsResponseDto
 import com.gun.app.service.PostsService
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiImplicitParams

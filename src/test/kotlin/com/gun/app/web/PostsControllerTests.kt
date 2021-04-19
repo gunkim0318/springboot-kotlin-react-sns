@@ -7,7 +7,7 @@ import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.PostsRequestDto
+import com.gun.app.web.dto.PostsRequestDto
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before

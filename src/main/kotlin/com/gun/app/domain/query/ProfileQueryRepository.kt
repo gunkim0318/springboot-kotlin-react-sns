@@ -2,7 +2,7 @@ package com.gun.app.domain.query
 
 import com.gun.app.domain.entity.QProfile.profile as qProfile
 import com.gun.app.domain.entity.QUser.user as qUser
-import com.gun.app.dto.ProfileResponseDto
+import com.gun.app.service.dto.ProfileResponseDto
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository

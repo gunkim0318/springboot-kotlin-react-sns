@@ -1,7 +1,7 @@
 package com.gun.app.service
 
-import com.gun.app.dto.PostsRequestDto
-import com.gun.app.dto.PostsResponseDto
+import com.gun.app.web.dto.PostsRequestDto
+import com.gun.app.service.dto.PostsResponseDto
 
 interface PostsService {
     fun     createPosts(dto: PostsRequestDto)

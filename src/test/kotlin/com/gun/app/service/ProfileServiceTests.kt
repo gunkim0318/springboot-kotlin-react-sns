@@ -5,8 +5,8 @@ import com.gun.app.domain.entity.Profile
 import com.gun.app.domain.entity.User
 import com.gun.app.domain.repository.ProfileRepository
 import com.gun.app.domain.repository.UserRepository
-import com.gun.app.dto.ProfileRequestDto
-import com.gun.app.dto.ProfileResponseDto
+import com.gun.app.web.dto.ProfileRequestDto
+import com.gun.app.service.dto.ProfileResponseDto
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

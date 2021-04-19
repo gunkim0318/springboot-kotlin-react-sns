@@ -1,4 +1,4 @@
-package com.gun.app.dto
+package com.gun.app.service.dto
 
 data class ProfileResponseDto(
     val image: String?,

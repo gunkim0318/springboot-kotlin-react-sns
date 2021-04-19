@@ -1,6 +1,6 @@
 package com.gun.app.service
 
-import com.gun.app.dto.AlarmResponseDto
+import com.gun.app.service.dto.AlarmResponseDto
 
 interface AlarmService {
     /**
