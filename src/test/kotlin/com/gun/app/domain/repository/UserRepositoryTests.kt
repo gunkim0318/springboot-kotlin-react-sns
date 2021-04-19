@@ -1,16 +1,13 @@
-package com.gun.app.domain
+package com.gun.app.domain.repository
 
+import com.gun.app.domain.Role
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.UserRepository
-import junit.framework.Assert
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 @RunWith(SpringJUnit4ClassRunner::class)

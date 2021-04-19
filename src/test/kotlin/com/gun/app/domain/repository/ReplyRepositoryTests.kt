@@ -1,11 +1,9 @@
-package com.gun.app.domain
+package com.gun.app.domain.repository
 
+import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.Reply
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.PostsRepository
-import com.gun.app.domain.repository.ReplyRepository
-import com.gun.app.domain.repository.UserRepository
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

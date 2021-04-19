@@ -1,9 +1,8 @@
-package com.gun.app.domain
+package com.gun.app.domain.repository
 
+import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Alarm
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.AlarmRepository
-import com.gun.app.domain.repository.UserRepository
 import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.gun.app.domain
+package com.gun.app.domain.query
 
 import com.gun.app.domain.query.ProfileQueryRepository
 import org.junit.Test
