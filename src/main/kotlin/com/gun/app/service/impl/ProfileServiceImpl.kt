@@ -2,7 +2,7 @@ package com.gun.app.service.impl
 
 import com.gun.app.domain.entity.Profile
 import com.gun.app.domain.entity.User
-import com.gun.app.domain.repository.ProfileQueryRepository
+import com.gun.app.domain.query.ProfileQueryRepository
 import com.gun.app.domain.repository.ProfileRepository
 import com.gun.app.domain.repository.UserRepository
 import com.gun.app.dto.ProfileRequestDto

@@ -1,4 +1,4 @@
-package com.gun.app.domain.repository
+package com.gun.app.domain.query
 
 import com.gun.app.domain.entity.QProfile.profile as qProfile
 import com.gun.app.domain.entity.QUser.user as qUser

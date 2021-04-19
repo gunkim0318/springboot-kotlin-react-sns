@@ -1,6 +1,6 @@
 package com.gun.app.domain
 
-import com.gun.app.domain.repository.ProfileQueryRepository
+import com.gun.app.domain.query.ProfileQueryRepository
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired

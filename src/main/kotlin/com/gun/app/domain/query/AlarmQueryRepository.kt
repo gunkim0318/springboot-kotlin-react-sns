@@ -1,4 +1,4 @@
-package com.gun.app.domain.repository
+package com.gun.app.domain.query
 
 import com.gun.app.dto.AlarmResponseDto
 import com.querydsl.core.types.Projections

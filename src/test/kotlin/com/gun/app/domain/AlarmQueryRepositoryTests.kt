@@ -1,6 +1,6 @@
 package com.gun.app.domain
 
-import com.gun.app.domain.repository.AlarmQueryRepository
+import com.gun.app.domain.query.AlarmQueryRepository
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
