@@ -7,7 +7,7 @@ interface ReplyService {
     /**
      * TODO: 해당 게시글 댓글 목록을 반환
      */
-    fun getReplyList(postsId: Long): List<ReplyResponseDto>
+    fun getReplyList(postsId: Long): MutableList<ReplyResponseDto>
 
     /**
      * TODO: 댓글 작성

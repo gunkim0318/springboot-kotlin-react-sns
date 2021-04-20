@@ -4,6 +4,7 @@ import com.gun.app.domain.Role
 import com.gun.app.domain.entity.Posts
 import com.gun.app.domain.entity.Reply
 import com.gun.app.domain.entity.User
+import com.gun.app.domain.query.ReplyQueryRepository
 import com.gun.app.domain.repository.PostsRepository
 import com.gun.app.domain.repository.ReplyRepository
 import com.gun.app.domain.repository.UserRepository
@@ -17,6 +18,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.transaction.annotation.Transactional
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest
@@ -33,6 +35,7 @@ class ReplyServiceTests {
     @Before
     fun setup(){
         userRepository.deleteAll()
+        postsRepository.deleteAll()
 
         val user = User(
                 name = "gunkim",
@@ -54,12 +57,13 @@ class ReplyServiceTests {
         )
         replyRepository.save(reply)
     }
+    @Transactional
     @Test
     fun getReplyListTest(){
         val postsId: Long = postsRepository.findAll()[0].id!!
 
         val replyList: List<ReplyResponseDto> = replyService.getReplyList(postsId)
-
+        println(replyList)
         assertThat(replyList.size, `is`(1))
     }
     @Test

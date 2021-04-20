@@ -4,7 +4,7 @@ import com.gun.app.domain.entity.common.BaseTimeEntity
 import javax.persistence.*
 
 @Entity
-class Reply(
+data class Reply(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
