@@ -18,7 +18,7 @@ class Posts(
         this.user.postsList.add(this)
     }
     @OneToMany(mappedBy = "posts", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var replyList: MutableList<Reply> = ArrayList<Reply>()
+    var replyList: MutableList<Reply> = ArrayList()
 
     @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
@@ -26,7 +26,7 @@ class Posts(
             joinColumns = [JoinColumn(name = "LIKED_ID")],
             inverseJoinColumns = [JoinColumn(name = "LIKES_ID")]
     )
-    var likes: MutableSet<User> = HashSet<User>()
+    var likes: MutableSet<User> = HashSet()
 
     fun modifyContents(contents: String){
         this.contents = contents

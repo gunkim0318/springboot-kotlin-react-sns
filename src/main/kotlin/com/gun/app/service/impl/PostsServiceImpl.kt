@@ -53,7 +53,7 @@ class PostsServiceImpl(
         }
     }
     override fun modifyPosts(dto: PostsRequestDto) {
-        val name: String = "gunkim"
+        val name = "gunkim"
         val user: User = userRepository.findByName(name).orElseThrow { IllegalArgumentException("잘못된 이름 : $name") }
         val posts: Posts = postsRepository.findById(dto.id!!).orElseThrow { IllegalArgumentException("잘못된 posts Id : ${dto.id}") }
 
@@ -65,7 +65,7 @@ class PostsServiceImpl(
 
     @Transactional
     override fun deletePosts(id: Long) {
-        val name: String = "gunkim"
+        val name = "gunkim"
         postsRepository.deleteById(id)
     }
 }

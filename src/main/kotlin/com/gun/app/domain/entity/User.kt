@@ -18,9 +18,9 @@ data class User(
         var role: Role
 ): BaseTimeEntity() {
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
-        var postsList: MutableList<Posts> = ArrayList<Posts>()
+        var postsList: MutableList<Posts> = ArrayList()
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
-        var alarmList: MutableList<Alarm> = ArrayList<Alarm>()
+        var alarmList: MutableList<Alarm> = ArrayList()
 
         @ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
@@ -28,9 +28,9 @@ data class User(
                 joinColumns = [JoinColumn(name = "FOLLOWED_ID")],
                 inverseJoinColumns = [JoinColumn(name = "FOLLOWER_ID")]
         )
-        var followers: MutableSet<User> = HashSet<User>()
+        var followers: MutableSet<User> = HashSet()
         @ManyToMany(mappedBy = "followers")
-        var following: MutableSet<User> = HashSet<User>()
+        var following: MutableSet<User> = HashSet()
 
         fun modifyName(name: String){
                 this.name = name
