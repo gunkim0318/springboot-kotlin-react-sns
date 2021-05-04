@@ -42,11 +42,12 @@ data class User(
                 this.role = role
         }
         fun addFollowers(follower: User){
-                followers.add(follower)
                 follower.following.add(this)
+                followers.add(follower)
         }
         fun addFollowing(followed: User){
                 followed.addFollowers(this)
+                this.following.add(followed)
         }
         fun deletePosts(posts: Posts){
                 this.postsList.remove(posts)
