@@ -23,13 +23,8 @@ data class User(
         var alarmList: MutableList<Alarm> = ArrayList()
 
         @ManyToMany(cascade = [CascadeType.ALL])
-        @JoinTable(
-                name = "USER_RELATIONS",
-                joinColumns = [JoinColumn(name = "FOLLOWED_ID")],
-                inverseJoinColumns = [JoinColumn(name = "FOLLOWER_ID")]
-        )
         var followers: MutableSet<User> = HashSet()
-        @ManyToMany(mappedBy = "followers")
+        @ManyToMany(cascade = [CascadeType.ALL])
         var following: MutableSet<User> = HashSet()
 
         fun modifyName(name: String){
@@ -38,17 +33,12 @@ data class User(
         fun modifyEmail(email: String){
                 this.email = email
         }
-        fun modifyRole(role: Role){
-                this.role = role
-        }
         fun addFollowers(follower: User){
-                followers.add(follower)
                 follower.following.add(this)
+                followers.add(follower)
         }
         fun addFollowing(followed: User){
                 followed.addFollowers(this)
-        }
-        fun deletePosts(posts: Posts){
-                this.postsList.remove(posts)
+                this.following.add(followed)
         }
 }
