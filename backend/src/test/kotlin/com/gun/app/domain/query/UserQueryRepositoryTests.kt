@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.util.stream.IntStream
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -30,49 +31,36 @@ class UserQueryRepositoryTests {
                 email= "gunkim.dev@gmail.com",
                 role= Role.USER
         )
-        userRepository.save(mainUser)
-
-        mainUser.addFollowers(User(
-                name= "followers1",
-                email= "followers1@gmail.com",
+        IntStream.rangeClosed(1, 2).forEach {
+            mainUser.addFollowers(User(
+                name= "followers${it}",
+                email= "followers${it}@gmail.com",
                 role= Role.USER
-        ))
-        mainUser.addFollowers(User(
-                name= "followers2",
-                email= "followers2@gmail.com",
+            ))
+        }
+        IntStream.rangeClosed(1, 3).forEach {
+            mainUser.addFollowing(User(
+                name= "following${it}",
+                email= "following${it}@gmail.com",
                 role= Role.USER
-        ))
-        mainUser.addFollowing(User(
-                name= "following1",
-                email= "following1@gmail.com",
-                role= Role.USER
-        ))
-        mainUser.addFollowing(User(
-                name= "following2",
-                email= "following2@gmail.com",
-                role= Role.USER
-        ))
-        mainUser.addFollowing(User(
-                name= "following3",
-                email= "following3@gmail.com",
-                role= Role.USER
-        ))
+            ))
+        }
         userRepository.save(mainUser)
     }
 
     @Test
     fun findFollowersTest() {
-        var followersCnt = userQueryRepository.findByFollowers("gunkim").size
+        val followersCnt = userQueryRepository.findByFollowers("gunkim").size
         assertThat(followersCnt, `is`(equalTo(2)))
     }
     @Test
     fun findAllTest() {
-        var userCnt = userRepository.findAll().size
+        val userCnt = userRepository.findAll().size
         assertThat(userCnt, `is`(equalTo(6)))
     }
     @Test
     fun findByFollowingTest() {
-        var followingCnt = userQueryRepository.findByFollowing("gunkim").size
+        val followingCnt = userQueryRepository.findByFollowing("gunkim").size
         assertThat(followingCnt, `is`(equalTo(3)))
     }
 }

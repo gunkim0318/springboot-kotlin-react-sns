@@ -1,8 +1,9 @@
 package com.gun.app.domain.query
 
-import com.gun.app.domain.entity.QAlarm
+import com.gun.app.domain.entity.QProfile.profile as qProfile
 import com.gun.app.domain.entity.QUser
-import com.gun.app.domain.entity.User
+import com.gun.app.service.dto.PeopleResponseDto
+import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.gun.app.domain.entity.QUser.user as qUser
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -13,23 +14,38 @@ import org.springframework.util.ObjectUtils
 class UserQueryRepository(
         private val jpaQueryRepository: JPAQueryFactory
 ) {
-    fun findByFollowers(name: String): List<User> {
-        val follower = QUser("follower")
+    fun findByFollowers(name: String): List<PeopleResponseDto> {
+        val qFollower = QUser("follower")
 
         return jpaQueryRepository
-                .select(follower)
-                .from(qUser, follower)
-                .where(qUser.followers.contains(follower).and(eqUserName(name)))
-                .fetch()
+            .select(Projections.constructor(
+                PeopleResponseDto::class.java,
+                qFollower.name,
+                qFollower.profile.image
+            ))
+            .from(qUser)
+            .leftJoin(qUser.followers, qFollower)
+            .leftJoin(qFollower.profile, qProfile)
+            .leftJoin(qUser.profile, qProfile)
+            .where(eqUserName(name))
+            .orderBy(qUser.id.desc())
+            .fetch()
     }
-    fun findByFollowing(name: String): List<User> {
-        val following = QUser("following")
+    fun findByFollowing(name: String): List<PeopleResponseDto> {
+        val qFollowing = QUser("following")
 
         return jpaQueryRepository
-                .select(following)
-                .from(qUser, following)
-                .where(qUser.following.contains(following).and(eqUserName(name)))
-                .fetch()
+            .select(Projections.constructor(
+                PeopleResponseDto::class.java,
+                qFollowing.name,
+                qFollowing.profile.image
+            ))
+            .from(qUser)
+            .leftJoin(qUser.following, qFollowing)
+            .leftJoin(qFollowing.profile, qProfile)
+            .where(eqUserName(name))
+            .orderBy(qFollowing.id.desc())
+            .fetch()
     }
     private fun eqUserName(userName: String): BooleanExpression? {
         if(ObjectUtils.isEmpty(userName)){
